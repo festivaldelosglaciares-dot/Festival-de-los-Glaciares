@@ -1311,7 +1311,22 @@
   }
 }
 
+/* Evita selección, arrastre y molestias táctiles en imágenes */
+img{
+  -webkit-user-drag:none;
+  user-select:none;
+  -webkit-user-select:none;
+  -webkit-touch-callout:none;
+}
 
+/* Las imágenes decorativas no capturan el toque */
+.cover-mountain img,
+.cover-icon-img,
+.logo-grid img,
+.organizer-logo-card img,
+.hummingbird-loader img{
+  pointer-events:none;
+}
   </style>
 </head>
 <body>
@@ -1848,7 +1863,17 @@
         observer.observe(el);
       });
     }
+document.addEventListener('contextmenu', (e) => {
+  if(e.target.tagName === 'IMG'){
+    e.preventDefault();
+  }
+});
 
+document.addEventListener('dragstart', (e) => {
+  if(e.target.tagName === 'IMG'){
+    e.preventDefault();
+  }
+});
     window.addEventListener('load', init);
   </script>
 </body>

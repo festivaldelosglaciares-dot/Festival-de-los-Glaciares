@@ -1,0 +1,1835 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Festival de los Glaciares - Programa</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#f7f5fc;
+      --card:#ffffff;
+      --line:#e8e2f3;
+      --text:#111735;
+      --muted:#6f7291;
+      --purple:#6e5ca5;
+      --purple-deep:#2f2368;
+      --purple-dark:#514286;
+      --green:#cad33f;
+      --green-deep:#aeb900;
+      --orange:#e69954;
+      --orange-deep:#c97839;
+      --aqua:#8bcbd0;
+      --purple-soft:#f0ecfb;
+      --green-soft:#f8f9db;
+      --orange-soft:#fff0e5;
+      --aqua-soft:#eaf8fa;
+      --shadow:0 22px 60px rgba(58,30,118,.10);
+      --shadow-soft:0 12px 28px rgba(58,30,118,.055);
+      --radius-xl:34px;
+      --radius-lg:28px;
+      --radius-md:18px;
+    }
+
+    *{box-sizing:border-box;}
+    html{scroll-behavior:smooth;width:100%;overflow-x:hidden;}
+
+    body{
+      margin:0;
+      width:100%;
+      min-height:100vh;
+      font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(110,92,165,.12), transparent 30%),
+        radial-gradient(circle at 88% 12%, rgba(202,211,63,.10), transparent 30%),
+        radial-gradient(circle at 50% 100%, rgba(230,153,84,.08), transparent 38%),
+        linear-gradient(135deg,#fbfaff 0%,#fffdf8 52%,#f5f1ff 100%);
+      overflow-x:hidden;
+    }
+
+    a{color:inherit;}
+
+    .wrap{
+      min-height:100vh;
+      display:grid;
+      grid-template-columns:minmax(360px,440px) minmax(0,1fr);
+      gap:24px;
+      padding:24px;
+      max-width:1540px;
+      margin:0 auto;
+    }
+
+    .panel,
+    .board{
+      background:linear-gradient(180deg,#ffffff 0%,#fcfbff 100%);
+      border:1px solid var(--line);
+      border-radius:var(--radius-xl);
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .panel::before,
+    .board::before{
+      content:"";
+      position:absolute;
+      width:150px;
+      height:100px;
+      right:26px;
+      top:22px;
+      background-image:radial-gradient(circle, rgba(110,92,165,.18) 1.5px, transparent 1.6px);
+      background-size:14px 14px;
+      opacity:.48;
+      pointer-events:none;
+    }
+
+    .panel::after,
+    .board::after{
+      content:"";
+      position:absolute;
+      width:280px;
+      height:175px;
+      left:-58px;
+      bottom:-52px;
+      border-radius:160px;
+      background:radial-gradient(circle at 75% 30%, rgba(202,211,63,.18), rgba(110,92,165,.045) 58%, transparent 59%);
+      opacity:.75;
+      pointer-events:none;
+    }
+
+    .panel > *,
+    .board > *{
+      position:relative;
+      z-index:2;
+    }
+
+    .panel{
+      padding:30px 26px;
+      position:sticky;
+      top:24px;
+      height:fit-content;
+      animation:fadeUp .85s cubic-bezier(.2,.8,.2,1) both;
+    }
+
+    .board{
+      padding:30px;
+      min-height:calc(100vh - 48px);
+      animation:ticketReveal 1s cubic-bezier(.2,.8,.2,1) .16s both;
+    }
+
+    .event-header{
+      text-align:center;
+      margin-bottom:24px;
+      padding-bottom:24px;
+      border-bottom:1px solid var(--line);
+    }
+
+    .event-kicker{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:38px;
+      padding:0 18px;
+      border-radius:999px;
+      background:var(--purple-soft);
+      border:1px solid rgba(110,92,165,.14);
+      color:var(--purple);
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.16em;
+      margin-bottom:22px;
+      text-transform:uppercase;
+      box-shadow:var(--shadow-soft);
+    }
+
+    h1{
+      margin:0 auto;
+      max-width:390px;
+      color:var(--text);
+      font-size:clamp(2.05rem,3.45vw,2.95rem);
+      line-height:.94;
+      letter-spacing:-.06em;
+      font-weight:900;
+      text-wrap:balance;
+    }
+
+    h1 span{
+      display:block;
+      margin-top:2px;
+      color:var(--purple);
+      font-size:.92em;
+      font-weight:900;
+    }
+
+    .hero-image{
+      width:min(82%, 310px);
+      margin:24px auto 4px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px;
+      border-radius:28px;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(139,203,208,.18), transparent 58%),
+        linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.20));
+    }
+
+    .hero-image img{
+      width:100%;
+      height:auto;
+      display:block;
+      object-fit:contain;
+      filter:drop-shadow(0 18px 28px rgba(110,92,165,.16));
+    }
+
+    .meta{
+      margin-top:20px;
+      display:grid;
+      gap:12px;
+      justify-items:center;
+    }
+
+    .meta-pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:14px;
+      min-height:50px;
+      padding:0 20px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid rgba(226,214,255,.82);
+      box-shadow:0 10px 24px rgba(58,30,118,.055), inset 0 1px 0 rgba(255,255,255,.95);
+      flex-wrap:wrap;
+    }
+
+    .meta-item{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color:#111735;
+      font-size:.88rem;
+      font-weight:900;
+      letter-spacing:.03em;
+      white-space:nowrap;
+    }
+
+    .meta-dot{
+      width:7px;
+      height:7px;
+      border-radius:999px;
+      background:var(--green);
+      box-shadow:0 0 0 5px rgba(202,211,63,.18);
+    }
+
+    .days-list{
+      display:grid;
+      gap:20px;
+    }
+
+    .day-card{
+      background:rgba(255,255,255,.72);
+      border:1px solid rgba(226,214,255,.72);
+      border-radius:30px;
+      box-shadow:var(--shadow-soft);
+      overflow:hidden;
+    }
+
+    .day-btn{
+      width:100%;
+      border:0;
+      background:transparent;
+      padding:0;
+      cursor:pointer;
+      text-align:left;
+      font-family:inherit;
+    }
+
+    .day-cover{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:18px;
+      align-items:center;
+      padding:26px;
+      background:
+        radial-gradient(circle at 92% 0%, rgba(230,153,84,.22), transparent 26%),
+        radial-gradient(circle at 5% 100%, rgba(139,203,208,.28), transparent 32%),
+        linear-gradient(135deg,#6e5ca5 0%,#7565aa 54%,#65549d 100%);
+      color:#fff;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .day-cover::after{
+      content:"";
+      position:absolute;
+      right:-64px;
+      top:-64px;
+      width:170px;
+      height:170px;
+      border-radius:999px;
+      background:var(--orange);
+      opacity:.78;
+    }
+
+    .day-cover > *{
+      position:relative;
+      z-index:2;
+    }
+
+    .day-theme{
+      color:var(--green);
+      font-weight:900;
+      font-size:.92rem;
+      letter-spacing:.09em;
+      text-transform:uppercase;
+      margin-bottom:7px;
+    }
+
+    .day-title{
+      font-weight:900;
+      font-size:clamp(1.8rem,3.6vw,3.35rem);
+      line-height:.98;
+      letter-spacing:-.058em;
+    }
+
+    .day-title .date-word{
+      display:block;
+      color:#fff;
+      font-size:1.08em;
+    }
+
+    .day-count{
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:999px;
+      padding:12px 16px;
+      color:#fff;
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    .chevron{
+      width:16px;
+      height:16px;
+      border-right:3px solid rgba(255,255,255,.9);
+      border-bottom:3px solid rgba(255,255,255,.9);
+      transform:rotate(45deg);
+      transition:.45s ease;
+      margin-left:10px;
+      display:inline-block;
+    }
+
+    .day-card.open .chevron{
+      transform:rotate(-135deg) translate(-2px,-2px);
+    }
+
+    .day-dropdown{
+      max-height:0;
+      overflow:hidden;
+      opacity:0;
+      transition:max-height .8s cubic-bezier(.23,.79,.24,1),opacity .45s ease;
+    }
+
+    .day-card.open .day-dropdown{
+      max-height:9000px;
+      opacity:1;
+    }
+
+    .events-shell{
+      display:grid;
+      gap:14px;
+      padding:18px;
+    }
+
+    .event-row{
+      display:grid;
+      grid-template-columns:136px 1fr 190px;
+      gap:18px;
+      align-items:center;
+      padding:20px;
+      border-radius:24px;
+      background:linear-gradient(180deg,#ffffff 0%,#fcfbff 100%);
+      border:1px solid rgba(226,214,255,.78);
+      box-shadow:0 10px 22px rgba(58,30,118,.045);
+      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+
+    .event-row:hover{
+      transform:translateY(-3px);
+      border-color:rgba(110,92,165,.22);
+      box-shadow:0 18px 34px rgba(58,30,118,.085);
+    }
+
+    .event-time{
+      font-weight:900;
+      color:var(--purple);
+      letter-spacing:-.05em;
+      font-size:1.32rem;
+      line-height:1.08;
+      padding:12px 10px;
+      border-radius:18px;
+      background:var(--purple-soft);
+      text-align:center;
+    }
+
+    .event-kind{
+      display:inline-flex;
+      align-items:center;
+      min-height:30px;
+      padding:0 12px;
+      border-radius:999px;
+      font-size:.68rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+    }
+
+    .kind-free{background:var(--aqua-soft);color:#357d84;border:1px solid rgba(139,203,208,.34);}
+    .kind-ticket{background:var(--green-soft);color:#4b5200;border:1px solid rgba(202,211,63,.38);}
+    .kind-paid{background:var(--orange-soft);color:var(--orange-deep);border:1px solid rgba(230,153,84,.26);}
+    .kind-register{background:var(--purple-soft);color:var(--purple);border:1px solid rgba(110,92,165,.14);}
+
+    .event-title{
+      font-size:1.14rem;
+      font-weight:900;
+      color:var(--text);
+      letter-spacing:-.034em;
+      line-height:1.14;
+    }
+
+    .event-desc{
+      margin-top:7px;
+      color:var(--muted);
+      font-size:.92rem;
+      line-height:1.45;
+      font-weight:500;
+    }
+
+    .event-speakers{
+  margin-top:9px;
+  color:#555b7d;
+  font-size:.88rem;
+  line-height:1.45;
+  font-weight:500;
+}
+
+   .event-place{
+  border-left:1px solid rgba(226,214,255,.9);
+  padding-left:16px;
+  color:var(--muted);
+  font-size:.85rem;
+  font-weight:600;
+  line-height:1.35;
+}
+
+    .map-link{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  margin-top:8px;
+  text-decoration:none;
+  color:var(--purple);
+  font-weight:700;
+  font-size:.80rem;
+}
+
+    .map-link:hover{text-decoration:underline;}
+
+    .event-actions{
+      grid-column:1 / -1;
+      display:none;
+      border-top:1px solid var(--line);
+      padding-top:16px;
+      margin-top:4px;
+    }
+
+    .event-row.active .event-actions{display:block;}
+
+    .action-note{
+      padding:14px 16px;
+      border-radius:18px;
+      background:linear-gradient(180deg,#faf7ff,#f2ecff);
+      border:1px solid #e9dcff;
+      color:#565c81;
+      line-height:1.45;
+      font-size:.90rem;
+      font-weight:650;
+    }
+
+    .event-button{
+  border:0;
+  border-radius:16px;
+  padding:13px 15px;
+  font-size:.92rem;
+  font-weight:700;
+  font-family:inherit;
+  cursor:pointer;
+  transition:.2s ease;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  text-align:center;
+}
+
+    .event-button:hover{transform:translateY(-2px);}
+    .btn-primary{background:linear-gradient(135deg,#8b78c7 0%,var(--purple) 52%,#58468f 100%);color:#fff;box-shadow:0 16px 30px rgba(110,92,165,.20), inset 0 1px 0 rgba(255,255,255,.22);}
+    .btn-secondary{color:var(--purple);background:var(--purple-soft);border:1px solid rgba(110,92,165,.14);}
+    .btn-paid{color:#192000;background:linear-gradient(90deg,var(--green),#e4ec77);box-shadow:0 14px 26px rgba(202,211,63,.18), inset 0 1px 0 rgba(255,255,255,.32);}
+    .btn-muted{background:#fff;color:var(--muted);border:1px solid rgba(226,214,255,.9);}
+
+    .form-card{
+      margin-top:14px;
+      padding:16px;
+      border-radius:20px;
+      background:#fff;
+      border:1px solid rgba(226,214,255,.72);
+      box-shadow:var(--shadow-soft);
+    }
+
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    .field{display:flex;flex-direction:column;gap:7px;}
+    .field.full{grid-column:1 / -1;}
+    label{font-size:.86rem;font-weight:800;color:#3f4568;}
+
+    input,select{
+      width:100%;
+      padding:14px 15px;
+      border-radius:16px;
+      border:1px solid rgba(224,216,244,.9);
+      background:#fff;
+      color:var(--text);
+      font-size:.96rem;
+      font-family:inherit;
+      outline:none;
+      box-shadow:0 8px 20px rgba(58,30,118,.035);
+      transition:.2s ease;
+    }
+
+    input:focus,select:focus{
+      border-color:rgba(110,92,165,.45);
+      box-shadow:0 0 0 4px rgba(110,92,165,.08),0 10px 24px rgba(58,30,118,.05);
+    }
+
+    .form-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;}
+
+    .result-box{
+      display:none;
+      margin-top:14px;
+      padding:14px 16px;
+      border-radius:18px;
+      line-height:1.45;
+      font-size:.90rem;
+      font-weight:650;
+    }
+
+    .result-box.show{display:block;}
+    .result-box.ok{background:rgba(143,207,111,.13);border:1px solid rgba(143,207,111,.45);color:#354208;}
+    .result-box.error{background:rgba(255,181,181,.12);border:1px solid rgba(255,181,181,.36);color:#7b1d1d;}
+
+    .registration-code{
+      display:inline-block;
+      margin-top:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(202,211,63,.16);
+      border:1px solid rgba(202,211,63,.36);
+      color:#3f430a;
+      font-weight:900;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      font-size:.88rem;
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(22px);
+      filter:blur(5px);
+      transition:opacity .75s ease,transform .75s cubic-bezier(.2,.8,.2,1),filter .75s ease;
+    }
+
+    .reveal.show{
+      opacity:1;
+      transform:translateY(0);
+      filter:blur(0);
+    }
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px);filter:blur(6px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+    @keyframes ticketReveal{from{opacity:0;transform:translateY(28px) scale(.975);filter:blur(8px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+
+    @media (prefers-reduced-motion:reduce){
+      *,*::before,*::after{
+        animation-duration:.001ms!important;
+        animation-iteration-count:1!important;
+        transition-duration:.001ms!important;
+        scroll-behavior:auto!important;
+      }
+    }
+
+    @media (max-width:1320px){
+      .wrap{grid-template-columns:1fr;max-width:980px;}
+      .panel{position:static;}
+      .board{min-height:auto;}
+    }
+
+    @media (max-width:760px){
+      .wrap{width:100%;max-width:100%;padding:12px;gap:14px;}
+      .panel,.board{width:100%;max-width:100%;min-width:0;border-radius:24px;}
+      .panel{padding:20px 14px;}
+      .board{padding:16px;}
+      .event-row{grid-template-columns:1fr;gap:10px;padding:16px;}
+      .event-time{text-align:left;}
+      .event-place{border-left:0;border-top:1px solid rgba(226,214,255,.9);padding-left:0;padding-top:12px;}
+      .form-grid,.form-actions{grid-template-columns:1fr;}
+      .day-cover{grid-template-columns:1fr;}
+      .day-count{width:max-content;}
+      .board-badge{width:100%;}
+    }
+
+    @media (max-width:430px){
+      .wrap{padding:8px;}
+      .panel{padding:18px 12px;}
+      .board{padding:12px;}
+      h1{font-size:clamp(1.78rem,10vw,2.42rem);}
+      .hero-image{width:min(88%, 280px);}
+      .day-cover{padding:18px;border-radius:0;}
+      .event-time{font-size:1.2rem;}
+      .event-title{font-size:1.02rem;}
+      .program-divider span{width:48px;}
+    }
+.developer-credit{
+  margin-top:34px;
+  padding-top:24px;
+  text-align:center;
+}
+
+.developer-credit-line{
+  display:none;
+}
+
+.developer-credit-title{
+  color:#737792;
+  font-size:1.05rem;
+  font-weight:900;
+  letter-spacing:-.04em;
+  margin-bottom:18px;
+}
+
+.developer-logos{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.developer-logo-card{
+  width:148px;
+  height:92px;
+  padding:20px 24px;
+  border-radius:28px;
+  background:#ffffff;
+  border:1px solid rgba(226,214,255,.95);
+  box-shadow:0 12px 28px rgba(58,30,118,.055);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.developer-logo-card img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
+
+.developer-credit-footer{
+  margin-top:24px;
+  color:var(--orange);
+  font-size:.92rem;
+  font-weight:900;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+@media (max-width:430px){
+  .developer-credit{
+    margin-top:28px;
+    padding-top:22px;
+  }
+
+  .developer-logos{
+    gap:12px;
+  }
+
+  .developer-logo-card{
+    width:128px;
+    height:82px;
+    border-radius:24px;
+    padding:18px 20px;
+  }
+
+  .developer-credit-title{
+    font-size:.98rem;
+  }
+
+  .developer-credit-footer{
+    font-size:.78rem;
+    letter-spacing:.10em;
+  }
+}
+.support-sponsors{
+  margin-top:28px;
+  padding:24px 18px 26px;
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(202,211,63,.10), transparent 28%),
+    radial-gradient(circle at 90% 100%, rgba(110,92,165,.10), transparent 30%),
+    linear-gradient(180deg,#ffffff 0%,#fcfbff 100%);
+  border:1px solid rgba(226,214,255,.86);
+  box-shadow:0 14px 32px rgba(58,30,118,.06);
+}
+
+.logo-section + .logo-section{
+  margin-top:28px;
+  padding-top:24px;
+  border-top:1px solid rgba(226,214,255,.82);
+}
+
+.logo-section h3{
+  margin:0 0 18px;
+  color:var(--purple);
+  font-size:1.05rem;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  text-align:center;
+}
+
+.logo-grid{
+  display:grid;
+  align-items:center;
+  justify-items:center;
+  gap:18px 20px;
+}
+
+.support-grid,
+.sponsors-grid{
+  grid-template-columns:repeat(3, minmax(0,1fr));
+}
+
+.logo-grid img{
+  max-width:100%;
+  width:92px;
+  max-height:54px;
+  object-fit:contain;
+  display:block;
+  filter:drop-shadow(0 8px 14px rgba(58,30,118,.08));
+  transition:transform .22s ease, filter .22s ease, opacity .22s ease;
+}
+
+.logo-grid img:hover{
+  transform:translateY(-2px);
+  filter:drop-shadow(0 12px 18px rgba(58,30,118,.12));
+}
+
+@media (max-width:430px){
+  .support-sponsors{
+    margin-top:24px;
+    padding:22px 14px 24px;
+    border-radius:24px;
+  }
+
+  .logo-grid{
+    gap:16px 14px;
+  }
+
+  .support-grid,
+  .sponsors-grid{
+    grid-template-columns:repeat(3, minmax(0,1fr));
+  }
+
+  .logo-grid img{
+    width:78px;
+    max-height:48px;
+  }
+
+  .logo-section h3{
+    font-size:.92rem;
+  }
+}
+.developer-credit-footer{
+  margin-top:24px;
+  color:var(--orange);
+  font-size:.92rem;
+  font-weight:900;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.developer-credit-top{
+  margin-top:0;
+  margin-bottom:20px;
+}
+/* =========================================================
+   NUEVA PORTADA LATERAL — FESTIVAL DE LOS GLACIARES
+   ========================================================= */
+
+.festival-cover{
+  padding:0;
+  background:
+    radial-gradient(circle at 50% 16%, rgba(255,255,255,.96), transparent 34%),
+    radial-gradient(circle at 50% 46%, rgba(139,203,208,.11), transparent 30%),
+    linear-gradient(180deg,#ffffff 0%,#fbfaff 72%,#f7f3ff 100%);
+}
+
+.festival-cover::before{
+  width:150px;
+  height:112px;
+  right:42px;
+  top:80px;
+  opacity:.38;
+}
+
+.festival-cover::after{
+  width:360px;
+  height:190px;
+  left:-120px;
+  bottom:-76px;
+  background:
+    repeating-radial-gradient(
+      ellipse at 50% 100%,
+      rgba(202,211,63,.16) 0,
+      rgba(202,211,63,.16) 1px,
+      transparent 2px,
+      transparent 11px
+    );
+  opacity:.55;
+}
+
+.cover-inner{
+  min-height:calc(100vh - 48px);
+  padding:46px 26px 44px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.cover-inner::after{
+  content:"";
+  position:absolute;
+  right:-110px;
+  bottom:-82px;
+  width:270px;
+  height:170px;
+  border-radius:55% 0 0 0;
+  background:rgba(110,92,165,.12);
+  pointer-events:none;
+}
+
+.cover-kicker{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin-bottom:34px;
+}
+
+.kicker-line{
+  display:none;
+}
+
+.cover-kicker .kicker-line:last-child{
+  background:linear-gradient(90deg,var(--purple),transparent);
+}
+
+.kicker-dot{
+  width:7px;
+  height:7px;
+  border-radius:999px;
+  background:var(--green);
+  box-shadow:0 0 0 4px rgba(202,211,63,.18);
+  flex:0 0 auto;
+}
+
+.kicker-pill{
+  min-height:32px;
+  padding:0 14px;
+  border-radius:999px;
+  border:1px solid rgba(210,190,255,.95);
+  background:rgba(255,255,255,.92);
+  color:var(--purple);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  font-size:.60rem;
+  font-weight:900;
+  letter-spacing:.21em;
+  text-transform:uppercase;
+  box-shadow:0 8px 20px rgba(110,92,165,.045);
+}
+
+.cover-title{
+  margin:0 auto;
+  max-width:360px;
+  color:var(--text);
+  font-size:clamp(2.05rem,4vw,3.05rem);
+  line-height:.92;
+  letter-spacing:-.065em;
+  font-weight:700;
+}
+
+.cover-title span{
+  display:block;
+  color:var(--purple);
+  font-weight:700;
+}
+
+.cover-title-divider{
+  margin:18px auto 15px;
+  width:100%;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  column-gap:24px;
+  transform:scale(.55);
+  transform-origin:center;
+}
+
+.cover-title-divider span{
+  position:relative;
+  display:block;
+  height:3px;
+  border-radius:999px;
+  background:var(--purple);
+}
+
+.cover-title-divider span:first-child{
+  background:linear-gradient(
+    90deg,
+    var(--purple) 0%,
+    var(--purple) 62%,
+    rgba(110,92,165,.68) 62%,
+    rgba(110,92,165,.68) 100%
+  );
+}
+
+.cover-title-divider span:last-child{
+  background:linear-gradient(
+    90deg,
+    rgba(110,92,165,.68) 0%,
+    rgba(110,92,165,.68) 38%,
+    var(--purple) 38%,
+    var(--purple) 100%
+  );
+}
+
+.cover-title-divider i{
+  width:22px;
+  height:22px;
+  border-radius:999px;
+  background:var(--green);
+  box-shadow:0 0 0 12px rgba(202,211,63,.16);
+}
+
+.cover-title-divider span:first-child::after,
+.cover-title-divider span:last-child::before{
+  content:"";
+  position:absolute;
+  top:50%;
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  background:var(--purple);
+  transform:translateY(-50%);
+}
+
+.cover-title-divider span:first-child::after{
+  right:-5px;
+}
+
+.cover-title-divider span:last-child::before{
+  left:-5px;
+}
+
+.cover-title-divider i{
+  width:16px;
+  height:16px;
+  border-radius:999px;
+  background:var(--green);
+  box-shadow:0 0 0 7px rgba(202,211,63,.20);
+  display:block;
+}
+
+.cover-title-divider i::after{
+  right:-28px;
+}
+
+.cover-subtitle{
+  margin:0;
+  color:#70738c;
+  font-size:.98rem;
+  line-height:1.35;
+  font-weight:500;
+  letter-spacing:.02em;
+}
+
+.cover-mountain{
+  width:100%;
+  margin:34px auto 28px;
+  min-height:260px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+.cover-mountain::before{
+  content:"";
+  position:absolute;
+  width:280px;
+  height:230px;
+  border-radius:50%;
+  background:
+    repeating-radial-gradient(
+      circle at 50% 50%,
+      rgba(139,203,208,.18) 0,
+      rgba(139,203,208,.18) 1px,
+      transparent 2px,
+      transparent 9px
+    );
+  opacity:.42;
+}
+
+.cover-mountain::after{
+  content:"";
+  position:absolute;
+  width:240px;
+  height:210px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(139,203,208,.12), transparent 65%);
+}
+
+.cover-mountain img{
+  width:min(100%, 360px);
+  height:auto;
+  position:relative;
+  z-index:2;
+  object-fit:contain;
+  filter:drop-shadow(0 18px 32px rgba(58,30,118,.10));
+}
+.cover-info-card{
+  width:min(100%, 360px);
+  min-height:72px;
+  padding:11px 22px;
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) 1px minmax(0, 1fr);
+  align-items:center;
+  column-gap:22px;
+  border-radius:30px;
+  background:#ffffff;
+  border:1px solid rgba(226,214,255,.95);
+  box-shadow:
+    0 12px 24px rgba(58,30,118,.045),
+    inset 0 1px 0 rgba(255,255,255,.95);
+}
+
+.cover-info-item{
+  display:grid;
+  grid-template-columns:34px max-content;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  text-align:left;
+  min-width:0;
+}
+
+.cover-icon-img{
+  width:30px;
+  height:30px;
+  object-fit:contain;
+  display:block;
+  justify-self:center;
+}
+
+.cover-info-item strong{
+  display:block;
+  color:var(--text);
+  font-size:.80rem;
+  font-weight:900;
+  line-height:1;
+  letter-spacing:-.015em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+
+.cover-info-item span{
+  display:block;
+  margin-top:5px;
+  color:#555973;
+  font-size:.49rem;
+  font-weight:700;
+  letter-spacing:.11em;
+  line-height:1.1;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+
+.cover-info-separator{
+  width:1px;
+  height:48px;
+  background:linear-gradient(
+    180deg,
+    transparent,
+    rgba(110,92,165,.22),
+    transparent
+  );
+}
+
+.organizer-separator{
+  width:100%;
+  margin:34px 0 24px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+}
+
+.organizer-separator span{
+  height:1px;
+  flex:1;
+  background:linear-gradient(90deg,transparent,rgba(110,92,165,.18),transparent);
+}
+
+.mini-mountain{
+  width:28px;
+  height:18px;
+  position:relative;
+}
+
+.mini-mountain::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:var(--purple);
+  clip-path:polygon(0 100%,20% 45%,34% 72%,52% 15%,72% 74%,84% 48%,100% 100%);
+  opacity:.95;
+}
+
+.organizer-title{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin-bottom:22px;
+  color:var(--orange);
+  font-size:.86rem;
+  font-weight:900;
+  letter-spacing:.20em;
+  text-transform:uppercase;
+}
+
+.organizer-title span{
+  width:48px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(230,153,84,.38));
+}
+
+.organizer-title span:last-child{
+  background:linear-gradient(90deg,rgba(230,153,84,.38),transparent);
+}
+
+.organizer-title::before,
+.organizer-title::after{
+  content:"";
+  width:5px;
+  height:5px;
+  border-radius:999px;
+  background:var(--orange);
+}
+
+.organizer-logos{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+}
+
+.organizer-logo-card{
+  width:136px;
+  height:100px;
+  padding:24px 26px;
+  border-radius:28px;
+  background:#ffffff;
+  border:1px solid rgba(226,214,255,.95);
+  box-shadow:0 14px 30px rgba(58,30,118,.06);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+
+.organizer-logo-card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(110,92,165,.24);
+  box-shadow:0 20px 38px rgba(58,30,118,.10);
+}
+
+.organizer-logo-card img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
+
+.organizer-vertical-line{
+  width:1px;
+  height:66px;
+  background:rgba(226,214,255,.95);
+}
+
+@media (max-width:1320px){
+  .cover-inner{
+    min-height:auto;
+  }
+}
+
+@media (max-width:430px){
+  .cover-inner{
+    padding:38px 18px 40px;
+  }
+
+  .kicker-line{
+    width:28px;
+  }
+
+  .kicker-pill{
+    font-size:.62rem;
+    padding:0 14px;
+  }
+
+  .cover-title{
+    font-size:clamp(2rem,13vw,2.75rem);
+  }
+
+  .cover-mountain{
+    margin-top:28px;
+    min-height:220px;
+  }
+
+  .cover-sun{
+    left:28px;
+    top:36px;
+  }
+
+  .cover-moon{
+    right:38px;
+  }
+
+ .cover-info-card{
+  width:min(100%, 340px);
+  grid-template-columns:1fr;
+  gap:14px;
+  padding:18px;
+  border-radius:28px;
+}
+
+.cover-info-separator{
+  width:100%;
+  height:1px;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(110,92,165,.22),
+    transparent
+  );
+}
+
+.cover-info-item{
+  grid-template-columns:42px 1fr;
+  gap:14px;
+  justify-content:center;
+}
+
+.cover-info-item strong{
+  font-size:1rem;
+}
+
+.cover-info-item span{
+  font-size:.62rem;
+}
+
+  .organizer-logo-card{
+    width:122px;
+    height:92px;
+    padding:22px;
+    border-radius:24px;
+  }
+
+  .organizer-logos{
+    gap:12px;
+  }
+
+  .organizer-title{
+    font-size:.76rem;
+    letter-spacing:.16em;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+<div class="hummingbird-loader" aria-hidden="true">
+  <img src="picaflor.png" alt="">
+</div>
+  <div class="wrap">
+   <aside class="panel festival-cover">
+  <div class="cover-inner reveal">
+
+   <div class="cover-kicker">
+  <span class="kicker-pill">
+    <span class="kicker-dot"></span>
+    <span>Programa oficial</span>
+    <span class="kicker-dot"></span>
+  </span>
+</div>
+
+    <h1 class="cover-title">
+      Festival de los
+      <span>Glaciares 2026</span>
+    </h1>
+
+    <div class="cover-title-divider">
+      <span></span>
+      <i></i>
+      <span></span>
+    </div>
+
+    <p class="cover-subtitle">
+      Ciencia, cultura y comunidad<br>
+      por nuestros glaciares
+    </p>
+
+    <div class="cover-mountain">
+     
+      <img src="imagen-central.png" alt="Nevado del Festival de los Glaciares">
+    </div>
+
+    <div class="cover-info-card">
+   <div class="cover-info-item">
+  <img class="cover-icon-img" src="icono-calendario-glaciares.png" alt="" aria-hidden="true">
+  <div>
+    <strong>2, 3 y 4</strong>
+    <span>de julio</span>
+  </div>
+</div>
+
+<div class="cover-info-separator"></div>
+
+<div class="cover-info-item">
+  <img class="cover-icon-img" src="icono-location-glaciares.png" alt="" aria-hidden="true">
+  <div>
+    <strong>Huaraz</strong>
+    <span>Áncash - Perú</span>
+  </div>
+</div>
+    </div>
+
+    <div class="organizer-separator">
+      <span></span>
+      <div class="mini-mountain" aria-hidden="true"></div>
+      <span></span>
+    </div>
+
+    <div class="organizer-title">
+      <span></span>
+      Organizadores
+      <span></span>
+    </div>
+
+    <div class="organizer-logos">
+      <a class="organizer-logo-card" href="https://www.instagram.com/chasingglaciers.peru/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Chasing Glaciers">
+        <img src="logo-organizador-1.png" alt="Chasing Glaciers">
+      </a>
+
+      <div class="organizer-vertical-line"></div>
+
+      <a class="organizer-logo-card" href="https://www.instagram.com/cumbresblancasperu/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Cumbres Blancas Perú">
+        <img src="logo-organizador-2.png" alt="Cumbres Blancas Perú">
+      </a>
+    </div>
+
+  </div>
+</aside>
+
+    <main class="board">
+    
+      <section class="days-list" id="daysList"></section>
+    </main>
+  </div>
+<div class="support-sponsors reveal">
+  <section class="logo-section">
+    <h3>Apoyo:</h3>
+
+    <div class="logo-grid support-grid">
+      <img src="camara-de-comercio.png" alt="Cámara de Comercio">
+      <img src="min-cultura.png" alt="Ministerio de Cultura">
+      <img src="inaigem.png" alt="INAIGEM">
+      <img src="muni-hz.png" alt="Municipalidad de Huaraz">
+      <img src="unasam.png" alt="UNASAM">
+      <img src="ultratrail.png" alt="Ultra Trail">
+      <img src="refugios-andinos.png" alt="Refugios Andinos">
+      <img src="sernamp.png" alt="SERNANP">
+      <img src="bko-sports.png" alt="BKO Sports">
+      <img src="outdoor.png" alt="+Outdoor">
+      <img src="rotary-hz.png" alt="Rotary Huaraz">
+    </div>
+  </section>
+
+  <section class="logo-section">
+    <h3>Auspiciadores:</h3>
+
+    <div class="logo-grid sponsors-grid">
+      <img src="movil-bus.png" alt="Móvil Bus">
+      <img src="mestizo.png" alt="Mestizo">
+      <img src="granizo.png" alt="Granizo">
+      <img src="siula-cafe.png" alt="Siula Café">
+      <img src="hotel-independencia.png" alt="Hotel Independencia">
+      <img src="wayki.png" alt="Wayki">
+      <img src="qolqa.png" alt="Qolqa">
+      <img src="cima.png" alt="Cima">
+      <img src="h-huascaran.png" alt="H Huascarán">
+      <img src="pampa-silvestre.png" alt="Pampa Silvestre">
+      <img src="dani-design.png" alt="Dani Design">
+    </div>
+  </section>
+</div>
+  <script>
+    const GOOGLE_SCRIPT_URL = 'PEGA_AQUI_TU_URL_DE_GOOGLE_APPS_SCRIPT';
+
+    const WHATSAPP_NUMBERS = {
+      fridayWood: '51XXXXXXXXX',
+      saturdayMaisha: '51XXXXXXXXX',
+      saturdayAnaMorcelli: '51XXXXXXXXX',
+      saturdayYarparishun: '51XXXXXXXXX'
+    };
+
+    const YAPE_NUMBER = 'COLOCAR_NUMERO_YAPE';
+    const YAPE_HOLDER = 'COLOCAR_NOMBRE_YAPE';
+    const WORKSHOP_PRICE = 15;
+
+    const daysData = [
+      {
+        id:'day-2',
+        date:'Jueves 2 de julio',
+        theme:'Cultura y ciencia',
+        events:[
+          { id:'thu-opening', time:'9:00 a.m. - 10:30 a.m.', kind:'free', title:'Inauguración del festival', description:'Apertura oficial.', place:'Sala Alpamayo de la Cámara de Comercio de Áncash', maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz' }, 
+          { id:'thu-fair-walk', time:'10:30 a.m. - 11:00 a.m.', kind:'free', title:'Feria sostenible del Festival de los Glaciares', description:'Recorrido por los stands y propuestas de la feria.', place:'Afuera de la Cámara de Comercio de Áncash', maps:'Cámara de Comercio de Áncash Huaraz' },
+          { id:'thu-art-walk', time:'11:30 a.m. - 12:30 p.m.', kind:'free', title:'Muestra artística colectiva “Voces del Deshielo”', description:'Visita a la muestra artística colectiva del festival.', place:'Hall de la DDC Áncash, frente de la Plaza de Armas', maps:'Dirección Desconcentrada de Cultura Áncash Huaraz Plaza de Armas' },
+          { id:'thu-panel', time:'3:00 p.m. - 6:00 p.m.', kind:'free', title:'Panel & conversatorio: El impacto del cambio climático en la criosfera', description:'Panel científico y conversatorio sobre glaciares, cambio climático y criosfera. Incluye coffee break.', speakers:'Ponentes: José Ubeda & Ramón Pellitero, Paola Moschella, Edwin Loarte, Wilmer Sánchez, Kiara Falcon y Pascal Egli.', place:'Sala Alpamayo de la Cámara de Comercio de Áncash', maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz' },
+          { id:'thu-cinema', time:'6:00 p.m. - 8:00 p.m.', kind:'free', title:'Noche de cine', description:'Proyección del documental “Nuestros Glaciares: La agonía de los Andes” y el cortometraje “Refugios Andinos”.', place:'Sala Alpamayo de la Cámara de Comercio de Áncash', maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz' }
+        ]
+      },
+      {
+        id:'day-3',
+        date:'Viernes 3 de julio',
+        theme:'Saberes y diálogo',
+        events:[
+          { id:'fri-cleaning', time:'7:00 a.m. - 12:00 p.m.', kind:'register', title:'Jornada de limpieza en Rataquenua', description:'Actividad comunitaria coorganizada por Merrell UTCB. Punto de encuentro: Plazuela de la Soledad, Huaraz.', place:'Plazuela de la Soledad, Huaraz', maps:'Plazuela de la Soledad Huaraz' },
+          { id:'fri-art-show', time:'9:00 a.m.', kind:'free', title:'Muestra artística “Voces del Deshielo”', description:'Exhibición artística del festival.', place:'Hall de la DDC Áncash, frente de la Plaza de Armas', maps:'Dirección Desconcentrada de Cultura Áncash Huaraz Plaza de Armas' },
+          { id:'fri-fair', time:'10:00 a.m.', kind:'free', title:'Feria por nuestros glaciares', description:'Feria abierta al público con propuestas vinculadas a los glaciares.', place:'Afuera de la Cámara de Comercio de Áncash', maps:'Cámara de Comercio de Áncash Huaraz' },
+          { id:'fri-wood', time:'3:00 p.m. - 5:00 p.m.', kind:'paid', whatsappKey:'fridayWood', title:'Taller artístico: El encanto de la madera recuperada', description:'Crea tu propia obra con materiales reciclados. Tallerista: Enrico Grillo.', place:'Sala Alpamayo de la Cámara de Comercio de Áncash', maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz' },
+          { id:'fri-cinema', time:'6:00 p.m. - 8:00 p.m.', kind:'free', title:'Noche del cine', description:'Proyección del documental “Canary” y el cortometraje “Tejiendo Esperanzas”.', place:'Sala Alpamayo de la Cámara de Comercio de Áncash', maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz' },
+          { id:'fri-after', time:'8:30 p.m. - 12:00 a.m.', kind:'free', title:'After Office', description:'Actividad de cierre de jornada.', place:'Cima Taproom, Parque Ginebra', maps:'Cima Taproom Parque Ginebra Huaraz' }
+        ]
+      },
+      {
+        id:'day-4',
+        date:'Sábado 4 de julio',
+        theme:'Acción, arte y comunidad',
+        events:[
+          { id:'sat-biorremediation', time:'7:30 a.m. - 1:00 p.m.', kind:'register', title:'Visita a los campos de biorremediación DAR - Canray Chico', description:'Tour guiado por investigadores a los campos de biorremediación, con explicación sobre drenaje ácido de roca, organismos y sistemas de remediación del agua contaminada. Con apoyo de Merrell UTCB & UNASAM. Cupos limitados.', place:'DAR - Canray Chico', maps:'Canray Chico Huaraz' },
+          { id:'sat-art-show', time:'9:00 a.m.', kind:'free', title:'Muestra artística “Voces del Deshielo”', description:'Exhibición artística del festival.', place:'Hall de la DDC Áncash, frente de la Plaza de Armas', maps:'Dirección Desconcentrada de Cultura Áncash Huaraz Plaza de Armas' },
+          { id:'sat-fair', time:'10:00 a.m.', kind:'free', title:'Feria por nuestros glaciares', description:'Feria abierta al público con propuestas vinculadas a los glaciares.', place:'Afuera de la Cámara de Comercio de Áncash', maps:'Cámara de Comercio de Áncash Huaraz' },
+          { id:'sat-maisha', time:'10:00 a.m. - 1:00 p.m.', kind:'paid', whatsappKey:'saturdayMaisha', title:'Florecer entre glaciares, acuarelas y conexión', description:'Taller artístico. Tallerista: Maisha.', place:'DDC - Doña Nati', maps:'DDC Doña Nati Huaraz' },
+          { id:'sat-ana', time:'10:00 a.m. - 1:00 p.m.', kind:'paid', whatsappKey:'saturdayAnaMorcelli', title:'Arteterapia: La voz de la montaña', description:'Taller artístico. Tallerista: Ana Morcelli.', place:'DDC - Auditorio', maps:'DDC Auditorio Huaraz' },
+          { id:'sat-yarparishun', time:'10:00 a.m. - 1:00 p.m.', kind:'paid', whatsappKey:'saturdayYarparishun', title:'Máscaras de animales de la reserva de biosfera', description:'Taller artístico. Tallerista: Yarparishun.', place:'DDC - Parque Lítico', maps:'DDC Parque Lítico Huaraz' },
+          { id:'sat-origin', time:'2:00 p.m. - 5:00 p.m.', kind:'ticket', title:'El origen de la Cordillera Blanca y la Cordillera Negra', description:'Presentación especial con programación escénica y musical: apertura, ritual de danza, conferencia central, El origen del Río Santa, La memoria del Huascarán, drenaje ácido de roca, Pintaykuna y cierre musical.', place:'Auditorio de Telemática de la UNASAM', maps:'Auditorio de Telemática UNASAM Huaraz' }
+        ]
+      }
+    ];
+
+    const daysList = document.getElementById('daysList');
+
+    function mapUrl(query){
+      return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+    }
+
+    function slugify(text){
+      return String(text || '')
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g,'')
+        .replace(/\s+/g,'-')
+        .replace(/[^a-z0-9-]/g,'') || 'registro';
+    }
+
+    function buildRandomCode(prefix){
+      const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      let randomPart = '';
+      for(let i=0;i<6;i++) randomPart += alphabet.charAt(Math.floor(Math.random()*alphabet.length));
+      return `${prefix}-${randomPart}`;
+    }
+
+    function validEmail(email){
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    async function saveRegistration(payload){
+      if(!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes('PEGA_AQUI')){
+        return {ok:true, registrationCode: payload.registrationCode || buildRandomCode(payload.codePrefix || 'FDG')};
+      }
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method:'POST',
+        headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body:JSON.stringify(payload)
+      });
+      const text = await response.text();
+      let data = {};
+      try{ data = JSON.parse(text); } catch { throw new Error('La respuesta del servidor no fue JSON válido.'); }
+      if(!response.ok || data.ok === false){ throw new Error(data.error || 'No se pudo guardar el registro.'); }
+      return data;
+    }
+
+    function showBox(el, html, type){
+      el.classList.remove('show','ok','error');
+      el.innerHTML = html;
+      el.classList.add('show', type);
+    }
+
+    function kindLabel(kind){
+      if(kind === 'paid') return 'Taller pago';
+      if(kind === 'ticket') return 'Ticket gratuito';
+      if(kind === 'register') return 'Previa inscripción';
+      return 'Ingreso libre';
+    }
+
+    function actionButton(event){
+      if(event.kind === 'paid') return `<button class="event-button btn-paid" type="button" data-action="open-form">Inscribirme al taller</button>`;
+      if(event.kind === 'ticket') return `<button class="event-button btn-primary" type="button" data-action="open-form">Generar ticket gratuito</button>`;
+      if(event.kind === 'register') return `<button class="event-button btn-secondary" type="button" data-action="open-info">Ver indicaciones</button>`;
+      return `<button class="event-button btn-muted" type="button" data-action="open-info">Ver detalle</button>`;
+    }
+
+    function renderEvent(event){
+      return `
+        <article class="event-row" data-event-id="${event.id}">
+          <div class="event-time">${event.time}</div>
+          <div>
+            <div class="event-kind kind-${event.kind}">${kindLabel(event.kind)}</div>
+            <div class="event-title">${event.title}</div>
+            <div class="event-desc">${event.description || ''}</div>
+            ${event.speakers ? `<div class="event-speakers">${event.speakers}</div>` : ''}
+          </div>
+          <div class="event-place">
+            ${event.place}
+            <br><a class="map-link" href="${mapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">Abrir en Google Maps ↗</a>
+            <div style="margin-top:12px;">${actionButton(event)}</div>
+          </div>
+          <div class="event-actions"></div>
+        </article>
+      `;
+    }
+
+    function renderDay(day){
+      return `
+        <section class="day-card reveal open" id="${day.id}">
+          <button class="day-btn" type="button" aria-expanded="true">
+            <div class="day-cover">
+              <div>
+                <div class="day-theme">${day.theme}</div>
+                <div class="day-title"><span class="date-word">${day.date}</span></div>
+              </div>
+              <div class="day-count">${day.events.length} actividades <span class="chevron"></span></div>
+            </div>
+          </button>
+          <div class="day-dropdown">
+            <div class="events-shell">
+              ${day.events.map(renderEvent).join('')}
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderInfo(event){
+      if(event.kind === 'register'){
+        return `
+          <div class="action-note">
+            Esta actividad aparece como <strong>con previa inscripción</strong>. El sistema no genera ticket aquí porque, según la regla indicada, solo la presentación del sábado 4 a las 2:00 p.m. emite ticket gratuito. Puedes usar el enlace de Google Maps para llegar al punto indicado.
+          </div>
+        `;
+      }
+      return `
+        <div class="action-note">
+          Este evento es de <strong>ingreso libre</strong> y no necesita ticket. Usa el enlace de Google Maps para llegar directamente a la ubicación.
+        </div>
+      `;
+    }
+
+    function renderForm(event){
+      const isPaid = event.kind === 'paid';
+      return `
+        <div class="form-card">
+          <div class="action-note" style="margin-bottom:14px;">
+            ${isPaid
+              ? `Inscripción independiente para este taller. Costo: <strong>S/ ${WORKSHOP_PRICE}</strong>. Al guardar tus datos se abrirá el WhatsApp del tallerista.`
+              : `Ticket gratuito para este evento. No redirige a WhatsApp; solo genera tu ticket.`}
+          </div>
+          <form class="registration-form" data-event-id="${event.id}">
+            <div class="form-grid">
+              <div class="field full">
+                <label>Nombres y apellidos *</label>
+                <input name="fullName" type="text" placeholder="Ej.: María González" required>
+              </div>
+              <div class="field">
+                <label>Celular *</label>
+                <input name="phone" type="tel" placeholder="Ej.: 987654321" required>
+              </div>
+              <div class="field">
+                <label>Edad</label>
+                <input name="age" type="number" min="0" placeholder="Ej.: 22">
+              </div>
+              <div class="field full">
+                <label>Correo *</label>
+                <input name="email" type="email" placeholder="Ej.: nombre@correo.com" required>
+              </div>
+              <div class="field">
+                <label>¿De dónde es?</label>
+                <input name="cityFrom" type="text" placeholder="Ej.: Huaraz">
+              </div>
+              <div class="field">
+                <label>Instagram</label>
+                <input name="instagram" type="text" placeholder="Ej.: @usuario">
+              </div>
+            </div>
+            <div class="form-actions">
+              <button class="event-button ${isPaid ? 'btn-paid' : 'btn-primary'}" type="submit">${isPaid ? 'Guardar y abrir WhatsApp' : 'Generar ticket'}</button>
+              <button class="event-button btn-secondary" type="button" data-action="close-form">Cerrar</button>
+            </div>
+            <div class="result-box error"></div>
+            <div class="result-box ok"></div>
+          </form>
+        </div>
+      `;
+    }
+
+    function getPayload(form,event){
+      const fullName = form.querySelector('input[name="fullName"]').value.trim();
+      const phone = form.querySelector('input[name="phone"]').value.trim();
+      const age = form.querySelector('input[name="age"]').value.trim();
+      const email = form.querySelector('input[name="email"]').value.trim();
+      const cityFrom = form.querySelector('input[name="cityFrom"]').value.trim();
+      const instagram = form.querySelector('input[name="instagram"]').value.trim();
+      return {
+        action:'register',
+        eventName:'Festival de los Glaciares',
+        eventId:event.id,
+        eventTitle:event.title,
+        eventDate:event.time,
+        eventPlace:event.place,
+        registrationType:event.kind,
+        amount:event.kind === 'paid' ? WORKSHOP_PRICE : 0,
+        paymentMethod:event.kind === 'paid' ? 'Yape / coordinación por WhatsApp' : 'Gratuito',
+        yapeNumber:YAPE_NUMBER,
+        yapeHolder:YAPE_HOLDER,
+        fullName, phone, age, email, cityFrom, instagram,
+        codePrefix:event.kind === 'paid' ? 'TALLER' : 'FDG',
+        createdAt:new Date().toISOString()
+      };
+    }
+
+    function buildWhatsAppLink(event,payload,registrationCode){
+      const number = WHATSAPP_NUMBERS[event.whatsappKey] || '';
+      const cleanNumber = number.replace(/\D/g,'');
+      const message = `Hola, quiero confirmar mi inscripción al taller del Festival de los Glaciares.\n\nTaller: ${event.title}\nCódigo: ${registrationCode}\nNombre: ${payload.fullName}\nCelular: ${payload.phone}\nCorreo: ${payload.email}\nCiudad: ${payload.cityFrom || 'No indicó'}\nInstagram: ${payload.instagram || 'No indicó'}\nMonto: S/ ${WORKSHOP_PRICE}\nYape: ${YAPE_NUMBER}\nTitular: ${YAPE_HOLDER}\n\nAdjunto mi comprobante de pago.`;
+      if(!cleanNumber || cleanNumber.includes('XXXXXXXXX')) return '';
+      return `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
+    }
+
+    function generateFreeTicketPDF(event,payload,registrationCode){
+      if(!window.jspdf){
+        alert('No se pudo cargar jsPDF. Revisa tu conexión e intenta nuevamente.');
+        return;
+      }
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+      const w = pdf.internal.pageSize.getWidth();
+      const h = pdf.internal.pageSize.getHeight();
+
+      pdf.setFillColor(247,245,252); pdf.rect(0,0,w,h,'F');
+      pdf.setFillColor(110,92,165); pdf.roundedRect(14,14,w-28,h-28,10,10,'F');
+      pdf.setFillColor(230,153,84); pdf.circle(w-15,42,28,'F');
+      pdf.setFillColor(139,203,208); pdf.roundedRect(14,h-78,w-28,64,18,18,'F');
+      pdf.setFillColor(202,211,63); pdf.roundedRect(14,h-54,w-28,40,14,14,'F');
+
+      pdf.setTextColor(255,255,255);
+      pdf.setFont('helvetica','bold');
+      pdf.setFontSize(13); pdf.text('FESTIVAL DE LOS GLACIARES', w/2, 38, {align:'center'});
+      pdf.setFontSize(24); pdf.text('TICKET GRATUITO', w/2, 58, {align:'center'});
+
+      pdf.setFontSize(16); pdf.text('Sábado 4 de julio · 2:00 p.m. a 5:00 p.m.', w/2, 82, {align:'center'});
+      pdf.setFontSize(12); pdf.text('Auditorio de Telemática de la UNASAM', w/2, 92, {align:'center'});
+
+      pdf.setFillColor(255,255,255); pdf.roundedRect(24,108,w-48,100,8,8,'F');
+      pdf.setTextColor(17,23,53);
+      pdf.setFontSize(20); pdf.text(event.title, w/2, 128, {align:'center', maxWidth:w-62});
+      pdf.setFont('helvetica','normal');
+      pdf.setFontSize(12);
+      pdf.text('Participante:', 34, 154);
+      pdf.setFont('helvetica','bold'); pdf.setFontSize(17); pdf.text(payload.fullName, 34, 166, {maxWidth:w-68});
+      pdf.setFontSize(12); pdf.text(`Código: ${registrationCode}`, 34, 187);
+      pdf.text(`Celular: ${payload.phone}`, 34, 197);
+
+      pdf.setTextColor(255,255,255);
+      pdf.setFontSize(11);
+      pdf.text('Presenta este ticket al ingresar. Este ticket no representa pago.', w/2, h-28, {align:'center'});
+
+      pdf.save(`festival-glaciares-ticket-${slugify(payload.fullName)}-${registrationCode}.pdf`);
+    }
+
+    function findEventById(eventId){
+      for(const day of daysData){
+        const ev = day.events.find(item => item.id === eventId);
+        if(ev) return ev;
+      }
+      return null;
+    }
+
+    function attachFormHandlers(container,event){
+      const form = container.querySelector('.registration-form');
+      if(!form) return;
+      const errorBox = form.querySelector('.result-box.error');
+      const okBox = form.querySelector('.result-box.ok');
+      const closeBtn = form.querySelector('[data-action="close-form"]');
+
+      closeBtn.addEventListener('click', () => {
+        const row = form.closest('.event-row');
+        row.classList.remove('active');
+        row.querySelector('.event-actions').innerHTML = '';
+      });
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errorBox.classList.remove('show'); okBox.classList.remove('show');
+        const payload = getPayload(form,event);
+        if(!payload.fullName || !payload.phone || !payload.email){
+          showBox(errorBox,'Completa nombre, celular y correo.','error');
+          return;
+        }
+        if(!validEmail(payload.email)){
+          showBox(errorBox,'Escribe un correo válido.','error');
+          return;
+        }
+        const submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Guardando...';
+        try{
+          const data = await saveRegistration(payload);
+          const registrationCode = data.registrationCode || buildRandomCode(payload.codePrefix);
+          if(event.kind === 'ticket'){
+            generateFreeTicketPDF(event,payload,registrationCode);
+            showBox(okBox,`Ticket generado correctamente.<br><span class="registration-code">${registrationCode}</span>`,'ok');
+          } else {
+            const wa = buildWhatsAppLink(event,payload,registrationCode);
+            if(wa){
+              showBox(okBox,`Datos guardados correctamente.<br><span class="registration-code">${registrationCode}</span><br><br><a class="event-button btn-paid" href="${wa}" target="_blank" rel="noopener noreferrer">Abrir WhatsApp del tallerista</a>`,'ok');
+              window.open(wa,'_blank');
+            } else {
+              showBox(okBox,`Datos guardados correctamente.<br><span class="registration-code">${registrationCode}</span><br><br><strong>Falta colocar el número de WhatsApp</strong> para este taller en WHATSAPP_NUMBERS.`,'ok');
+            }
+          }
+        } catch(error){
+          showBox(errorBox,`Ocurrió un problema:<br>${error.message}`,'error');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = event.kind === 'paid' ? 'Guardar y abrir WhatsApp' : 'Generar ticket';
+        }
+      });
+    }
+
+    function openEventAction(row,event,mode){
+      document.querySelectorAll('.event-row.active').forEach(activeRow => {
+        if(activeRow !== row){
+          activeRow.classList.remove('active');
+          activeRow.querySelector('.event-actions').innerHTML = '';
+        }
+      });
+      const actions = row.querySelector('.event-actions');
+      row.classList.add('active');
+      if(mode === 'open-form'){
+        actions.innerHTML = renderForm(event);
+        attachFormHandlers(actions,event);
+      } else {
+        actions.innerHTML = renderInfo(event);
+      }
+    }
+
+    function init(){
+      daysList.innerHTML = daysData.map(renderDay).join('');
+
+      document.querySelectorAll('.day-card').forEach(card => {
+        const btn = card.querySelector('.day-btn');
+        btn.addEventListener('click', () => {
+          const open = card.classList.toggle('open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      });
+
+      document.querySelectorAll('.event-row').forEach(row => {
+        row.addEventListener('click', (e) => {
+          const actionTarget = e.target.closest('[data-action]');
+          if(!actionTarget) return;
+          const event = findEventById(row.dataset.eventId);
+          if(!event) return;
+          openEventAction(row,event,actionTarget.dataset.action);
+        });
+      });
+
+      initReveals();
+    }
+
+    function initReveals(){
+      const elements = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) entry.target.classList.add('show');
+        });
+      }, {threshold:.08});
+      elements.forEach((el,index) => {
+        el.style.transitionDelay = `${Math.min(index * 45, 360)}ms`;
+        observer.observe(el);
+      });
+    }
+
+    window.addEventListener('load', init);
+  </script>
+</body>
+</html>

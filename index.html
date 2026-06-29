@@ -242,15 +242,22 @@
       overflow:hidden;
     }
 
-    .day-btn{
-      width:100%;
-      border:0;
-      background:transparent;
-      padding:0;
-      cursor:pointer;
-      text-align:left;
-      font-family:inherit;
-    }
+  .day-btn{
+  width:100%;
+  border:0;
+  background:transparent;
+  padding:0;
+  cursor:pointer;
+  text-align:left;
+  font-family:inherit;
+  display:block;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+.day-cover{
+  user-select:none;
+  -webkit-user-select:none;
+}
 
     .day-cover{
       display:grid;
@@ -1594,25 +1601,25 @@ img{
     }
 
     function renderDay(day){
-      return `
-        <section class="day-card reveal open" id="${day.id}">
-          <button class="day-btn" type="button" aria-expanded="true">
-            <div class="day-cover">
-              <div>
-                <div class="day-theme">${day.theme}</div>
-                <div class="day-title"><span class="date-word">${day.date}</span></div>
-              </div>
-              <div class="day-count">${day.events.length} actividades <span class="chevron"></span></div>
-            </div>
-          </button>
-          <div class="day-dropdown">
-            <div class="events-shell">
-              ${day.events.map(renderEvent).join('')}
-            </div>
+  return `
+    <section class="day-card reveal" id="${day.id}">
+      <button class="day-btn" type="button" aria-expanded="false">
+        <div class="day-cover">
+          <div>
+            <div class="day-theme">${day.theme}</div>
+            <div class="day-title"><span class="date-word">${day.date}</span></div>
           </div>
-        </section>
-      `;
-    }
+          <div class="day-count">${day.events.length} actividades <span class="chevron"></span></div>
+        </div>
+      </button>
+      <div class="day-dropdown">
+        <div class="events-shell">
+          ${day.events.map(renderEvent).join('')}
+        </div>
+      </div>
+    </section>
+  `;
+}
 
     function renderInfo(event){
       if(event.kind === 'register'){

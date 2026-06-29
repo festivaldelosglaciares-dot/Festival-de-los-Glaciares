@@ -241,8 +241,7 @@
       box-shadow:var(--shadow-soft);
       overflow:hidden;
     }
-
-  .day-btn{
+.day-btn{
   width:100%;
   border:0;
   background:transparent;
@@ -251,7 +250,7 @@
   text-align:left;
   font-family:inherit;
   display:block;
-  touch-action:manipulation;
+  touch-action:pan-y;
   -webkit-tap-highlight-color:transparent;
 }
 .day-cover{
@@ -1318,7 +1317,6 @@
   }
 }
 
-/* Evita selección, arrastre y molestias táctiles en imágenes */
 img{
   -webkit-user-drag:none;
   user-select:none;
@@ -1326,13 +1324,53 @@ img{
   -webkit-touch-callout:none;
 }
 
-/* Las imágenes decorativas no capturan el toque */
 .cover-mountain img,
 .cover-icon-img,
 .logo-grid img,
 .organizer-logo-card img,
+.hummingbird-loader,
 .hummingbird-loader img{
   pointer-events:none;
+}
+/* Mejora de scroll táctil en celulares */
+@media (max-width:760px){
+  html,
+  body{
+    scroll-behavior:auto;
+    -webkit-overflow-scrolling:touch;
+    touch-action:pan-y;
+  }
+
+  .wrap,
+  .panel,
+  .board,
+  .cover-inner,
+  .days-list,
+  .day-card{
+    touch-action:pan-y;
+  }
+
+  .hummingbird-loader{
+    pointer-events:none;
+  }
+
+  .reveal{
+    opacity:1;
+    transform:none;
+    filter:none;
+    transition:none;
+  }
+
+  .reveal.show{
+    opacity:1;
+    transform:none;
+    filter:none;
+  }
+
+  .panel,
+  .board{
+    animation:none;
+  }
 }
   </style>
 </head>

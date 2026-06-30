@@ -1506,6 +1506,447 @@ img{
     padding-bottom:42px !important;
   }
 }
+/* =========================================================
+   DETALLE MEJORADO DE EVENTOS + CARRUSEL
+   ========================================================= */
+
+.event-detail-card{
+  display:grid;
+  grid-template-columns:300px 1fr;
+  gap:22px;
+  align-items:stretch;
+  padding:18px;
+  border-radius:24px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(202,211,63,.10), transparent 34%),
+    linear-gradient(180deg,#ffffff 0%,#faf7ff 100%);
+  border:1px solid rgba(226,214,255,.95);
+  box-shadow:0 12px 28px rgba(58,30,118,.055);
+}
+
+.event-detail-carousel{
+  position:relative;
+  width:100%;
+  min-height:360px;
+  border-radius:20px;
+  overflow:hidden;
+  background:linear-gradient(135deg,#f0ecfb,#ffffff);
+  border:1px solid rgba(226,214,255,.9);
+}
+
+.event-detail-carousel-track{
+  display:flex;
+  width:100%;
+  height:100%;
+  min-height:360px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+
+.event-detail-carousel-track::-webkit-scrollbar{
+  display:none;
+}
+
+.event-detail-slide{
+  flex:0 0 100%;
+  width:100%;
+  min-height:360px;
+  scroll-snap-align:center;
+}
+
+.event-detail-slide img{
+  width:100%;
+  height:100%;
+  min-height:360px;
+  object-fit:cover;
+  display:block;
+}
+
+.event-detail-dots{
+  position:absolute;
+  left:50%;
+  bottom:12px;
+  transform:translateX(-50%);
+  display:flex;
+  gap:7px;
+  padding:7px 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.76);
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(226,214,255,.75);
+}
+
+.event-detail-dot{
+  width:7px;
+  height:7px;
+  border-radius:999px;
+  background:rgba(110,92,165,.28);
+  border:0;
+  padding:0;
+  cursor:pointer;
+}
+
+.event-detail-dot.active{
+  width:18px;
+  background:var(--green);
+}
+
+.event-detail-content{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.event-detail-badge{
+  width:max-content;
+  padding:8px 13px;
+  border-radius:999px;
+  background:var(--purple-soft);
+  color:var(--purple);
+  border:1px solid rgba(110,92,165,.16);
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.event-detail-title{
+  margin:0;
+  color:var(--text);
+  font-size:1.18rem;
+  font-weight:900;
+  line-height:1.18;
+  letter-spacing:-.035em;
+}
+
+.event-detail-text{
+  margin:0;
+  color:#565c81;
+  font-size:.94rem;
+  line-height:1.52;
+  font-weight:650;
+}
+
+.event-detail-about{
+  padding:16px;
+  border-radius:18px;
+  background:#ffffff;
+  border:1px solid rgba(226,214,255,.8);
+}
+
+.event-detail-about strong{
+  display:block;
+  margin-bottom:7px;
+  color:var(--purple);
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+}
+
+.event-detail-about span{
+  display:block;
+  color:#565c81;
+  font-size:.92rem;
+  line-height:1.5;
+  font-weight:650;
+}
+
+.event-detail-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.event-detail-mini{
+  padding:14px;
+  border-radius:18px;
+  background:#ffffff;
+  border:1px solid rgba(226,214,255,.8);
+}
+
+.event-detail-mini strong{
+  display:block;
+  margin-bottom:5px;
+  color:var(--purple);
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+}
+
+.event-detail-mini span{
+  display:block;
+  color:#565c81;
+  font-size:.88rem;
+  line-height:1.38;
+  font-weight:650;
+}
+
+.event-detail-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:auto;
+}
+
+.btn-walk{
+  color:#192000;
+  background:linear-gradient(90deg,var(--green),#e4ec77);
+  box-shadow:0 14px 26px rgba(202,211,63,.16), inset 0 1px 0 rgba(255,255,255,.32);
+}
+
+.btn-map{
+  color:var(--purple);
+  background:#ffffff;
+  border:1px solid rgba(110,92,165,.18);
+}
+
+@media (max-width:760px){
+  .event-detail-card{
+    grid-template-columns:1fr;
+    padding:14px;
+    gap:14px;
+  }
+
+  .event-detail-carousel,
+  .event-detail-carousel-track,
+  .event-detail-slide,
+  .event-detail-slide img{
+    min-height:240px;
+  }
+
+  .event-detail-grid{
+    grid-template-columns:1fr;
+  }
+
+  .event-detail-actions{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+
+  .event-detail-actions .event-button{
+    width:100%;
+  }
+}
+/* Carrusel manipulable con dedo o mouse */
+.event-detail-carousel{
+  cursor:grab;
+  touch-action:pan-y;
+  user-select:none;
+  -webkit-user-select:none;
+}
+
+.event-detail-carousel.dragging{
+  cursor:grabbing;
+}
+
+.event-detail-carousel-track{
+  cursor:inherit;
+  overscroll-behavior-x:contain;
+}
+
+.event-detail-slide,
+.event-detail-slide img{
+  user-select:none;
+  -webkit-user-select:none;
+  -webkit-user-drag:none;
+  pointer-events:none;
+}
+/* Carrusel más fluido: movimiento real con el dedo o mouse */
+.event-detail-carousel{
+  overflow:hidden !important;
+  cursor:grab;
+  touch-action:pan-y;
+  user-select:none;
+  -webkit-user-select:none;
+}
+
+.event-detail-carousel.dragging{
+  cursor:grabbing;
+}
+
+.event-detail-carousel-track{
+  overflow:visible !important;
+  scroll-snap-type:none !important;
+  scroll-behavior:auto !important;
+  scrollbar-width:none;
+  transform:translate3d(0,0,0);
+  transition:transform .72s cubic-bezier(.22,.8,.24,1);
+  will-change:transform;
+}
+
+.event-detail-carousel.dragging .event-detail-carousel-track{
+  transition:none !important;
+}
+
+.event-detail-slide{
+  flex:0 0 100%;
+  width:100%;
+}
+
+.event-detail-slide,
+.event-detail-slide img{
+  user-select:none;
+  -webkit-user-select:none;
+  -webkit-user-drag:none;
+  pointer-events:none;
+}
+.event-detail-carousel-track{
+  display:flex !important;
+  overflow:visible !important;
+  transform:translate3d(0,0,0);
+  will-change:transform;
+}
+
+.event-detail-slide{
+  min-width:100% !important;
+  flex:0 0 100% !important;
+}
+/* =========================================================
+   AJUSTE PREMIUM DEL DETALLE EN MÓVIL
+   ========================================================= */
+
+@media (max-width:760px){
+
+  .event-actions{
+    padding-top:12px !important;
+  }
+
+  .event-detail-card{
+    padding:12px !important;
+    gap:14px !important;
+    border-radius:22px !important;
+  }
+
+  .event-detail-carousel{
+    width:100% !important;
+    height:220px !important;
+    min-height:220px !important;
+    border-radius:20px !important;
+  }
+
+  .event-detail-carousel-track,
+  .event-detail-slide,
+  .event-detail-slide img{
+    height:220px !important;
+    min-height:220px !important;
+  }
+
+  .event-detail-slide img{
+    object-fit:cover !important;
+    object-position:center center !important;
+  }
+
+  .event-detail-content{
+    gap:12px !important;
+  }
+
+  .event-detail-badge{
+    font-size:.66rem !important;
+    padding:7px 12px !important;
+  }
+
+  .event-detail-title{
+    font-size:1.34rem !important;
+    line-height:1.12 !important;
+    letter-spacing:-.055em !important;
+  }
+
+  .event-detail-text{
+    font-size:.94rem !important;
+    line-height:1.46 !important;
+  }
+
+  .event-detail-about{
+    padding:14px !important;
+    border-radius:18px !important;
+  }
+
+  .event-detail-about strong{
+    font-size:.68rem !important;
+    letter-spacing:.12em !important;
+  }
+
+  .event-detail-about span{
+    font-size:.92rem !important;
+    line-height:1.48 !important;
+  }
+
+  .event-detail-grid{
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:10px !important;
+  }
+
+  .event-detail-mini{
+    padding:12px !important;
+    border-radius:17px !important;
+    min-height:auto !important;
+  }
+
+  .event-detail-mini strong{
+    font-size:.66rem !important;
+    letter-spacing:.11em !important;
+    margin-bottom:6px !important;
+  }
+
+  .event-detail-mini span{
+    font-size:.82rem !important;
+    line-height:1.35 !important;
+  }
+
+  .event-detail-actions{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:9px !important;
+  }
+
+  .event-detail-actions .event-button{
+    width:100% !important;
+    min-height:48px !important;
+    border-radius:16px !important;
+  }
+}
+
+@media (max-width:430px){
+
+  .event-detail-carousel{
+    height:190px !important;
+    min-height:190px !important;
+  }
+
+  .event-detail-carousel-track,
+  .event-detail-slide,
+  .event-detail-slide img{
+    height:190px !important;
+    min-height:190px !important;
+  }
+
+  .event-detail-card{
+    padding:10px !important;
+  }
+
+  .event-detail-title{
+    font-size:1.22rem !important;
+  }
+
+  .event-detail-grid{
+    grid-template-columns:1fr 1fr !important;
+    gap:8px !important;
+  }
+
+  .event-detail-mini{
+    padding:11px 10px !important;
+  }
+
+  .event-detail-mini span{
+    font-size:.78rem !important;
+  }
+}
   </style>
 </head>
 <body>
@@ -1654,7 +2095,25 @@ img{
         date:'Jueves 2 de julio',
         theme:'Cultura y ciencia',
         events:[
-          { id:'thu-opening', time:'9:00 a.m. - 10:30 a.m.', kind:'free', title:'Inauguración del festival', description:'Apertura oficial.', place:'Sala Alpamayo de la Cámara de Comercio de Áncash', maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz' }, 
+          { 
+  id:'thu-opening',
+  time:'9:00 a.m. - 10:30 a.m.',
+  kind:'free',
+  title:'Inauguración del festival',
+  description:'Apertura oficial.',
+  place:'Sala Alpamayo',
+  maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz',
+
+  images:[
+    'sala-alpamayo-1.jpg',
+    'sala-alpamayo-2.jpg',
+    'sala-alpamayo-3.jpg'
+  ],
+
+  reference:'Más arriba de la esquina del BBVA de la plaza de armas.',
+  detail:'Apertura oficial del Festival de los Glaciares 2026.',
+  institutions:'INAIGEM, UNASAM, UTCB, CCA, DDC.'
+},
           { id:'thu-fair-walk', time:'10:30 a.m. - 11:00 a.m.', kind:'free', title:'Feria sostenible del Festival de los Glaciares', description:'Recorrido por los stands y propuestas de la feria.', place:'Afuera de la Cámara de Comercio de Áncash', maps:'Cámara de Comercio de Áncash Huaraz' },
           { id:'thu-art-walk', time:'11:30 a.m. - 12:30 p.m.', kind:'free', title:'Muestra artística colectiva “Voces del Deshielo”', description:'Visita a la muestra artística colectiva del festival.', place:'Hall de la DDC Áncash, frente de la Plaza de Armas', maps:'Dirección Desconcentrada de Cultura Áncash Huaraz Plaza de Armas' },
           { id:'thu-panel', time:'3:00 p.m. - 6:00 p.m.', kind:'free', title:'Panel & conversatorio: El impacto del cambio climático en la criosfera', description:'Panel científico y conversatorio sobre glaciares, cambio climático y criosfera. Incluye coffee break.', speakers:'Ponentes: José Ubeda & Ramón Pellitero, Paola Moschella, Edwin Loarte, Wilmer Sánchez, Kiara Falcon y Pascal Egli.', place:'Sala Alpamayo de la Cámara de Comercio de Áncash', maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz' },
@@ -1692,9 +2151,13 @@ img{
 
     const daysList = document.getElementById('daysList');
 
-    function mapUrl(query){
-      return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
-    }
+function mapUrl(query){
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+}
+
+function walkingMapUrl(query){
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(query)}&travelmode=walking`;
+}
 
     function slugify(text){
       return String(text || '')
@@ -1793,30 +2256,168 @@ img{
   `;
 }
 
-    function renderInfo(event){
-      if(event.kind === 'register'){
-        return `
-          <div class="action-note">
-            Esta actividad aparece como <strong>con previa inscripción</strong>. El sistema no genera ticket aquí porque, según la regla indicada, solo la presentación del sábado 4 a las 2:00 p.m. emite ticket gratuito. Puedes usar el enlace de Google Maps para llegar al punto indicado.
+    function eventStatusText(event){
+  if(event.kind === 'paid') return 'Taller pago';
+  if(event.kind === 'ticket') return 'Ticket gratuito';
+  if(event.kind === 'register') return 'Previa inscripción';
+  return 'Ingreso libre';
+}
+
+function eventMainMessage(event){
+  if(event.kind === 'register'){
+    return 'Esta actividad requiere inscripción o coordinación previa. Revisa la ubicación y llega con anticipación al punto indicado.';
+  }
+
+  if(event.kind === 'ticket'){
+    return 'Este evento necesita ticket gratuito. Puedes generar tu ticket desde esta misma página antes de asistir.';
+  }
+
+  if(event.kind === 'paid'){
+    return `Este taller requiere inscripción y tiene un costo de S/ ${WORKSHOP_PRICE}. Luego de registrar tus datos, se abrirá WhatsApp para coordinar el pago.`;
+  }
+
+  return 'Este evento es de ingreso libre y no necesita ticket. Puedes asistir directamente al lugar indicado.';
+}
+function eventImages(event){
+  if(Array.isArray(event.images) && event.images.length){
+    return event.images;
+  }
+
+  if(event.image){
+    return [event.image, event.image, event.image];
+  }
+
+  return ['lugar-referencia.jpg', 'lugar-referencia.jpg', 'lugar-referencia.jpg'];
+}
+
+function renderImageCarousel(event){
+  const images = eventImages(event);
+  const carouselId = `carousel-${event.id}-${Math.random().toString(36).slice(2,8)}`;
+  const visualImages = [...images, images[0]];
+
+  return `
+    <div class="event-detail-carousel" data-carousel-id="${carouselId}">
+      <div class="event-detail-carousel-track">
+        ${visualImages.map((img, index) => `
+          <div class="event-detail-slide">
+            <img src="${img}" alt="Imagen ${index + 1} de ${event.place}">
           </div>
-        `;
-      }
-      return `
-        <div class="action-note">
-          Este evento es de <strong>ingreso libre</strong> y no necesita ticket. Usa el enlace de Google Maps para llegar directamente a la ubicación.
+        `).join('')}
+      </div>
+
+      <div class="event-detail-dots">
+        ${images.map((_, index) => `
+          <button class="event-detail-dot ${index === 0 ? 'active' : ''}" type="button" data-slide="${index}" aria-label="Ver imagen ${index + 1}"></button>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function eventExtendedInfo(event){
+  const parts = [];
+
+  if(event.detail){
+    parts.push(event.detail);
+  } else if(event.description){
+    parts.push(event.description);
+  }
+
+  if(event.speakers){
+    parts.push(`<strong>Ponentes / participantes:</strong> ${event.speakers}`);
+  }
+
+  if(event.institutions){
+    parts.push(`<strong>Instituciones o grupos:</strong> ${event.institutions}`);
+  }
+
+  return parts.join('<br><br>') || 'Información orientativa de la actividad.';
+}
+function renderInfo(event){
+  const reference = event.reference || 'Ubicación referencial del evento. Revisa Google Maps antes de salir.';
+
+  return `
+    <div class="event-detail-card">
+      ${renderImageCarousel(event)}
+
+      <div class="event-detail-content">
+        <div class="event-detail-badge">${eventStatusText(event)}</div>
+
+        <h3 class="event-detail-title">${event.title}</h3>
+
+        <div class="event-detail-about">
+          <strong>Sobre la actividad</strong>
+          <span>${eventExtendedInfo(event)}</span>
         </div>
-      `;
-    }
+
+        <div class="event-detail-grid">
+          <div class="event-detail-mini">
+            <strong>Ubicación</strong>
+            <span>${event.place}</span>
+          </div>
+
+          <div class="event-detail-mini">
+            <strong>Referencia</strong>
+            <span>${reference}</span>
+          </div>
+        </div>
+
+        <div class="event-detail-actions">
+          <a class="event-button btn-map" href="${mapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">
+            Ver en Google Maps ↗
+          </a>
+
+          <a class="event-button btn-walk" href="${walkingMapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">
+            🚶 Cómo llegar caminando
+          </a>
+        </div>
+      </div>
+    </div>
+  `;
+}
 
     function renderForm(event){
       const isPaid = event.kind === 'paid';
       return `
         <div class="form-card">
-          <div class="action-note" style="margin-bottom:14px;">
-            ${isPaid
-              ? `Inscripción independiente para este taller. Costo: <strong>S/ ${WORKSHOP_PRICE}</strong>. Al guardar tus datos se abrirá el WhatsApp del tallerista.`
-              : `Ticket gratuito para este evento. No redirige a WhatsApp; solo genera tu ticket.`}
-          </div>
+          <div class="event-detail-card" style="margin-bottom:14px;">
+  ${renderImageCarousel(event)}
+
+  <div class="event-detail-content">
+    <div class="event-detail-badge">${eventStatusText(event)}</div>
+
+    <h3 class="event-detail-title">${event.title}</h3>
+
+    <p class="event-detail-text">
+      ${isPaid
+        ? `Este taller requiere inscripción y tiene un costo de <strong>S/ ${WORKSHOP_PRICE}</strong>. Al guardar tus datos se abrirá WhatsApp para coordinar el pago.`
+        : `Este evento requiere ticket gratuito. Completa tus datos y descarga tu ticket antes de asistir.`}
+    </p>
+
+    <div class="event-detail-grid">
+      <div class="event-detail-mini">
+        <strong>Ubicación</strong>
+        <span>${event.place}</span>
+      </div>
+
+      <div class="event-detail-mini">
+        <strong>Referencia</strong>
+        <span>${event.reference || 'Revisa la ubicación en Google Maps antes de salir.'}</span>
+      </div>
+
+    
+
+    <div class="event-detail-actions">
+      <a class="event-button btn-map" href="${mapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">
+        Ver en Google Maps ↗
+      </a>
+
+      <a class="event-button btn-walk" href="${walkingMapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">
+        🚶 Cómo llegar caminando
+      </a>
+    </div>
+  </div>
+</div>
           <form class="registration-form" data-event-id="${event.id}">
             <div class="form-grid">
               <div class="field full">
@@ -1998,12 +2599,14 @@ img{
       });
       const actions = row.querySelector('.event-actions');
       row.classList.add('active');
-      if(mode === 'open-form'){
-        actions.innerHTML = renderForm(event);
-        attachFormHandlers(actions,event);
-      } else {
-        actions.innerHTML = renderInfo(event);
-      }
+     if(mode === 'open-form'){
+  actions.innerHTML = renderForm(event);
+  attachFormHandlers(actions,event);
+  initEventCarousels();
+} else {
+  actions.innerHTML = renderInfo(event);
+  initEventCarousels();
+}
     }
 
     function init(){
@@ -2053,6 +2656,160 @@ document.addEventListener('dragstart', (e) => {
     e.preventDefault();
   }
 });
+function initEventCarousels(){
+  document.querySelectorAll('.event-detail-carousel').forEach(carousel => {
+    if(carousel.dataset.ready === 'true') return;
+    carousel.dataset.ready = 'true';
+
+    const track = carousel.querySelector('.event-detail-carousel-track');
+    const dots = carousel.querySelectorAll('.event-detail-dot');
+    const slides = carousel.querySelectorAll('.event-detail-slide');
+
+    if(!track || slides.length <= 1) return;
+
+    const realCount = dots.length;
+
+    let visualIndex = 0;
+    let interval = null;
+    let userStopped = false;
+
+    let isDragging = false;
+    let startX = 0;
+    let currentX = 0;
+
+    function slideWidth(){
+      return carousel.clientWidth;
+    }
+
+    function realIndex(){
+      return visualIndex >= realCount ? 0 : visualIndex;
+    }
+
+    function updateDots(){
+      const activeIndex = realIndex();
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === activeIndex);
+      });
+    }
+
+    function moveTo(offset = 0, smooth = true){
+      track.style.transition = smooth
+        ? 'transform 1.05s cubic-bezier(.25,.8,.25,1)'
+        : 'none';
+
+      const x = -(visualIndex * slideWidth()) + offset;
+      track.style.transform = `translate3d(${x}px,0,0)`;
+
+      updateDots();
+    }
+
+    function goToVisualSlide(nextIndex, smooth = true){
+      visualIndex = nextIndex;
+      moveTo(0, smooth);
+    }
+
+    function goToRealSlide(nextIndex, smooth = true){
+      visualIndex = Math.max(0, Math.min(nextIndex, realCount - 1));
+      moveTo(0, smooth);
+    }
+
+    function stopAuto(){
+      userStopped = true;
+
+      if(interval){
+        clearInterval(interval);
+        interval = null;
+      }
+    }
+
+    track.addEventListener('transitionend', () => {
+      if(visualIndex === realCount){
+        visualIndex = 0;
+        moveTo(0, false);
+      }
+    });
+
+    interval = setInterval(() => {
+      if(userStopped) return;
+
+      const next = visualIndex + 1;
+      goToVisualSlide(next, true);
+    }, 2500);
+
+    carousel.addEventListener('pointerdown', (e) => {
+      stopAuto();
+
+      isDragging = true;
+      startX = e.clientX;
+      currentX = 0;
+
+      carousel.classList.add('dragging');
+
+      try{
+        carousel.setPointerCapture(e.pointerId);
+      } catch(error){}
+    });
+
+    carousel.addEventListener('pointermove', (e) => {
+      if(!isDragging) return;
+
+      currentX = e.clientX - startX;
+
+      const atFirst = visualIndex === 0 && currentX > 0;
+      const atLast = visualIndex === realCount - 1 && currentX < 0;
+
+      let resistanceX = currentX;
+
+      if(atFirst || atLast){
+        resistanceX = currentX * .28;
+      }
+
+      moveTo(resistanceX, false);
+    });
+
+    carousel.addEventListener('pointerup', (e) => {
+      if(!isDragging) return;
+
+      isDragging = false;
+      carousel.classList.remove('dragging');
+
+      const threshold = slideWidth() * .18;
+
+      if(currentX < -threshold && visualIndex < realCount - 1){
+        visualIndex++;
+      } else if(currentX > threshold && visualIndex > 0){
+        visualIndex--;
+      }
+
+      moveTo(0, true);
+
+      try{
+        carousel.releasePointerCapture(e.pointerId);
+      } catch(error){}
+    });
+
+    carousel.addEventListener('pointercancel', () => {
+      isDragging = false;
+      carousel.classList.remove('dragging');
+      moveTo(0, true);
+    });
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        stopAuto();
+        goToRealSlide(Number(dot.dataset.slide), true);
+      });
+    });
+
+    window.addEventListener('resize', () => {
+      moveTo(0, false);
+    });
+
+    moveTo(0, false);
+  });
+}
     window.addEventListener('load', init);
   </script>
 </body>

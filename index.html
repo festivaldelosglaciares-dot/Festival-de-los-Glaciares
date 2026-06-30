@@ -1292,7 +1292,7 @@
 
 @media (max-width:430px){
   .cover-inner{
-    padding:38px 18px 40px;
+    padding:18px 18px 32px;
   }
 
   .kicker-line{
@@ -1451,6 +1451,43 @@ img{
   .organizer-title,
   .organizer-logos{
     display:none;
+  }
+}
+/* AJUSTE FINAL SOLO PARA MÓVIL: reduce espacio superior */
+@media (max-width:760px){
+  body{
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  .wrap{
+    padding-top:0 !important;
+    padding-left:8px !important;
+    padding-right:8px !important;
+    gap:12px !important;
+  }
+
+  .festival-cover{
+    margin-top:0 !important;
+  }
+
+  .cover-inner{
+    padding-top:35px !important;
+  }
+
+  .cover-kicker{
+    margin-top:0 !important;
+    margin-bottom:26px !important;
+  }
+}
+@media (max-width:760px){
+  .wrap{
+    padding-top:0 !important;
+    margin-top:-6px !important;
+  }
+
+  .panel{
+    margin-top:0 !important;
   }
 }
   </style>

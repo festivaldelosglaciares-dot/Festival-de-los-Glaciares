@@ -2988,30 +2988,55 @@ function initMobileAutoCollapseDetails(){
   let ticking = false;
 
   /*
-    Mantiene estable visualmente el evento que viene debajo
-    mientras el detalle superior se contrae o se vuelve a desplegar.
+    Límite para cerrar y límite para volver a abrir.
+    Usamos dos valores distintos para evitar que la tarjeta
+    se abra y cierre repetidamente en el mismo punto.
   */
-  function keepAnchorStable(anchor, duration = 950){
-    if(!anchor) return;
+  const collapseLimit = -400;
+  const reopenLimit = -180;
 
-    const targetTop = anchor.getBoundingClientRect().top;
-    const startTime = performance.now();
+  function checkDetails(){
+    if(window.innerWidth > 760){
+      document.querySelectorAll('.event-row.auto-collapsed').forEach(row => {
+        row.classList.remove('auto-collapsed');
+      });
 
-    function stabilize(now){
-      const currentTop = anchor.getBoundingClientRect().top;
-      const difference = currentTop - targetTop;
-
-      if(Math.abs(difference) > 0.5){
-        window.scrollBy(0, difference);
-      }
-
-      if(now - startTime < duration){
-        requestAnimationFrame(stabilize);
-      }
+      ticking = false;
+      return;
     }
 
-    requestAnimationFrame(stabilize);
+    document.querySelectorAll('.event-row.active').forEach(row => {
+      const rect = row.getBoundingClientRect();
+      const isCollapsed = row.classList.contains('auto-collapsed');
+
+      /*
+        Si la tarjeta ya subió bastante, se contrae.
+      */
+      if(!isCollapsed && rect.top < collapseLimit){
+        row.classList.add('auto-collapsed');
+      }
+
+      /*
+        Para volver a abrirse, no basta con pasar el mismo punto.
+        Tiene que bajar más, así evitamos el temblor del scroll.
+      */
+      if(isCollapsed && rect.top > reopenLimit){
+        row.classList.remove('auto-collapsed');
+      }
+    });
+
+    ticking = false;
   }
+
+  window.addEventListener('scroll', () => {
+    if(!ticking){
+      window.requestAnimationFrame(checkDetails);
+      ticking = true;
+    }
+  }, {passive:true});
+
+  window.addEventListener('resize', checkDetails);
+}
 
   function checkDetails(){
     if(window.innerWidth > 760){

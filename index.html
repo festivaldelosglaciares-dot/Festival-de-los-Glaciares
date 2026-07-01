@@ -3038,55 +3038,7 @@ function initMobileAutoCollapseDetails(){
   window.addEventListener('resize', checkDetails);
 }
 
-  function checkDetails(){
-    if(window.innerWidth > 760){
-      document.querySelectorAll('.event-row.auto-collapsed').forEach(row => {
-        row.classList.remove('auto-collapsed');
-      });
 
-      ticking = false;
-      return;
-    }
-
-    const limit = -400;
-
-    document.querySelectorAll('.event-row.active').forEach(row => {
-      const rect = row.getBoundingClientRect();
-      const isCollapsed = row.classList.contains('auto-collapsed');
-      const shouldCollapse = rect.top < limit;
-      const anchor = row.nextElementSibling || row;
-
-      /*
-        Cuando el detalle sube demasiado, se contrae,
-        pero el evento siguiente queda visualmente estable.
-      */
-      if(shouldCollapse && !isCollapsed){
-        keepAnchorStable(anchor, 950);
-        row.classList.add('auto-collapsed');
-      }
-
-      /*
-        Cuando el usuario vuelve hacia arriba, el detalle reaparece,
-        también sin empujar bruscamente el contenido.
-      */
-      if(!shouldCollapse && isCollapsed){
-        keepAnchorStable(anchor, 950);
-        row.classList.remove('auto-collapsed');
-      }
-    });
-
-    ticking = false;
-  }
-
-  window.addEventListener('scroll', () => {
-    if(!ticking){
-      window.requestAnimationFrame(checkDetails);
-      ticking = true;
-    }
-  }, {passive:true});
-
-  window.addEventListener('resize', checkDetails);
-}
     window.addEventListener('load', init);
   </script>
 </body>

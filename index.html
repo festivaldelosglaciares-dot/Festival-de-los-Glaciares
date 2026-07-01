@@ -1968,6 +1968,32 @@ img{
   background:transparent !important;
   padding:0 !important;
 }
+/* Ocultar ubicación superior cuando el detalle está abierto, solo en móvil */
+@media (max-width:760px){
+
+  .event-place-button{
+    margin-top:12px;
+  }
+
+  .event-row.active .event-place-info{
+    display:none !important;
+  }
+
+  .event-row.active .event-place-button{
+    margin-top:0 !important;
+  }
+}
+/* Separación entre Google Maps y Ver detalle en desktop */
+@media (min-width:761px){
+  .event-place-button{
+    margin-top:12px !important;
+  }
+
+  .event-place .map-link{
+    margin-top:10px !important;
+    margin-bottom:0 !important;
+  }
+}
   </style>
 </head>
 <body>
@@ -2247,10 +2273,17 @@ function walkingMapUrl(query){
             ${event.speakers ? `<div class="event-speakers">${event.speakers}</div>` : ''}
           </div>
           <div class="event-place">
-            ${event.place}
-            <br><a class="map-link" href="${mapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">Abrir en Google Maps ↗</a>
-            <div style="margin-top:12px;">${actionButton(event)}</div>
-          </div>
+  <div class="event-place-info">
+    <div class="event-place-name">${event.place}</div>
+    <a class="map-link" href="${mapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">
+      Abrir en Google Maps ↗
+    </a>
+  </div>
+
+  <div class="event-place-button">
+    ${actionButton(event)}
+  </div>
+</div>
           <div class="event-actions"></div>
         </article>
       `;

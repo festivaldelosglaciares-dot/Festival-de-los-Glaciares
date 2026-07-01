@@ -2012,6 +2012,80 @@ img{
     margin-top:12px !important;
   }
 }
+/* =========================================================
+   ANIMACIÓN PREMIUM PARA VER DETALLE / CIERRE DE DETALLE
+   ========================================================= */
+
+.event-actions{
+  display:block !important;
+  overflow:hidden !important;
+  max-height:0 !important;
+  opacity:0 !important;
+  transform:translateY(-10px) scale(.985) !important;
+  filter:blur(4px) !important;
+  padding-top:0 !important;
+  margin-top:0 !important;
+  border-top:none !important;
+  pointer-events:none !important;
+
+  transition:
+    max-height 1.05s cubic-bezier(.22,.8,.24,1),
+    opacity .38s ease,
+    transform .55s cubic-bezier(.22,.8,.24,1),
+    filter .45s ease,
+    padding-top .45s ease,
+    margin-top .45s ease !important;
+}
+
+.event-row.active .event-actions{
+  max-height:1800px !important;
+  opacity:1 !important;
+  transform:translateY(0) scale(1) !important;
+  filter:blur(0) !important;
+  padding-top:16px !important;
+  margin-top:8px !important;
+  pointer-events:auto !important;
+}
+
+.event-row.closing .event-actions{
+  max-height:0 !important;
+  opacity:0 !important;
+  transform:translateY(-8px) scale(.985) !important;
+  filter:blur(4px) !important;
+  padding-top:0 !important;
+  margin-top:0 !important;
+  pointer-events:none !important;
+}
+
+/* Auto-colapso móvil, pero animado, no brusco */
+@media (max-width:760px){
+  .event-row.auto-collapsed .event-actions{
+    display:block !important;
+    max-height:0 !important;
+    opacity:0 !important;
+    transform:translateY(-8px) scale(.985) !important;
+    filter:blur(4px) !important;
+    padding-top:0 !important;
+    margin-top:0 !important;
+    pointer-events:none !important;
+  }
+}
+
+/* Pequeña entrada interna más elegante */
+.event-detail-card,
+.form-card{
+  transition:
+    opacity .45s ease,
+    transform .55s cubic-bezier(.22,.8,.24,1),
+    filter .45s ease !important;
+}
+
+.event-row.active .event-detail-card,
+.event-row.active .form-card{
+  opacity:1;
+  transform:translateY(0);
+  filter:blur(0);
+}
   </style>
 </head>
 <body>
@@ -2659,34 +2733,53 @@ function renderInfo(event){
       });
     }
 
-  function openEventAction(row,event,mode){
+ function closeEventRow(row){
+  const actions = row.querySelector('.event-actions');
 
-  /* Si la tarjeta ya está abierta, al tocar nuevamente se cierra */
+  row.classList.add('closing');
+  row.classList.remove('active');
+  row.classList.remove('auto-collapsed');
+
+  setTimeout(() => {
+    row.classList.remove('closing');
+    actions.innerHTML = '';
+  }, 650);
+}
+
+function openEventAction(row,event,mode){
+
+  /* Si la tarjeta ya está abierta, al tocar nuevamente se cierra suave */
   if(row.classList.contains('active')){
-    row.classList.remove('active');
-    row.querySelector('.event-actions').innerHTML = '';
+    closeEventRow(row);
     return;
   }
 
   document.querySelectorAll('.event-row.active').forEach(activeRow => {
     if(activeRow !== row){
-      activeRow.classList.remove('active');
-      activeRow.querySelector('.event-actions').innerHTML = '';
+      closeEventRow(activeRow);
     }
   });
 
   const actions = row.querySelector('.event-actions');
-  row.classList.add('active');
-row.classList.remove('auto-collapsed');
+
+  row.classList.remove('closing');
+  row.classList.remove('auto-collapsed');
 
   if(mode === 'open-form'){
     actions.innerHTML = renderForm(event);
     attachFormHandlers(actions,event);
-    initEventCarousels();
   } else {
     actions.innerHTML = renderInfo(event);
-    initEventCarousels();
   }
+
+  /*
+    Pequeño delay para que el navegador primero coloque el contenido
+    y luego anime la apertura.
+  */
+  requestAnimationFrame(() => {
+    row.classList.add('active');
+    initEventCarousels();
+  });
 }
 
     function init(){

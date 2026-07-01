@@ -1994,6 +1994,24 @@ img{
     margin-bottom:0 !important;
   }
 }
+/* =========================================================
+   AUTO-COLAPSO DE DETALLES EN MÓVIL AL HACER SCROLL
+   ========================================================= */
+
+@media (max-width:760px){
+
+  .event-row.auto-collapsed .event-actions{
+    display:none !important;
+  }
+
+  .event-row.auto-collapsed .event-place-info{
+    display:block !important;
+  }
+
+  .event-row.auto-collapsed .event-place-button{
+    margin-top:12px !important;
+  }
+}
   </style>
 </head>
 <body>
@@ -2659,6 +2677,7 @@ function renderInfo(event){
 
   const actions = row.querySelector('.event-actions');
   row.classList.add('active');
+row.classList.remove('auto-collapsed');
 
   if(mode === 'open-form'){
     actions.innerHTML = renderForm(event);
@@ -2692,6 +2711,7 @@ function renderInfo(event){
       });
 
       initReveals();
+initMobileAutoCollapseDetails();
     }
 
     function initReveals(){
@@ -2870,6 +2890,52 @@ function initEventCarousels(){
 
     moveTo(0, false);
   });
+}
+function initMobileAutoCollapseDetails(){
+  let ticking = false;
+
+  function checkDetails(){
+    if(window.innerWidth > 760){
+      document.querySelectorAll('.event-row.auto-collapsed').forEach(row => {
+        row.classList.remove('auto-collapsed');
+      });
+      ticking = false;
+      return;
+    }
+
+    const limit = window.innerHeight * 0.33;
+
+    document.querySelectorAll('.event-row.active').forEach(row => {
+      const rect = row.getBoundingClientRect();
+
+      /*
+        Si la tarjeta activa sube y supera el tercio superior,
+        se contrae temporalmente.
+      */
+      if(rect.top < limit){
+        row.classList.add('auto-collapsed');
+      }
+
+      /*
+        Si el usuario vuelve hacia esa tarjeta y baja otra vez
+        debajo del tercio superior, recupera el despliegue.
+      */
+      if(rect.top >= limit){
+        row.classList.remove('auto-collapsed');
+      }
+    });
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if(!ticking){
+      window.requestAnimationFrame(checkDetails);
+      ticking = true;
+    }
+  }, {passive:true});
+
+  window.addEventListener('resize', checkDetails);
 }
     window.addEventListener('load', init);
   </script>

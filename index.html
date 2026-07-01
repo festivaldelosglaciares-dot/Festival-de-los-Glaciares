@@ -2987,11 +2987,38 @@ function initEventCarousels(){
 function initMobileAutoCollapseDetails(){
   let ticking = false;
 
+  /*
+    Mantiene estable visualmente el evento que viene debajo
+    mientras el detalle superior se contrae o se vuelve a desplegar.
+  */
+  function keepAnchorStable(anchor, duration = 950){
+    if(!anchor) return;
+
+    const targetTop = anchor.getBoundingClientRect().top;
+    const startTime = performance.now();
+
+    function stabilize(now){
+      const currentTop = anchor.getBoundingClientRect().top;
+      const difference = currentTop - targetTop;
+
+      if(Math.abs(difference) > 0.5){
+        window.scrollBy(0, difference);
+      }
+
+      if(now - startTime < duration){
+        requestAnimationFrame(stabilize);
+      }
+    }
+
+    requestAnimationFrame(stabilize);
+  }
+
   function checkDetails(){
     if(window.innerWidth > 760){
       document.querySelectorAll('.event-row.auto-collapsed').forEach(row => {
         row.classList.remove('auto-collapsed');
       });
+
       ticking = false;
       return;
     }
@@ -3000,20 +3027,25 @@ function initMobileAutoCollapseDetails(){
 
     document.querySelectorAll('.event-row.active').forEach(row => {
       const rect = row.getBoundingClientRect();
+      const isCollapsed = row.classList.contains('auto-collapsed');
+      const shouldCollapse = rect.top < limit;
+      const anchor = row.nextElementSibling || row;
 
       /*
-        Si la tarjeta activa sube y supera el tercio superior,
-        se contrae temporalmente.
+        Cuando el detalle sube demasiado, se contrae,
+        pero el evento siguiente queda visualmente estable.
       */
-      if(rect.top < limit){
+      if(shouldCollapse && !isCollapsed){
+        keepAnchorStable(anchor, 950);
         row.classList.add('auto-collapsed');
       }
 
       /*
-        Si el usuario vuelve hacia esa tarjeta y baja otra vez
-        debajo del tercio superior, recupera el despliegue.
+        Cuando el usuario vuelve hacia arriba, el detalle reaparece,
+        también sin empujar bruscamente el contenido.
       */
-      if(rect.top >= limit){
+      if(!shouldCollapse && isCollapsed){
+        keepAnchorStable(anchor, 950);
         row.classList.remove('auto-collapsed');
       }
     });

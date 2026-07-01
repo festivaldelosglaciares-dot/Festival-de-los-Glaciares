@@ -2341,9 +2341,6 @@ function renderInfo(event){
       ${renderImageCarousel(event)}
 
       <div class="event-detail-content">
-        <div class="event-detail-badge">${eventStatusText(event)}</div>
-
-        <h3 class="event-detail-title">${event.title}</h3>
 
         <div class="event-detail-about">
           <strong>Sobre la actividad</strong>
@@ -2590,24 +2587,34 @@ function renderInfo(event){
       });
     }
 
-    function openEventAction(row,event,mode){
-      document.querySelectorAll('.event-row.active').forEach(activeRow => {
-        if(activeRow !== row){
-          activeRow.classList.remove('active');
-          activeRow.querySelector('.event-actions').innerHTML = '';
-        }
-      });
-      const actions = row.querySelector('.event-actions');
-      row.classList.add('active');
-     if(mode === 'open-form'){
-  actions.innerHTML = renderForm(event);
-  attachFormHandlers(actions,event);
-  initEventCarousels();
-} else {
-  actions.innerHTML = renderInfo(event);
-  initEventCarousels();
-}
+  function openEventAction(row,event,mode){
+
+  /* Si la tarjeta ya está abierta, al tocar nuevamente se cierra */
+  if(row.classList.contains('active')){
+    row.classList.remove('active');
+    row.querySelector('.event-actions').innerHTML = '';
+    return;
+  }
+
+  document.querySelectorAll('.event-row.active').forEach(activeRow => {
+    if(activeRow !== row){
+      activeRow.classList.remove('active');
+      activeRow.querySelector('.event-actions').innerHTML = '';
     }
+  });
+
+  const actions = row.querySelector('.event-actions');
+  row.classList.add('active');
+
+  if(mode === 'open-form'){
+    actions.innerHTML = renderForm(event);
+    attachFormHandlers(actions,event);
+    initEventCarousels();
+  } else {
+    actions.innerHTML = renderInfo(event);
+    initEventCarousels();
+  }
+}
 
     function init(){
       daysList.innerHTML = daysData.map(renderDay).join('');

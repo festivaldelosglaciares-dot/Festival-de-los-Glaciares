@@ -2086,6 +2086,447 @@ img{
   transform:translateY(0);
   filter:blur(0);
 }
+/* =========================================================
+   ACABADO PREMIUM DEL BLOQUE DERECHO EN DESKTOP
+   ========================================================= */
+
+@media (min-width:761px){
+
+  .event-place{
+    border-left:1px solid rgba(110,92,165,.22) !important;
+    padding-left:28px !important;
+    min-height:150px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+    gap:0;
+  }
+
+  .event-place-info{
+    width:100%;
+    position:relative;
+    padding-left:58px;
+    padding-bottom:22px;
+    margin-bottom:18px;
+    border-bottom:1px dashed rgba(110,92,165,.22);
+  }
+
+  .event-place-info::before{
+    content:"📍";
+    position:absolute;
+    left:0;
+    top:0;
+    width:42px;
+    height:42px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(180deg,#f6f1ff,#ffffff);
+    border:1px solid rgba(226,214,255,.95);
+    box-shadow:
+      0 10px 22px rgba(58,30,118,.055),
+      inset 0 1px 0 rgba(255,255,255,.9);
+    font-size:1.25rem;
+    line-height:1;
+  }
+
+  .event-place-name{
+    color:var(--text);
+    font-size:.96rem;
+    line-height:1.25;
+    font-weight:900;
+    letter-spacing:-.025em;
+    max-width:270px;
+  }
+
+  .event-place .map-link{
+    position:relative;
+    display:inline-flex !important;
+    align-items:center;
+    gap:8px;
+    margin-top:18px !important;
+    color:var(--purple);
+    font-size:.88rem !important;
+    line-height:1;
+    font-weight:850;
+    text-decoration:none !important;
+  }
+
+  .event-place .map-link::before{
+    content:"↗";
+    width:22px;
+    height:22px;
+    border-radius:7px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--purple);
+    border:1px solid rgba(110,92,165,.20);
+    background:#ffffff;
+    font-size:.90rem;
+    font-weight:900;
+  }
+
+  .event-place-button{
+    margin-top:0 !important;
+  }
+
+  .event-place-button .event-button{
+    min-width:170px;
+    min-height:46px;
+    padding:0 22px !important;
+    border-radius:14px !important;
+    background:#ffffff !important;
+    color:var(--purple) !important;
+    border:1px solid rgba(110,92,165,.25) !important;
+    box-shadow:none !important;
+    font-size:.92rem !important;
+    font-weight:900 !important;
+    justify-content:space-between;
+    gap:22px;
+  }
+
+  .event-place-button .event-button::after{
+    content:"›";
+    font-size:1.55rem;
+    line-height:1;
+    font-weight:900;
+    color:var(--purple);
+    transform:translateY(-1px);
+  }
+
+  .event-place-button .event-button:hover{
+    transform:translateY(-2px);
+    border-color:rgba(110,92,165,.42) !important;
+    box-shadow:0 12px 24px rgba(58,30,118,.075) !important;
+  }
+}
+/* =========================================================
+   REFINAMIENTO FINAL DEL BLOQUE DERECHO EN DESKTOP
+   ========================================================= */
+
+@media (min-width:761px){
+
+  /* Mueve la barra vertical hacia la izquierda y da más aire al bloque derecho */
+  .event-row{
+    grid-template-columns:136px minmax(0,1fr) 340px !important;
+    column-gap:26px !important;
+  }
+
+  .event-place{
+    border-left:1px solid rgba(110,92,165,.22) !important;
+    padding-left:34px !important;
+    min-height:152px !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:center !important;
+    align-items:stretch !important;
+  }
+
+  .event-place-info{
+    width:100% !important;
+    position:relative !important;
+
+    padding-left:64px !important;
+    padding-bottom:20px !important;
+    margin-bottom:18px !important;
+
+    border-bottom:1px dashed rgba(110,92,165,.22) !important;
+  }
+
+  /* Ícono de ubicación más limpio, sin emoji rojo */
+  .event-place-info::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:1px;
+
+    width:46px;
+    height:46px;
+    border-radius:15px;
+
+    background:
+      radial-gradient(circle at 50% 36%, var(--purple) 0 6px, transparent 7px),
+      radial-gradient(circle at 50% 36%, rgba(110,92,165,.18) 0 14px, transparent 15px),
+      linear-gradient(180deg,#f7f2ff,#ffffff);
+
+    border:1px solid rgba(226,214,255,.95);
+    box-shadow:
+      0 10px 22px rgba(58,30,118,.055),
+      inset 0 1px 0 rgba(255,255,255,.95);
+  }
+
+  .event-place-info::after{
+    content:"";
+    position:absolute;
+    left:21px;
+    top:27px;
+
+    width:6px;
+    height:14px;
+    border-radius:999px;
+    background:var(--purple);
+    opacity:.95;
+  }
+
+  .event-place-name{
+    max-width:250px !important;
+    color:var(--text) !important;
+
+    font-size:.98rem !important;
+    line-height:1.22 !important;
+    font-weight:820 !important;
+    letter-spacing:-.025em !important;
+  }
+
+  .event-place .map-link{
+    width:max-content !important;
+    max-width:100% !important;
+
+    display:inline-flex !important;
+    align-items:center !important;
+    gap:10px !important;
+
+    margin-top:18px !important;
+
+    color:var(--purple) !important;
+    font-size:.88rem !important;
+    line-height:1.18 !important;
+    font-weight:760 !important;
+    letter-spacing:-.015em !important;
+    text-decoration:none !important;
+  }
+
+  .event-place .map-link::before{
+    content:"↗";
+    width:25px;
+    height:25px;
+    flex:0 0 25px;
+
+    border-radius:8px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    color:var(--purple);
+    background:#ffffff;
+    border:1px solid rgba(110,92,165,.22);
+
+    font-size:.96rem;
+    font-weight:900;
+    line-height:1;
+  }
+
+  .event-place-button{
+    width:100% !important;
+    margin-top:0 !important;
+  }
+
+  .event-place-button .event-button{
+    width:100% !important;
+    max-width:210px !important;
+    min-height:48px !important;
+
+    padding:0 20px !important;
+    border-radius:15px !important;
+
+    background:#ffffff !important;
+    color:var(--purple) !important;
+    border:1px solid rgba(110,92,165,.25) !important;
+    box-shadow:none !important;
+
+    font-size:.92rem !important;
+    font-weight:830 !important;
+    letter-spacing:-.015em !important;
+
+    display:flex !important;
+    justify-content:space-between !important;
+    align-items:center !important;
+  }
+
+  .event-place-button .event-button::after{
+  content:"›";
+  font-size:1.65rem;
+  line-height:1;
+  font-weight:900;
+  color:var(--purple);
+
+  transform:translateY(-1px) rotate(0deg);
+  transform-origin:center center;
+
+ transition:
+  transform 1.5s cubic-bezier(.16,1,.3,1),
+  color .25s ease;
+}
+@media (min-width:761px){
+  .event-row.active .event-place-button .event-button::after{
+    transform:translateY(-1px) rotate(90deg);
+  }
+}
+
+  .event-place-button .event-button:hover{
+    transform:translateY(-2px) !important;
+    border-color:rgba(110,92,165,.42) !important;
+    box-shadow:0 12px 24px rgba(58,30,118,.075) !important;
+  }
+}
+
+/* Hacer más ligera la tipografía del bloque derecho en desktop */
+@media (min-width:761px){
+
+  .event-place-name{
+    font-weight:700 !important;
+  }
+
+  .event-place .map-link{
+    font-weight:650 !important;
+  }
+
+  .event-place-button .event-button{
+    font-weight:700 !important;
+  }
+}
+/* =========================================================
+   ICONO LOCATION PROFESIONAL EN BLOQUE DERECHO DESKTOP
+   ========================================================= */
+
+@media (min-width:761px){
+
+  .event-place-info::before{
+    content:"" !important;
+    position:absolute !important;
+    left:0 !important;
+    top:2px !important;
+
+    width:48px !important;
+    height:48px !important;
+    border-radius:16px !important;
+
+    background:
+      linear-gradient(180deg,#ffffff 0%,#f8f4ff 100%) !important;
+
+    border:1px solid rgba(110,92,165,.20) !important;
+    box-shadow:
+      0 14px 28px rgba(58,30,118,.08),
+      inset 0 1px 0 rgba(255,255,255,.95) !important;
+  }
+
+  .event-place-info::after{
+    content:"" !important;
+    position:absolute !important;
+
+    left:14px !important;
+    top:10px !important;
+
+    width:20px !important;
+    height:20px !important;
+
+    background:var(--purple) !important;
+    border-radius:50% 50% 50% 0 !important;
+
+    transform:rotate(-45deg) !important;
+
+    box-shadow:
+      0 0 0 7px rgba(110,92,165,.14),
+      0 8px 16px rgba(58,30,118,.14) !important;
+  }
+
+  .event-place-info .event-place-name::before{
+    content:"" !important;
+    position:absolute !important;
+
+    left:20px !important;
+    top:16px !important;
+
+    width:8px !important;
+    height:8px !important;
+
+    border-radius:999px !important;
+    background:#ffffff !important;
+
+    z-index:3 !important;
+    box-shadow:0 1px 3px rgba(58,30,118,.18) !important;
+  }
+}
+/* =========================================================
+   LOCATION ICON MÁS FINO, CENTRADO Y ESCALABLE
+   ========================================================= */
+
+@media (min-width:761px){
+
+  .event-place-info{
+    --location-icon-scale:.78;
+  }
+
+  .event-place-info::before{
+    content:"" !important;
+    position:absolute !important;
+    left:0 !important;
+    top:2px !important;
+
+    width:48px !important;
+    height:48px !important;
+    border-radius:16px !important;
+
+    background:linear-gradient(180deg,#ffffff 0%,#f8f4ff 100%) !important;
+
+    border:1px solid rgba(110,92,165,.18) !important;
+    box-shadow:
+      0 10px 22px rgba(58,30,118,.055),
+      inset 0 1px 0 rgba(255,255,255,.95) !important;
+  }
+
+  .event-place-info::after{
+    content:"" !important;
+    position:absolute !important;
+
+    left:25px !important;
+    top:25px !important;
+
+    width:20px !important;
+    height:20px !important;
+
+    background:var(--purple) !important;
+    border-radius:50% 50% 50% 0 !important;
+
+    transform:
+      translate(-50%, -56%)
+      rotate(-45deg)
+      scale(var(--location-icon-scale)) !important;
+
+    transform-origin:center center !important;
+
+    box-shadow:
+      0 0 0 7px rgba(110,92,165,.12),
+      0 6px 12px rgba(58,30,118,.10) !important;
+  }
+
+  .event-place-info .event-place-name::before{
+    content:"" !important;
+    position:absolute !important;
+
+    left:25px !important;
+    top:23px !important;
+
+    width:7px !important;
+    height:7px !important;
+
+    border-radius:999px !important;
+    background:#ffffff !important;
+
+    transform:
+      translate(-50%, -50%)
+      scale(var(--location-icon-scale)) !important;
+
+    transform-origin:center center !important;
+
+    z-index:3 !important;
+    box-shadow:0 1px 2px rgba(58,30,118,.14) !important;
+  }
+}
   </style>
 </head>
 <body>
@@ -2240,7 +2681,7 @@ img{
   kind:'free',
   title:'Inauguración del festival',
   description:'Apertura oficial.',
-  place:'Sala Alpamayo',
+  place:'Sala Alpamayo de la Cámara de Comercio de Áncash',
   maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz',
 
   images:[
@@ -2252,6 +2693,25 @@ img{
   reference:'Más arriba de la esquina del BBVA de la plaza de armas.',
   detail:'Apertura oficial del Festival de los Glaciares 2026.',
   institutions:'INAIGEM, UNASAM, UTCB, CCA, DDC.'
+},
+{
+  id:'thu-institutional-presentations',
+  time:'9:30 a.m. - 10:10 a.m.',
+  kind:'free',
+  title:'Presentaciones institucionales',
+  description:'Chasing Glaciers y Cumbres Blancas.',
+  place:'Sala Alpamayo de la Cámara de Comercio de Áncash',
+  maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz',
+
+  images:[
+    'sala-alpamayo-1.jpg',
+    'sala-alpamayo-2.jpg',
+    'sala-alpamayo-3.jpg'
+  ],
+
+  reference:'Más arriba de la esquina del BBVA de la plaza de armas.',
+  detail:'Presentaciones institucionales:<br><br>• Chasing Glaciers: Adopta un Glaciar<br>• Cumbres Blancas: presentación de proyectos del año<br>• Firma de acuerdo entre Cumbres Blancas y el Parque Nacional de Huascarán.',
+  institutions:'Chasing Glaciers, Cumbres Blancas y Parque Nacional de Huascarán.'
 },
           { id:'thu-fair-walk', time:'10:30 a.m. - 11:00 a.m.', kind:'free', title:'Feria sostenible del Festival de los Glaciares', description:'Recorrido por los stands y propuestas de la feria.', place:'Afuera de la Cámara de Comercio de Áncash', maps:'Cámara de Comercio de Áncash Huaraz' },
           { id:'thu-art-walk', time:'11:30 a.m. - 12:30 p.m.', kind:'free', title:'Muestra artística colectiva “Voces del Deshielo”', description:'Visita a la muestra artística colectiva del festival.', place:'Hall de la DDC Áncash, frente de la Plaza de Armas', maps:'Dirección Desconcentrada de Cultura Áncash Huaraz Plaza de Armas' },
@@ -2368,7 +2828,7 @@ function walkingMapUrl(query){
   <div class="event-place-info">
     <div class="event-place-name">${event.place}</div>
     <a class="map-link" href="${mapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">
-      Abrir en Google Maps ↗
+      Abrir en Google Maps
     </a>
   </div>
 

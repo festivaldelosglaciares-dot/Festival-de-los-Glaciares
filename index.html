@@ -3281,6 +3281,51 @@ img{
     min-height:220px !important;
   }
 }
+/* =========================================================
+   MÓVIL: DOBLE NUBE EN UNA SOLA LÍNEA
+   INGRESO LIBRE + PANEL Y CONVERSATORIO
+   ========================================================= */
+
+@media (max-width:760px){
+
+  .event-badges{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    gap:10px !important;
+
+    margin-bottom:16px !important;
+    flex-wrap:nowrap !important;
+    white-space:nowrap !important;
+  }
+
+  .event-badges .event-kind{
+    margin-bottom:0 !important;
+    flex:0 0 auto !important;
+  }
+
+  .event-extra-badge{
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+
+    min-height:38px !important;
+    padding:0 16px !important;
+    border-radius:999px !important;
+
+    background:#f4eefb !important;
+    border:1px solid rgba(110,92,165,.18) !important;
+    color:var(--purple) !important;
+
+    font-size:.72rem !important;
+    font-weight:800 !important;
+    letter-spacing:.11em !important;
+    text-transform:uppercase !important;
+
+    white-space:nowrap !important;
+    flex:0 0 auto !important;
+  }
+}
   </style>
 </head>
 <body>

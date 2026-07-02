@@ -3180,30 +3180,28 @@ img{
   }
 }
 /* =========================================================
-   MÓVIL: SUSTITUIR COPO POR RAYA HORIZONTAL
+   MÓVIL: CAMBIAR COPO DE NIEVE POR RAYA HORIZONTAL
    ========================================================= */
 
 @media (max-width:760px){
 
-  .event-time-divider{
-    width:auto !important;
-    margin:0 10px !important;
-    display:inline-flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-  }
-
-  .event-time-divider span{
-    display:none !important;
-  }
-
   .event-time-divider i{
-    font-style:normal !important;
-    font-size:1.2rem !important;
-    font-weight:700 !important;
-    line-height:1 !important;
-    color:var(--purple) !important;
+    font-size:0 !important;
+    width:auto !important;
+    min-width:auto !important;
     transform:none !important;
+  }
+
+  .event-time-divider i::before{
+    content:"—" !important;
+    display:inline-block !important;
+
+    font-size:1.35rem !important;
+    line-height:1 !important;
+    font-weight:600 !important;
+
+    color:var(--purple) !important;
+    transform:translateY(-1px) !important;
   }
 }
   </style>
@@ -3670,7 +3668,7 @@ function formatEventTime(time){
     <span class="event-time-start">${start}</span>
     <span class="event-time-divider" aria-hidden="true">
       <span></span>
-      <i>—</i>
+      <i>❄</i>
       <span></span>
     </span>
     <span class="event-time-end">${end}</span>

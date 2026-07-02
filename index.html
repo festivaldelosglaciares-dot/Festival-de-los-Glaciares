@@ -3295,7 +3295,7 @@ img{
     gap:10px !important;
 
     margin-bottom:16px !important;
-    flex-wrap:nowrap !important;
+    flex-wrap:wrap !important;
     white-space:nowrap !important;
   }
 
@@ -3366,6 +3366,51 @@ img{
 @media (min-width:761px){
   .event-row[data-event-id="thu-panel"] .coffee-break-line{
     margin-top:10px !important;
+  }
+}
+/* =========================================================
+   CORRECCIÓN MÓVIL: CENTRAR TARJETAS DEL PRIMER DÍA
+   EVITA DESBORDE POR DOBLE NUBE
+   ========================================================= */
+
+@media (max-width:760px){
+
+  .day-card,
+  .day-dropdown,
+  .events-shell,
+  .event-row{
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    overflow:hidden !important;
+  }
+
+  .events-shell{
+    padding-left:14px !important;
+    padding-right:14px !important;
+    justify-items:center !important;
+  }
+
+  .event-row{
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+
+  .event-row > div{
+    min-width:0 !important;
+  }
+
+  .event-badges{
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    overflow:hidden !important;
+  }
+
+  .event-badges .event-kind,
+  .event-extra-badge{
+    min-width:0 !important;
+    max-width:100% !important;
   }
 }
   </style>

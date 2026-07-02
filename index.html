@@ -3104,6 +3104,108 @@ img{
     line-height:1.45;
   }
 }
+/* =========================================================
+   DESKTOP: CARRUSEL MÁS FLUIDO Y SIN SALTOS
+   ========================================================= */
+
+@media (min-width:761px){
+
+  .event-detail-carousel{
+    height:390px !important;
+    min-height:390px !important;
+    max-height:390px !important;
+
+    overflow:hidden !important;
+    border-radius:22px !important;
+
+    transform:translateZ(0) !important;
+    backface-visibility:hidden !important;
+    contain:layout paint !important;
+  }
+
+  .event-detail-carousel-track{
+    height:390px !important;
+    min-height:390px !important;
+
+    display:flex !important;
+    align-items:stretch !important;
+
+    transform:translate3d(0,0,0);
+    will-change:transform !important;
+    backface-visibility:hidden !important;
+  }
+
+  .event-detail-slide{
+    height:390px !important;
+    min-height:390px !important;
+    flex:0 0 100% !important;
+    min-width:100% !important;
+
+    overflow:hidden !important;
+    transform:translateZ(0) !important;
+    backface-visibility:hidden !important;
+  }
+
+  .event-detail-slide img{
+    width:100% !important;
+    height:390px !important;
+    min-height:390px !important;
+
+    object-fit:cover !important;
+    object-position:center center !important;
+
+    display:block !important;
+    transform:translateZ(0) scale(1.001) !important;
+    backface-visibility:hidden !important;
+  }
+
+  .event-detail-carousel.dragging .event-detail-carousel-track{
+    transition:none !important;
+  }
+
+  .artist-info{
+    min-height:390px !important;
+    transition:
+      opacity .42s ease,
+      transform .42s cubic-bezier(.22,.8,.24,1) !important;
+  }
+
+  .artist-info.changing{
+    opacity:0 !important;
+    transform:translateY(6px) !important;
+  }
+
+  .artist-card-description{
+    min-height:188px !important;
+  }
+}
+/* =========================================================
+   MÓVIL: SUSTITUIR COPO POR RAYA HORIZONTAL
+   ========================================================= */
+
+@media (max-width:760px){
+
+  .event-time-divider{
+    width:auto !important;
+    margin:0 10px !important;
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+  }
+
+  .event-time-divider span{
+    display:none !important;
+  }
+
+  .event-time-divider i{
+    font-style:normal !important;
+    font-size:1.2rem !important;
+    font-weight:700 !important;
+    line-height:1 !important;
+    color:var(--purple) !important;
+    transform:none !important;
+  }
+}
   </style>
 </head>
 <body>
@@ -3568,7 +3670,7 @@ function formatEventTime(time){
     <span class="event-time-start">${start}</span>
     <span class="event-time-divider" aria-hidden="true">
       <span></span>
-      <i>❄</i>
+      <i>—</i>
       <span></span>
     </span>
     <span class="event-time-end">${end}</span>
@@ -4148,17 +4250,20 @@ function updateArtistInfo(activeIndex){
     panel.classList.remove('changing');
   }, 220);
 }
+function moveTo(offset = 0, smooth = true){
+  const isDesktop = window.innerWidth > 760;
 
-    function moveTo(offset = 0, smooth = true){
-      track.style.transition = smooth
-        ? 'transform 1.05s cubic-bezier(.25,.8,.25,1)'
-        : 'none';
+  track.style.transition = smooth
+    ? isDesktop
+      ? 'transform 1.15s cubic-bezier(.19,1,.22,1)'
+      : 'transform 1.05s cubic-bezier(.25,.8,.25,1)'
+    : 'none';
 
-      const x = -(visualIndex * slideWidth()) + offset;
-      track.style.transform = `translate3d(${x}px,0,0)`;
+  const x = -(visualIndex * slideWidth()) + offset;
+  track.style.transform = `translate3d(${x}px,0,0)`;
 
-      updateDots();
-    }
+  updateDots();
+}
 
     function goToVisualSlide(nextIndex, smooth = true){
       visualIndex = nextIndex;
@@ -4180,11 +4285,15 @@ function updateArtistInfo(activeIndex){
     }
 
     track.addEventListener('transitionend', () => {
-      if(visualIndex === realCount){
-        visualIndex = 0;
-        moveTo(0, false);
-      }
-    });
+  if(visualIndex === realCount){
+    track.style.transition = 'none';
+    visualIndex = 0;
+    moveTo(0, false);
+
+    /* Fuerza el navegador a estabilizar el frame sin animar el salto invisible */
+    track.offsetHeight;
+  }
+});
 
     interval = setInterval(() => {
       if(userStopped) return;

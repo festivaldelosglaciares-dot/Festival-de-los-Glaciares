@@ -3529,7 +3529,7 @@ img{
   extraBadge:'Panel y conversatorio',
   title:'El impacto del cambio climático en la criosfera',
   description:'Panel científico y conversatorio sobre glaciares, cambio climático y criosfera. Incluye coffee break.',
-  speakers:'Ponentes: José Ubeda & Ramón Pellitero, Paola Moschella, Edwin Loarte, Wilmer Sánchez, Kiara Falcón, Pascal Egli y Edwin Loarte.',
+  speakers:'Ponentes: José Ubeda & Ramón Pellitero, Paola Moschella, Edwin Loarte, Wilmer Sánchez, Kiara Falcón y Pascal Egli.',
   place:'Sala Alpamayo de la Cámara de Comercio de Áncash',
   maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz',
 
@@ -3552,12 +3552,14 @@ img{
     },
     {
       name:'Paola Moschella',
+gender:'female',
       role:'Directora de Investigación en Glaciares de INAIGEM',
       talk:'Glaciares del Perú: cambios y desafíos',
       description:'Doctora en Geografía por la Universidad de Strasbourg, Francia. Geógrafa con maestría en Desarrollo Ambiental por la PUCP. Actualmente es Directora de Investigación en Glaciares del INAIGEM y cuenta con más de 10 años de experiencia como docente e investigadora.'
     },
     {
       name:'Kiara Falcón',
+gender:'female',
       role:'Ingeniera ambiental · UNASAM',
       talk:'',
       description:'Investigadora del Grupo de Investigación en Ciencia y Tecnología del Agua. Participa en el proyecto “Soluciones Basadas en la Naturaleza para el tratamiento y reutilización de aguas contaminadas con Drenajes Ácidos de Roca y Aguas Residuales Domésticas”.'
@@ -3587,13 +3589,24 @@ img{
       description:'Dirige el proyecto MOTICE, que busca cuantificar el agua congelada de los nevados Coropuna y Quelccaya para modelizar su evolución ante el cambio climático.'
     }
   ],
-
   reference:'Más arriba de la esquina del BBVA de la plaza de armas.',
   detail:'Panel científico y conversatorio sobre glaciares, cambio climático y criosfera.'
 },
+{
+  id:'thu-cinema',
+  time:'6:00 p.m. - 8:00 p.m.',
+  kind:'free',
+  title:'Noche de cine',
+  description:'Proyección del documental “Nuestros Glaciares: La agonía de los Andes” y el cortometraje “Refugios Andinos”.',
+  place:'Sala Alpamayo de la Cámara de Comercio de Áncash',
+  maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz'
+}
+        ]
+      },
       {
         id:'day-3',
         date:'Viernes 3 de julio',
+      
         theme:'Saberes y diálogo',
         events:[
           { id:'fri-cleaning', time:'7:00 a.m. - 12:00 p.m.', kind:'register', title:'Jornada de limpieza en Rataquenua', description:'Actividad comunitaria coorganizada por Merrell UTCB. Punto de encuentro: Plazuela de la Soledad, Huaraz.', place:'Plazuela de la Soledad, Huaraz', maps:'Plazuela de la Soledad Huaraz' },
@@ -3914,7 +3927,7 @@ function renderProfileInfo(event){
   const profile = profiles[0];
 
   const isPanel = Array.isArray(event.panelists);
-  const mainLabel = isPanel ? 'Investigador' : 'Artista';
+const mainLabel = isPanel ? (profile.gender === 'female' ? 'Investigadora' : 'Investigador') : 'Artista';
 
   return `
     <div class="artist-info" data-artist-panel="${event.id}">

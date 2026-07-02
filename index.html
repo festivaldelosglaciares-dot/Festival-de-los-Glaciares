@@ -3241,6 +3241,21 @@ img{
     min-height:260px !important;
   }
 }
+/* =========================================================
+   PANELISTAS: CAJA DE PONENCIA
+   ========================================================= */
+
+.artist-card-talk{
+  background:linear-gradient(180deg,#ffffff 0%,#fbf8ff 100%);
+}
+
+.artist-card-talk .artist-description{
+  color:var(--text);
+  font-size:1.04rem;
+  line-height:1.35;
+  font-weight:650;
+  letter-spacing:-.025em;
+}
   </style>
 </head>
 <body>
@@ -3514,13 +3529,68 @@ img{
   extraBadge:'Panel y conversatorio',
   title:'El impacto del cambio climático en la criosfera',
   description:'Panel científico y conversatorio sobre glaciares, cambio climático y criosfera. Incluye coffee break.',
-  speakers:'Ponentes: José Ubeda & Ramón Pellitero, Paola Moschella, Edwin Loarte, Wilmer Sánchez, Kiara Falcon y Pascal Egli.',
+  speakers:'Ponentes: José Ubeda & Ramón Pellitero, Paola Moschella, Edwin Loarte, Wilmer Sánchez, Kiara Falcón, Pascal Egli y Edwin Loarte.',
   place:'Sala Alpamayo de la Cámara de Comercio de Áncash',
-  maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz'
+  maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz',
+
+  images:[
+    'panel-edwin-loarte.jpg',
+    'panel-paola-moschella.jpg',
+    'panel-kiara-falcon.jpg',
+    'panel-wilmer-sanchez.jpg',
+    'panel-pascal-egli.jpg',
+    'panel-jose-ubeda.jpg',
+    'panel-ramon-pellitero.jpg'
+  ],
+
+  panelists:[
+    {
+      name:'Edwin Loarte',
+      role:'Glaciólogo · Director ESAT UNASAM',
+      talk:'',
+      description:'Ingeniero ambiental con maestría en Recursos Hídricos y doctorado en Teledetección por la Universidad de Valencia. Ha investigado glaciares en la Cordillera Blanca, los Andes peruanos y la Antártida. Es uno de los referentes más importantes en monitoreo glaciar del Perú.'
+    },
+    {
+      name:'Paola Moschella',
+      role:'Directora de Investigación en Glaciares de INAIGEM',
+      talk:'Glaciares del Perú: cambios y desafíos',
+      description:'Doctora en Geografía por la Universidad de Strasbourg, Francia. Geógrafa con maestría en Desarrollo Ambiental por la PUCP. Actualmente es Directora de Investigación en Glaciares del INAIGEM y cuenta con más de 10 años de experiencia como docente e investigadora.'
+    },
+    {
+      name:'Kiara Falcón',
+      role:'Ingeniera ambiental · UNASAM',
+      talk:'',
+      description:'Investigadora del Grupo de Investigación en Ciencia y Tecnología del Agua. Participa en el proyecto “Soluciones Basadas en la Naturaleza para el tratamiento y reutilización de aguas contaminadas con Drenajes Ácidos de Roca y Aguas Residuales Domésticas”.'
+    },
+    {
+      name:'Wilmer Sánchez',
+      role:'Glaciólogo · ESAT UNASAM · Huaraz',
+      talk:'',
+      description:'Ha participado en expediciones científicas al glaciar Quelccaya, al Huascarán y a la Meseta Tibetana en China. En 2016 fue invitado por el Dr. Lonnie Thompson de Ohio State University para investigar la capa de hielo Quelccaya. Es colaborador científico de Chasing Glaciers desde 2021.'
+    },
+    {
+      name:'Pascal Egli',
+      role:'Glaciólogo · NTNU, Noruega',
+      talk:'Glaciares y deportes: entre riesgos y sostenibilidad',
+      description:'Ha realizado trabajo de campo glaciológico en los Alpes suizos, glaciares noruegos, la Patagonia chilena, Pakistán, Uganda y el Himalaya. En el festival presentará una mirada sobre cómo las actividades de montaña conviven con glaciares en retroceso.'
+    },
+    {
+      name:'José Ubeda',
+      role:'Universidad Complutense de Madrid',
+      talk:'',
+      description:'Lleva más de 20 años investigando el impacto del cambio climático en glaciares y permafrost andinos, con más de 35 campañas en los Andes peruanos.'
+    },
+    {
+      name:'Ramón Pellitero',
+      role:'Universidad Nacional de Educación a Distancia - UNED',
+      talk:'',
+      description:'Dirige el proyecto MOTICE, que busca cuantificar el agua congelada de los nevados Coropuna y Quelccaya para modelizar su evolución ante el cambio climático.'
+    }
+  ],
+
+  reference:'Más arriba de la esquina del BBVA de la plaza de armas.',
+  detail:'Panel científico y conversatorio sobre glaciares, cambio climático y criosfera.'
 },
-          { id:'thu-cinema', time:'6:00 p.m. - 8:00 p.m.', kind:'free', title:'Noche de cine', description:'Proyección del documental “Nuestros Glaciares: La agonía de los Andes” y el cortometraje “Refugios Andinos”.', place:'Sala Alpamayo de la Cámara de Comercio de Áncash', maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz' }
-        ]
-      },
       {
         id:'day-3',
         date:'Viernes 3 de julio',
@@ -3839,20 +3909,31 @@ function eventExtendedInfo(event){
 
   return parts.join('<br><br>') || 'Información orientativa de la actividad.';
 }
-function renderArtistInfo(event){
-  const artist = event.artists[0];
+function renderProfileInfo(event){
+  const profiles = Array.isArray(event.artists) ? event.artists : event.panelists;
+  const profile = profiles[0];
+
+  const isPanel = Array.isArray(event.panelists);
+  const mainLabel = isPanel ? 'Investigador' : 'Artista';
 
   return `
     <div class="artist-info" data-artist-panel="${event.id}">
       <div class="artist-card artist-card-main">
-        <strong>Artista</strong>
-        <span class="artist-name">${artist.name}</span>
-        <em class="artist-role">${artist.role}</em>
+        <strong>${mainLabel}</strong>
+        <span class="artist-name">${profile.name}</span>
+        <em class="artist-role">${profile.role}</em>
       </div>
+
+      ${profile.talk ? `
+        <div class="artist-card artist-card-talk">
+          <strong>Ponencia</strong>
+          <span class="artist-description artist-talk">${profile.talk}</span>
+        </div>
+      ` : ''}
 
       <div class="artist-card artist-card-description">
         <strong>Descripción</strong>
-        <span class="artist-description">${artist.description}</span>
+        <span class="artist-description">${profile.description}</span>
       </div>
 
       <div class="event-detail-actions">
@@ -3876,7 +3957,7 @@ function renderInfo(event){
 
       <div class="event-detail-content">
 
-        ${event.artists ? renderArtistInfo(event) : `
+        ${event.artists || event.panelists ? renderProfileInfo(event) : `
           <div class="event-detail-about">
             <strong>Sobre la actividad</strong>
             <span>${eventExtendedInfo(event)}</span>
@@ -4267,37 +4348,47 @@ function initEventCarousels(){
       return visualIndex;
     }
 
-    function updateArtistInfo(activeIndex){
-      const eventId = carousel.dataset.eventId;
-      const event = findEventById(eventId);
+  function updateArtistInfo(activeIndex){
+  const eventId = carousel.dataset.eventId;
+  const event = findEventById(eventId);
 
-      if(!event || !Array.isArray(event.artists)) return;
+  if(!event) return;
 
-      const panel = document.querySelector(`[data-artist-panel="${eventId}"]`);
-      if(!panel) return;
+  const profiles = Array.isArray(event.artists) ? event.artists : event.panelists;
 
-      if(panel.dataset.currentArtist === String(activeIndex)) return;
-      panel.dataset.currentArtist = String(activeIndex);
+  if(!Array.isArray(profiles)) return;
 
-      const artist = event.artists[activeIndex];
-      if(!artist) return;
+  const profile = profiles[activeIndex];
+  const panel = document.querySelector(`[data-artist-panel="${eventId}"]`);
 
-      panel.classList.add('changing');
+  if(!profile || !panel) return;
 
-      clearTimeout(panel._artistTimer);
+  panel.classList.add('changing');
 
-      panel._artistTimer = setTimeout(() => {
-        const nameEl = panel.querySelector('.artist-name');
-        const roleEl = panel.querySelector('.artist-role');
-        const descEl = panel.querySelector('.artist-description');
+  setTimeout(() => {
+    const nameEl = panel.querySelector('.artist-name');
+    const roleEl = panel.querySelector('.artist-role');
+    const descEl = panel.querySelector('.artist-card-description .artist-description');
+    const talkCard = panel.querySelector('.artist-card-talk');
+    const talkEl = panel.querySelector('.artist-talk');
 
-        if(nameEl) nameEl.textContent = artist.name;
-        if(roleEl) roleEl.textContent = artist.role;
-        if(descEl) descEl.textContent = artist.description;
+    if(nameEl) nameEl.textContent = profile.name;
+    if(roleEl) roleEl.textContent = profile.role;
+    if(descEl) descEl.textContent = profile.description;
 
-        panel.classList.remove('changing');
-      }, 220);
+    if(talkCard && talkEl){
+      if(profile.talk){
+        talkCard.style.display = 'block';
+        talkEl.textContent = profile.talk;
+      } else {
+        talkCard.style.display = 'none';
+        talkEl.textContent = '';
+      }
     }
+
+    panel.classList.remove('changing');
+  }, 220);
+}
 
     function updateDots(){
       const activeIndex = realIndex();

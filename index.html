@@ -3204,6 +3204,43 @@ img{
     transform:translateY(-1px) !important;
   }
 }
+/* =========================================================
+   MÓVIL: DAR AIRE ENTRE LA RAYA Y LA HORA FINAL
+   ========================================================= */
+
+@media (max-width:760px){
+
+  .event-time-divider i::before{
+    content:"—" !important;
+    margin-right:10px !important;
+    margin-left:4px !important;
+  }
+}
+/* =========================================================
+   MÓVIL: MÁS ALTURA SOLO PARA CARRUSEL DE ARTISTAS
+   ========================================================= */
+
+@media (max-width:760px){
+
+  .event-detail-carousel[data-event-id="thu-art-walk"],
+  .event-detail-carousel[data-event-id="thu-art-walk"] .event-detail-carousel-track,
+  .event-detail-carousel[data-event-id="thu-art-walk"] .event-detail-slide,
+  .event-detail-carousel[data-event-id="thu-art-walk"] .event-detail-slide img{
+    height:280px !important;
+    min-height:280px !important;
+  }
+}
+
+@media (max-width:430px){
+
+  .event-detail-carousel[data-event-id="thu-art-walk"],
+  .event-detail-carousel[data-event-id="thu-art-walk"] .event-detail-carousel-track,
+  .event-detail-carousel[data-event-id="thu-art-walk"] .event-detail-slide,
+  .event-detail-carousel[data-event-id="thu-art-walk"] .event-detail-slide img{
+    height:260px !important;
+    min-height:260px !important;
+  }
+}
   </style>
 </head>
 <body>

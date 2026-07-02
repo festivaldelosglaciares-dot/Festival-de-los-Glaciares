@@ -582,11 +582,20 @@
       }
     }
 
-    @media (max-width:1320px){
-      .wrap{grid-template-columns:1fr;max-width:980px;}
-      .panel{position:static;}
-      .board{min-height:auto;}
-    }
+    @media (max-width:999px){
+  .wrap{
+    grid-template-columns:1fr;
+    max-width:980px;
+  }
+
+  .panel{
+    position:static;
+  }
+
+  .board{
+    min-height:auto;
+  }
+}
 @media (max-width:760px){
   .wrap{
     width:100%;
@@ -2210,10 +2219,10 @@ img{
 @media (min-width:761px){
 
   /* Mueve la barra vertical hacia la izquierda y da más aire al bloque derecho */
-  .event-row{
-    grid-template-columns:136px minmax(0,1fr) 340px !important;
-    column-gap:26px !important;
-  }
+ .event-row{
+  grid-template-columns:160px minmax(0,1fr) 340px !important;
+  column-gap:24px !important;
+}
 
   .event-place{
     border-left:1px solid rgba(110,92,165,.22) !important;
@@ -2527,6 +2536,574 @@ img{
     box-shadow:0 1px 2px rgba(58,30,118,.14) !important;
   }
 }
+/* =========================================================
+   AJUSTE FINO: TEXTO DEL BLOQUE DERECHO DESKTOP
+   ========================================================= */
+
+@media (min-width:761px){
+
+  /* Baja un poco el texto del lugar al lado del ícono */
+  .event-place-name{
+    padding-top:5px !important;
+    font-weight:650 !important;
+  }
+
+  /* Hace más leve el texto morado de Google Maps */
+  .event-place .map-link{
+    font-weight:560 !important;
+  }
+
+  /* También suaviza un poco el botón Ver detalle */
+  .event-place-button .event-button{
+    font-weight:620 !important;
+  }
+}
+/* =========================================================
+   TIPOGRAFÍA MÁS LEVE EN BLOQUE DERECHO DESKTOP
+   ========================================================= */
+
+@media (min-width:761px){
+
+  .event-place-name{
+    font-weight:560 !important;
+    letter-spacing:-.018em !important;
+  }
+
+  .event-place .map-link{
+    font-weight:500 !important;
+    letter-spacing:-.012em !important;
+  }
+
+  .event-place-button .event-button{
+    font-weight:560 !important;
+    letter-spacing:-.012em !important;
+  }
+}
+/* =========================================================
+   SEGMENTACIÓN PREMIUM DEL LUGAR EN DESKTOP
+   ========================================================= */
+
+.event-place-line{
+  display:inline;
+}
+
+/* Solo desktop: cada segmento baja a su propia línea */
+@media (min-width:761px){
+
+  .event-place-line{
+    display:block;
+  }
+
+  .event-place-line + .event-place-line{
+    margin-top:2px;
+  }
+
+  .event-place-name{
+    line-height:1.18 !important;
+  }
+}
+/* =========================================================
+   SEGUNDA LÍNEA MÁS DELGADA EN LUGAR — DESKTOP
+   ========================================================= */
+
+@media (min-width:761px){
+
+  .event-place-name .event-place-line:first-child{
+    font-weight:620 !important;
+  }
+
+  .event-place-name .event-place-line:nth-child(2){
+    font-weight:430 !important;
+    color:#202642 !important;
+    opacity:.92 !important;
+  }
+}
+/* =========================================================
+   BAJAR SEGUNDA LÍNEA DEL LUGAR — DESKTOP
+   ========================================================= */
+
+@media (min-width:761px){
+
+  .event-place-name .event-place-line:nth-child(2){
+    display:block !important;
+    margin-top:8px !important;
+  }
+}
+/* =========================================================
+   PORTADA IZQUIERDA FIJA REAL — SOLO DESKTOP
+   SIN SOBREPONERSE AL FOOTER
+   ========================================================= */
+
+@media (min-width:1000px){
+
+  .wrap{
+    display:grid !important;
+    grid-template-columns:clamp(360px,28.6vw,440px) minmax(0,1fr) !important;
+    gap:24px !important;
+    align-items:start !important;
+
+    max-width:1540px !important;
+    margin:0 auto !important;
+    padding:24px !important;
+  }
+
+  .panel.festival-cover{
+    position:fixed !important;
+
+    top:24px !important;
+    left:calc((100vw - min(1540px, 100vw)) / 2 + 24px) !important;
+
+    width:clamp(360px,28.6vw,440px) !important;
+    height:calc(100vh - 48px) !important;
+    max-height:calc(100vh - 48px) !important;
+
+    overflow:hidden !important;
+
+    z-index:20 !important;
+
+    animation:none !important;
+    transform:none !important;
+  }
+
+  .panel.festival-cover .cover-inner{
+    width:100% !important;
+    height:100% !important;
+    min-height:100% !important;
+  }
+
+  .board{
+    grid-column:2 !important;
+    min-height:calc(100vh - 48px) !important;
+  }
+
+  /* Footer alineado con la columna derecha */
+  .support-sponsors{
+    width:calc(
+      min(1540px, 100vw)
+      - clamp(360px,28.6vw,440px)
+      - 72px
+    ) !important;
+
+    margin-left:calc(
+      (100vw - min(1540px, 100vw)) / 2
+      + clamp(360px,28.6vw,440px)
+      + 48px
+    ) !important;
+
+    margin-right:24px !important;
+    margin-top:0 !important;
+    margin-bottom:24px !important;
+  }
+}
+/* =========================================================
+   DESKTOP: HORARIO VERTICAL + TÍTULO MÁS PROTAGÓNICO
+   ========================================================= */
+
+@media (min-width:761px){
+
+  /* Caja del horario en formato vertical */
+  .event-time{
+    width:100% !important;
+    max-width:220px !important;
+    min-height:132px !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+
+    padding:22px 18px !important;
+    border-radius:24px !important;
+
+    font-size:1.92rem !important;
+    line-height:.98 !important;
+    font-weight:900 !important;
+    letter-spacing:-.065em !important;
+    text-align:center !important;
+  }
+
+  .event-time-start,
+  .event-time-end{
+    display:block !important;
+    white-space:nowrap !important;
+  }
+
+  .event-time-separator{
+    display:block !important;
+    margin:2px 0 3px !important;
+
+    color:var(--purple) !important;
+    font-size:1.35rem !important;
+    line-height:1 !important;
+    font-weight:900 !important;
+    letter-spacing:0 !important;
+  }
+
+  /* Mejora del bloque central */
+  .event-row > div:nth-child(2){
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:center !important;
+    align-items:flex-start !important;
+  }
+
+  /* Etiqueta ingreso libre / ticket / inscripción */
+  .event-kind{
+    margin-bottom:16px !important;
+    min-height:38px !important;
+    padding:0 22px !important;
+
+    font-size:.82rem !important;
+    letter-spacing:.16em !important;
+    border-radius:999px !important;
+  }
+
+  /* Título principal más visible */
+  .event-title{
+    font-size:clamp(2rem, 2.65vw, 3rem) !important;
+    line-height:.98 !important;
+    letter-spacing:-.075em !important;
+    font-weight:900 !important;
+    max-width:760px !important;
+  }
+
+  /* Descripción debajo del título */
+  .event-desc{
+    margin-top:16px !important;
+    font-size:1.28rem !important;
+    line-height:1.25 !important;
+    font-weight:650 !important;
+    letter-spacing:-.035em !important;
+    color:#6d718f !important;
+  }
+
+  .event-speakers{
+    margin-top:14px !important;
+    font-size:1.03rem !important;
+    line-height:1.38 !important;
+  }
+}
+/* =========================================================
+   AJUSTE FINO DESKTOP: ESCALA MÁS EQUILIBRADA DE TARJETAS
+   ========================================================= */
+
+@media (min-width:761px){
+
+  /* Caja del horario: mantiene el formato vertical, pero menos grande */
+  .event-time{
+    max-width:170px !important;
+    min-height:118px !important;
+
+    padding:18px 14px !important;
+    border-radius:22px !important;
+
+    font-size:1.48rem !important;
+    line-height:1.02 !important;
+    letter-spacing:-.055em !important;
+  }
+
+  .event-time-separator{
+    margin:1px 0 2px !important;
+    font-size:1.05rem !important;
+    line-height:1 !important;
+  }
+
+  /* Etiqueta INGRESO LIBRE más pequeña */
+  .event-kind{
+    min-height:34px !important;
+    padding:0 18px !important;
+
+    font-size:.72rem !important;
+    letter-spacing:.15em !important;
+    margin-bottom:14px !important;
+  }
+
+  /* Título principal más fuerte, pero no excesivo */
+  .event-title{
+    font-size:clamp(1.62rem, 2.05vw, 2.28rem) !important;
+    line-height:1.02 !important;
+    letter-spacing:-.065em !important;
+    font-weight:900 !important;
+    max-width:620px !important;
+  }
+
+  /* Subtítulo / descripción más contenido */
+  .event-desc{
+    margin-top:12px !important;
+    font-size:1.02rem !important;
+    line-height:1.28 !important;
+    font-weight:620 !important;
+    letter-spacing:-.028em !important;
+  }
+
+  /* Si hay ponentes, también evitar que se agranden demasiado */
+  .event-speakers{
+    margin-top:12px !important;
+    font-size:.92rem !important;
+    line-height:1.36 !important;
+    font-weight:520 !important;
+  }
+}
+/* =========================================================
+   TÍTULOS DE TARJETAS MÁS DELGADOS — SOLO DESKTOP
+   ========================================================= */
+
+@media (min-width:761px){
+
+  .event-title{
+    Font-weight:650 !important;
+  }
+}
+/* =========================================================
+   HORARIOS MÁS LEVES — SOLO DESKTOP
+   ========================================================= */
+
+@media (min-width:761px){
+
+  .event-time{
+    font-weight:720 !important;
+  }
+}
+/* =========================================================
+   HORARIO MÁS PEQUEÑO Y LEVE — DESKTOP
+   ========================================================= */
+
+@media (min-width:761px){
+
+  .event-time{
+    font-size:1.12rem !important;
+    font-weight:620 !important;
+    line-height:1.08 !important;
+    letter-spacing:-.045em !important;
+  }
+
+  .event-time .time-separator{
+    display:block;
+    font-size:1.05rem !important;
+    font-weight:520 !important;
+    line-height:1.05 !important;
+    margin:2px 0 3px !important;
+    color:var(--purple);
+  }
+}
+/* =========================================================
+   HORARIO DESKTOP CON COPO DE NIEVE — AJUSTADO
+   ========================================================= */
+
+@media (min-width:761px){
+
+  .event-time{
+    width:150px !important;
+    min-height:132px !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+
+    padding:18px 14px !important;
+    border-radius:26px !important;
+
+    background:linear-gradient(180deg,#f2eefc 0%,#eee9fa 100%) !important;
+
+    color:var(--purple) !important;
+    text-align:center !important;
+
+    font-size:1.36rem !important;
+    line-height:1.04 !important;
+    font-weight:600 !important;
+    letter-spacing:-.04em !important;
+  }
+
+  .event-time-start,
+  .event-time-end,
+  .event-time-single{
+    display:block !important;
+    width:100% !important;
+    color:var(--purple) !important;
+    font-weight:600 !important;
+    line-height:1.04 !important;
+    letter-spacing:-.04em !important;
+  }
+
+  .event-time-divider{
+  width:62% !important;
+  margin:11px auto 12px !important;
+
+  display:grid !important;
+  grid-template-columns:1fr auto 1fr !important;
+  align-items:center !important;
+  column-gap:8px !important;
+
+  color:var(--purple) !important;
+}
+
+  .event-time-divider span{
+    display:block !important;
+    height:2px !important;
+    border-radius:999px !important;
+    background:rgba(110,92,165,.30) !important;
+  }
+
+  .event-time-divider i{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+
+    font-style:normal !important;
+    font-size:1.08rem !important;
+    line-height:1 !important;
+    font-weight:500 !important;
+
+    color:var(--purple) !important;
+    transform:translateY(-1px) !important;
+  }
+}
+/* =========================================================
+   DOBLE NUBE EN UNA SOLA LÍNEA — SOLO DESKTOP
+   ========================================================= */
+
+@media (min-width:761px){
+
+  .event-badges{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    gap:12px !important;
+
+    margin-bottom:14px !important;
+    flex-wrap:nowrap !important;
+    white-space:nowrap !important;
+  }
+
+  .event-badges .event-kind{
+    margin-bottom:0 !important;
+    flex:0 0 auto !important;
+  }
+
+  .event-extra-badge{
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+
+    min-height:34px !important;
+    padding:0 18px !important;
+    border-radius:999px !important;
+
+    background:#f4eefb !important;
+    border:1px solid rgba(110,92,165,.16) !important;
+    color:var(--purple) !important;
+
+    font-size:.72rem !important;
+    font-weight:780 !important;
+    letter-spacing:.12em !important;
+    text-transform:uppercase !important;
+
+    white-space:nowrap !important;
+    flex:0 0 auto !important;
+  }
+}
+/* =========================================================
+   SUBTÍTULO DE TARJETA MÁS LEVE — SOLO DESKTOP
+   ========================================================= */
+
+@media (min-width:761px){
+
+  .event-desc{
+    font-weight:460 !important;
+    color:#727690 !important;
+    letter-spacing:-.018em !important;
+  }
+}
+/* =========================================================
+   CARRUSEL DE ARTISTAS — MUESTRA VOCES DEL DESHIELO
+   ========================================================= */
+
+.artist-info{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  height:100%;
+  opacity:1;
+  transform:translateY(0);
+  transition:
+    opacity .35s ease,
+    transform .35s cubic-bezier(.22,.8,.24,1);
+}
+
+.artist-info.changing{
+  opacity:0;
+  transform:translateY(8px);
+}
+
+.artist-card{
+  padding:18px 20px;
+  border-radius:20px;
+  background:#ffffff;
+  border:1px solid rgba(226,214,255,.86);
+  box-shadow:0 10px 22px rgba(58,30,118,.035);
+}
+
+.artist-card strong{
+  display:block;
+  margin-bottom:10px;
+  color:var(--purple);
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+
+.artist-name{
+  display:block;
+  color:var(--text);
+  font-size:1.42rem;
+  line-height:1.08;
+  font-weight:760;
+  letter-spacing:-.045em;
+}
+
+.artist-role{
+  display:block;
+  margin-top:8px;
+  color:#6d718f;
+  font-size:.96rem;
+  line-height:1.28;
+  font-style:normal;
+  font-weight:520;
+}
+
+.artist-description{
+  display:block;
+  color:#565c81;
+  font-size:1rem;
+  line-height:1.48;
+  font-weight:520;
+}
+
+.artist-info .event-detail-actions{
+  margin-top:auto;
+}
+
+@media (max-width:760px){
+  .artist-info{
+    gap:12px;
+  }
+
+  .artist-card{
+    padding:15px;
+    border-radius:18px;
+  }
+
+  .artist-name{
+    font-size:1.22rem;
+  }
+
+  .artist-description{
+    font-size:.92rem;
+    line-height:1.45;
+  }
+}
   </style>
 </head>
 <body>
@@ -2713,9 +3290,97 @@ img{
   detail:'Presentaciones institucionales:<br><br>• Chasing Glaciers: Adopta un Glaciar<br>• Cumbres Blancas: presentación de proyectos del año<br>• Firma de acuerdo entre Cumbres Blancas y el Parque Nacional de Huascarán.',
   institutions:'Chasing Glaciers, Cumbres Blancas y Parque Nacional de Huascarán.'
 },
-          { id:'thu-fair-walk', time:'10:30 a.m. - 11:00 a.m.', kind:'free', title:'Feria sostenible del Festival de los Glaciares', description:'Recorrido por los stands y propuestas de la feria.', place:'Afuera de la Cámara de Comercio de Áncash', maps:'Cámara de Comercio de Áncash Huaraz' },
-          { id:'thu-art-walk', time:'11:30 a.m. - 12:30 p.m.', kind:'free', title:'Muestra artística colectiva “Voces del Deshielo”', description:'Visita a la muestra artística colectiva del festival.', place:'Hall de la DDC Áncash, frente de la Plaza de Armas', maps:'Dirección Desconcentrada de Cultura Áncash Huaraz Plaza de Armas' },
-          { id:'thu-panel', time:'3:00 p.m. - 6:00 p.m.', kind:'free', title:'Panel & conversatorio: El impacto del cambio climático en la criosfera', description:'Panel científico y conversatorio sobre glaciares, cambio climático y criosfera. Incluye coffee break.', speakers:'Ponentes: José Ubeda & Ramón Pellitero, Paola Moschella, Edwin Loarte, Wilmer Sánchez, Kiara Falcon y Pascal Egli.', place:'Sala Alpamayo de la Cámara de Comercio de Áncash', maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz' },
+          {
+  id:'thu-fair-walk',
+  time:'10:30 a.m. - 11:00 a.m.',
+  kind:'free',
+  title:'Feria sostenible del Festival de los Glaciares',
+  description:'Recorrido por los stands y propuestas de la feria.',
+  place:'Afuera de la Cámara de Comercio de Áncash',
+  maps:'Cámara de Comercio de Áncash Huaraz',
+
+  images:[
+    'feria-sostenible-1.jpg',
+    'feria-sostenible-2.jpg',
+    'feria-sostenible-3.jpg'
+  ]
+},
+          {
+  id:'thu-art-walk',
+  time:'11:30 a.m. - 12:30 p.m.',
+  kind:'free',
+  title:'Muestra artística colectiva “Voces del Deshielo”',
+  description:'Visita a la muestra artística colectiva del festival.',
+  place:'Hall de la DDC Áncash, frente de la Plaza de Armas',
+  maps:'Dirección Desconcentrada de Cultura Áncash Huaraz Plaza de Armas',
+
+  images:[
+    'artista-elizabeth-sanchez.jpg',
+    'artista-claudia-rosas.jpg',
+    'artista-katya-castillo.jpg',
+    'artista-brayan-oncoy.jpg',
+    'artista-liz-matencio.jpg',
+    'artista-maisha-rondon.jpg',
+    'artista-aurelien-buiron.jpg',
+    'artista-miguel-micha-valverde.jpg'
+  ],
+
+  artists:[
+    {
+      name:'Elizabeth Sánchez',
+      role:'Educadora artística y tallerista de tejido',
+      description:'La montaña es mi guía; en ella cultivo el arte, la contemplación y el aprendizaje interior. Su silencio me enseña a caminar en armonía con la tierra, fortaleciendo mi compromiso con la comunidad y el servicio.'
+    },
+    {
+      name:'Claudia Rosas',
+      role:'Arquitecta',
+      description:'Llegué a Huaraz para ejercer la docencia, pero también con el deseo de comprender este territorio a través de sus memorias, su identidad y las personas que lo habitan. En el Festival de los Glaciares encontré un espacio para hacerlo desde la colaboración y la creación colectiva. Como arquitecta, me interesa cómo los espacios pueden contar historias y convertirse en experiencias que inviten al diálogo.'
+    },
+    {
+      name:'Katya Castillo',
+      role:'Arquitecta',
+      description:'Mi vínculo con los glaciares nace de mi relación con Huaraz, el territorio que siento como propio. Aquí vivieron mis abuelos, viven mis padres, mis amigos y mi comunidad; por eso, hablar de glaciares es también hablar del agua, de los ríos y de la vida que sostiene este lugar.'
+    },
+    {
+      name:'Brayan Oncoy',
+      role:'Artista plástico y docente de arte',
+      description:'Mi conexión con las montañas es desde que nací. Poder apreciar a los hirkas desde la cuna ha inspirado diferentes obras de arte y diversos emprendimientos que hoy dan frutos. Actualmente desarrollo clases de arte en la ciudad de Caraz y gestión cultural con Tinkuy.'
+    },
+    {
+      name:'Liz Matencio',
+      role:'Artista multidisciplinaria',
+      description:'Originaria de Huaraz, en el Callejón de Huaylas. Mi vínculo con las montañas es de pertenencia, de íntimo afecto, y atraviesa mis expresiones textiles, visuales y poéticas como un lenguaje que a veces va hacia fuera y a veces hacia dentro.'
+    },
+    {
+      name:'Maisha Rondón',
+      role:'Artista',
+      description:'Nací en Huaraz y crecí mirando montañas. Con el tiempo entendí que no solo forman parte del paisaje, sino también de mi identidad. Cuando pinto un nevado, pinto la calma, la fuerza y la belleza que me acompañan desde siempre.'
+    },
+    {
+      name:'Aurélien Buiron (Ghost In The Loop)',
+      role:'Artista, compositor y productor',
+      description:'A través del registro de sonidos de glaciares y la sonificación de datos científicos, crea experiencias inmersivas que revelan procesos naturales invisibles. Desde 2023 documenta sonidos de glaciares para construir un archivo de memoria acústica.'
+    },
+    {
+      name:'Miguel “Micha” Valverde Robles',
+      role:'Gestor cultural, museógrafo y curador',
+      description:'Cuenta con experiencia en proyectos culturales, diseño de museos y exposiciones, así como en la gestión de iniciativas independientes para la promoción del arte y el patrimonio cultural. Su vínculo con el territorio se basa en el aprendizaje constante y la admiración por su diversidad y potencial.'
+    }
+  ],
+
+  reference:'Ubicación referencial del evento. Revisa Google Maps antes de salir.'
+},
+          {
+  id:'thu-panel',
+  time:'3:00 p.m. - 6:00 p.m.',
+  kind:'free',
+  extraBadge:'Panel y conversatorio',
+  title:'El impacto del cambio climático en la criosfera',
+  description:'Panel científico y conversatorio sobre glaciares, cambio climático y criosfera. Incluye coffee break.',
+  speakers:'Ponentes: José Ubeda & Ramón Pellitero, Paola Moschella, Edwin Loarte, Wilmer Sánchez, Kiara Falcon y Pascal Egli.',
+  place:'Sala Alpamayo de la Cámara de Comercio de Áncash',
+  maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz'
+},
           { id:'thu-cinema', time:'6:00 p.m. - 8:00 p.m.', kind:'free', title:'Noche de cine', description:'Proyección del documental “Nuestros Glaciares: La agonía de los Andes” y el cortometraje “Refugios Andinos”.', place:'Sala Alpamayo de la Cámara de Comercio de Áncash', maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz' }
         ]
       },
@@ -2813,33 +3478,131 @@ function walkingMapUrl(query){
       if(event.kind === 'register') return `<button class="event-button btn-secondary" type="button" data-action="open-info">Ver indicaciones</button>`;
       return `<button class="event-button btn-muted" type="button" data-action="open-info">Ver detalle</button>`;
     }
+function formatPlaceName(place){
+  const cleanPlace = String(place || '').trim();
 
-    function renderEvent(event){
-      return `
-        <article class="event-row" data-event-id="${event.id}">
-          <div class="event-time">${event.time}</div>
-          <div>
-            <div class="event-kind kind-${event.kind}">${kindLabel(event.kind)}</div>
-            <div class="event-title">${event.title}</div>
-            <div class="event-desc">${event.description || ''}</div>
-            ${event.speakers ? `<div class="event-speakers">${event.speakers}</div>` : ''}
-          </div>
-          <div class="event-place">
-  <div class="event-place-info">
-    <div class="event-place-name">${event.place}</div>
-    <a class="map-link" href="${mapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">
-      Abrir en Google Maps
-    </a>
-  </div>
+  const places = {
+    'Sala Alpamayo de la Cámara de Comercio de Áncash': [
+      'Sala Alpamayo',
+      'Cámara de Comercio de Áncash'
+    ],
 
-  <div class="event-place-button">
-    ${actionButton(event)}
-  </div>
+    'Afuera de la Cámara de Comercio de Áncash': [
+      'Exteriores',
+      'Cámara de Comercio de Áncash'
+    ],
+
+    'Hall de la DDC Áncash, frente de la Plaza de Armas': [
+      'Hall de la DDC Áncash',
+      'Frente a la Plaza de Armas'
+    ],
+
+    'Cima Taproom, Parque Ginebra': [
+      'Cima Taproom',
+      'Parque Ginebra'
+    ],
+
+    'Auditorio de Telemática de la UNASAM': [
+      'UNASAM',
+      'Auditorio de Telemática'
+    ],
+
+    'DDC - Doña Nati': [
+      'DDC',
+      'Doña Nati'
+    ],
+
+    'DDC - Auditorio': [
+      'DDC',
+      'Auditorio'
+    ],
+
+    'DDC - Parque Lítico': [
+      'DDC',
+      'Parque Lítico'
+    ],
+
+    'Plazuela de la Soledad, Huaraz': [
+      'Plazuela de la Soledad',
+      'Huaraz'
+    ]
+  };
+
+  const lines = places[cleanPlace] || [cleanPlace];
+
+  return lines.map(line => `<span class="event-place-line">${line}</span>`).join(' ');
+}
+function formatEventTime(time){
+  const cleanTime = String(time || '').trim();
+
+  if(cleanTime.includes(' - ')){
+    const parts = cleanTime.split(' - ');
+
+    return `
+      <span class="event-time-start">${parts[0]}</span>
+      <span class="event-time-separator">-</span>
+      <span class="event-time-end">${parts[1]}</span>
+    `;
+  }
+
+  return `<span class="event-time-start">${cleanTime}</span>`;
+}
+function formatEventTime(time){
+  return String(time || '')
+    .replace(/\s*-\s*/g, '<span class="time-separator">—</span>')
+    .replace(/\s+a\.m\./g, ' a.m.')
+    .replace(/\s+p\.m\./g, ' p.m.');
+}
+function formatEventTime(time){
+  const cleanTime = String(time || '').trim();
+
+  if(!cleanTime.includes(' - ')){
+    return `<span class="event-time-single">${cleanTime}</span>`;
+  }
+
+  const parts = cleanTime.split(' - ');
+  const start = parts[0].trim();
+  const end = parts[1].trim();
+
+  return `
+    <span class="event-time-start">${start}</span>
+    <span class="event-time-divider" aria-hidden="true">
+      <span></span>
+      <i>❄</i>
+      <span></span>
+    </span>
+    <span class="event-time-end">${end}</span>
+  `;
+}
+  function renderEvent(event){
+  return `
+    <article class="event-row" data-event-id="${event.id}">
+      <div class="event-time">${formatEventTime(event.time)}</div>
+      <div>
+        <div class="event-badges">
+  <div class="event-kind kind-${event.kind}">${kindLabel(event.kind)}</div>
+  ${event.extraBadge ? `<div class="event-extra-badge">${event.extraBadge}</div>` : ''}
 </div>
-          <div class="event-actions"></div>
-        </article>
-      `;
-    }
+        <div class="event-title">${event.title}</div>
+        <div class="event-desc">${event.description || ''}</div>
+        ${event.speakers ? `<div class="event-speakers">${event.speakers}</div>` : ''}
+      </div>
+      <div class="event-place">
+        <div class="event-place-info">
+          <div class="event-place-name">${formatPlaceName(event.place)}</div>
+          <a class="map-link" href="${mapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">
+            Abrir en Google Maps
+          </a>
+        </div>
+
+        <div class="event-place-button">
+          ${actionButton(event)}
+        </div>
+      </div>
+      <div class="event-actions"></div>
+    </article>
+  `;
+}
 
     function renderDay(day){
   return `
@@ -2902,7 +3665,7 @@ function renderImageCarousel(event){
   const visualImages = [...images, images[0]];
 
   return `
-    <div class="event-detail-carousel" data-carousel-id="${carouselId}">
+    <div class="event-detail-carousel" data-carousel-id="${carouselId}" data-event-id="${event.id}">
       <div class="event-detail-carousel-track">
         ${visualImages.map((img, index) => `
           <div class="event-detail-slide">
@@ -2939,6 +3702,34 @@ function eventExtendedInfo(event){
 
   return parts.join('<br><br>') || 'Información orientativa de la actividad.';
 }
+function renderArtistInfo(event){
+  const artist = event.artists[0];
+
+  return `
+    <div class="artist-info" data-artist-panel="${event.id}">
+      <div class="artist-card artist-card-main">
+        <strong>Artista</strong>
+        <span class="artist-name">${artist.name}</span>
+        <em class="artist-role">${artist.role}</em>
+      </div>
+
+      <div class="artist-card artist-card-description">
+        <strong>Descripción</strong>
+        <span class="artist-description">${artist.description}</span>
+      </div>
+
+      <div class="event-detail-actions">
+        <a class="event-button btn-map" href="${mapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">
+          Ver en Google Maps ↗
+        </a>
+
+        <a class="event-button btn-walk" href="${walkingMapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">
+          🚶 Cómo llegar caminando
+        </a>
+      </div>
+    </div>
+  `;
+}
 function renderInfo(event){
   const reference = event.reference || 'Ubicación referencial del evento. Revisa Google Maps antes de salir.';
 
@@ -2948,32 +3739,35 @@ function renderInfo(event){
 
       <div class="event-detail-content">
 
-        <div class="event-detail-about">
-          <strong>Sobre la actividad</strong>
-          <span>${eventExtendedInfo(event)}</span>
-        </div>
-
-        <div class="event-detail-grid">
-          <div class="event-detail-mini">
-            <strong>Ubicación</strong>
-            <span>${event.place}</span>
+        ${event.artists ? renderArtistInfo(event) : `
+          <div class="event-detail-about">
+            <strong>Sobre la actividad</strong>
+            <span>${eventExtendedInfo(event)}</span>
           </div>
 
-          <div class="event-detail-mini">
-            <strong>Referencia</strong>
-            <span>${reference}</span>
+          <div class="event-detail-grid">
+            <div class="event-detail-mini">
+              <strong>Ubicación</strong>
+              <span>${event.place}</span>
+            </div>
+
+            <div class="event-detail-mini">
+              <strong>Referencia</strong>
+              <span>${reference}</span>
+            </div>
           </div>
-        </div>
 
-        <div class="event-detail-actions">
-          <a class="event-button btn-map" href="${mapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">
-            Ver en Google Maps ↗
-          </a>
+          <div class="event-detail-actions">
+            <a class="event-button btn-map" href="${mapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">
+              Ver en Google Maps ↗
+            </a>
 
-          <a class="event-button btn-walk" href="${walkingMapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">
-            🚶 Cómo llegar caminando
-          </a>
-        </div>
+            <a class="event-button btn-walk" href="${walkingMapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">
+              🚶 Cómo llegar caminando
+            </a>
+          </div>
+        `}
+
       </div>
     </div>
   `;
@@ -3320,12 +4114,40 @@ function initEventCarousels(){
     }
 
     function updateDots(){
-      const activeIndex = realIndex();
+  const activeIndex = realIndex();
 
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === activeIndex);
-      });
-    }
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', i === activeIndex);
+  });
+
+  updateArtistInfo(activeIndex);
+}
+
+function updateArtistInfo(activeIndex){
+  const eventId = carousel.dataset.eventId;
+  const event = findEventById(eventId);
+
+  if(!event || !Array.isArray(event.artists)) return;
+
+  const artist = event.artists[activeIndex];
+  const panel = document.querySelector(`[data-artist-panel="${eventId}"]`);
+
+  if(!artist || !panel) return;
+
+  panel.classList.add('changing');
+
+  setTimeout(() => {
+    const nameEl = panel.querySelector('.artist-name');
+    const roleEl = panel.querySelector('.artist-role');
+    const descEl = panel.querySelector('.artist-description');
+
+    if(nameEl) nameEl.textContent = artist.name;
+    if(roleEl) roleEl.textContent = artist.role;
+    if(descEl) descEl.textContent = artist.description;
+
+    panel.classList.remove('changing');
+  }, 220);
+}
 
     function moveTo(offset = 0, smooth = true){
       track.style.transition = smooth

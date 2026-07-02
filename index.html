@@ -3333,6 +3333,41 @@ img{
 .event-row[data-event-id="thu-panel"].active .event-speakers{
   display:none !important;
 }
+/* =========================================================
+   AJUSTE DESKTOP SOLO PARA TARJETA: PANEL CRIOSFERA
+   ========================================================= */
+
+@media (min-width:761px){
+
+  /* Reduce un poco la altura de la línea vertical derecha */
+  .event-row[data-event-id="thu-panel"] .event-place{
+    min-height:130px !important;
+  }
+
+  /* Baja ligeramente el bloque derecho para que no choque con la nube */
+  .event-row[data-event-id="thu-panel"] .event-place-info{
+    margin-top:8px !important;
+  }
+
+  /* Hace que "Incluye coffee break." baje a una línea aparte */
+  .event-row[data-event-id="thu-panel"] .event-desc{
+    max-width:560px !important;
+  }
+}
+/* =========================================================
+   PANEL CRIOSFERA: BAJAR "INCLUYE COFFEE BREAK"
+   ========================================================= */
+
+.coffee-break-line{
+  display:block;
+  margin-top:8px;
+}
+
+@media (min-width:761px){
+  .event-row[data-event-id="thu-panel"] .coffee-break-line{
+    margin-top:10px !important;
+  }
+}
   </style>
 </head>
 <body>
@@ -3605,8 +3640,7 @@ img{
   kind:'free',
   extraBadge:'Panel y conversatorio',
   title:'El impacto del cambio climático en la criosfera',
-  description:'Panel científico y conversatorio sobre glaciares, cambio climático y criosfera. Incluye coffee break.',
-  speakers:'Ponentes: José Ubeda & Ramón Pellitero, Paola Moschella, Edwin Loarte, Wilmer Sánchez, Kiara Falcón y Pascal Egli.',
+description:'Panel científico y conversatorio sobre glaciares, cambio climático y criosfera.<span class="coffee-break-line">Incluye coffee break.</span>',  speakers:'Ponentes: José Ubeda & Ramón Pellitero, Paola Moschella, Edwin Loarte, Wilmer Sánchez, Kiara Falcón y Pascal Egli.',
   place:'Sala Alpamayo de la Cámara de Comercio de Áncash',
   maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz',
 
@@ -3676,7 +3710,29 @@ gender:'female',
   title:'Noche de cine',
   description:'Proyección del documental “Nuestros Glaciares: La agonía de los Andes” y el cortometraje “Refugios Andinos”.',
   place:'Sala Alpamayo de la Cámara de Comercio de Áncash',
-  maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz'
+  maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz',
+
+  images:[
+    'cine-nuestros-glaciares.jpg',
+    'cine-refugios-andinos.jpg'
+  ],
+
+  movies:[
+    {
+      label:'Documental',
+      name:'Nuestros Glaciares: La agonía de los Andes',
+      role:'Latina TV',
+      description:'Documental de Latina TV sobre la situación crítica de los glaciares andinos y los impactos visibles del cambio climático en estos ecosistemas de alta montaña.'
+    },
+    {
+      label:'Cortometraje',
+      name:'Refugios Andinos',
+      role:'Chasing Glaciers',
+      description:'Cortometraje producido por Chasing Glaciers que presenta la relación entre los refugios andinos, la montaña y la memoria de los glaciares. Luego de la proyección del corto se realizará un conversatorio.'
+    }
+  ],
+
+  reference:'Más arriba de la esquina del BBVA de la plaza de armas.'
 }
         ]
       },
@@ -4000,26 +4056,37 @@ function eventExtendedInfo(event){
   return parts.join('<br><br>') || 'Información orientativa de la actividad.';
 }
 function renderProfileInfo(event){
-  const profiles = Array.isArray(event.artists) ? event.artists : event.panelists;
+  const profiles =
+    Array.isArray(event.artists) ? event.artists :
+    Array.isArray(event.panelists) ? event.panelists :
+    Array.isArray(event.movies) ? event.movies :
+    [];
+
   const profile = profiles[0];
 
+  if(!profile) return '';
+
   const isPanel = Array.isArray(event.panelists);
-const mainLabel = isPanel ? (profile.gender === 'female' ? 'Investigadora' : 'Investigador') : 'Artista';
+  const isMovie = Array.isArray(event.movies);
+
+  const mainLabel = isMovie
+    ? (profile.label || 'Película')
+    : isPanel
+      ? (profile.gender === 'female' ? 'Investigadora' : 'Investigador')
+      : 'Artista';
 
   return `
     <div class="artist-info" data-artist-panel="${event.id}">
       <div class="artist-card artist-card-main">
-        <strong>${mainLabel}</strong>
+        <strong class="profile-main-label">${mainLabel}</strong>
         <span class="artist-name">${profile.name}</span>
         <em class="artist-role">${profile.role}</em>
       </div>
 
-      ${profile.talk ? `
-        <div class="artist-card artist-card-talk">
-          <strong>Ponencia</strong>
-          <span class="artist-description artist-talk">${profile.talk}</span>
-        </div>
-      ` : ''}
+      <div class="artist-card artist-card-talk" style="${profile.talk ? '' : 'display:none;'}">
+        <strong class="profile-talk-label">Ponencia</strong>
+        <span class="artist-description artist-talk">${profile.talk || ''}</span>
+      </div>
 
       <div class="artist-card artist-card-description">
         <strong>Descripción</strong>
@@ -4047,7 +4114,7 @@ function renderInfo(event){
 
       <div class="event-detail-content">
 
-        ${event.artists || event.panelists ? renderProfileInfo(event) : `
+        ${event.artists || event.panelists || event.movies ? renderProfileInfo(event) : `
           <div class="event-detail-about">
             <strong>Sobre la actividad</strong>
             <span>${eventExtendedInfo(event)}</span>
@@ -4438,13 +4505,17 @@ function initEventCarousels(){
       return visualIndex;
     }
 
-  function updateArtistInfo(activeIndex){
+function updateArtistInfo(activeIndex){
   const eventId = carousel.dataset.eventId;
   const event = findEventById(eventId);
 
   if(!event) return;
 
-  const profiles = Array.isArray(event.artists) ? event.artists : event.panelists;
+  const profiles =
+    Array.isArray(event.artists) ? event.artists :
+    Array.isArray(event.panelists) ? event.panelists :
+    Array.isArray(event.movies) ? event.movies :
+    [];
 
   if(!Array.isArray(profiles)) return;
 
@@ -4453,15 +4524,27 @@ function initEventCarousels(){
 
   if(!profile || !panel) return;
 
+  const isPanel = Array.isArray(event.panelists);
+  const isMovie = Array.isArray(event.movies);
+
+  const mainLabel = isMovie
+    ? (profile.label || 'Película')
+    : isPanel
+      ? (profile.gender === 'female' ? 'Investigadora' : 'Investigador')
+      : 'Artista';
+
   panel.classList.add('changing');
 
   setTimeout(() => {
+    const labelEl = panel.querySelector('.profile-main-label');
     const nameEl = panel.querySelector('.artist-name');
     const roleEl = panel.querySelector('.artist-role');
     const descEl = panel.querySelector('.artist-card-description .artist-description');
+
     const talkCard = panel.querySelector('.artist-card-talk');
     const talkEl = panel.querySelector('.artist-talk');
 
+    if(labelEl) labelEl.textContent = mainLabel;
     if(nameEl) nameEl.textContent = profile.name;
     if(roleEl) roleEl.textContent = profile.role;
     if(descEl) descEl.textContent = profile.description;

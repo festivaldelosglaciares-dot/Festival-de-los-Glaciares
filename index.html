@@ -3911,84 +3911,97 @@ function renderInfo(event){
 }
 
     function renderForm(event){
-      const isPaid = event.kind === 'paid';
-      return `
-        <div class="form-card">
-          <div class="event-detail-card" style="margin-bottom:14px;">
-  ${renderImageCarousel(event)}
+  const isPaid = event.kind === 'paid';
 
-  <div class="event-detail-content">
-    <div class="event-detail-badge">${eventStatusText(event)}</div>
+  return `
+    <div class="form-card">
+      <div class="event-detail-card" style="margin-bottom:14px;">
+        ${renderImageCarousel(event)}
 
-    <h3 class="event-detail-title">${event.title}</h3>
+        <div class="event-detail-content">
+          <div class="event-detail-badge">${eventStatusText(event)}</div>
 
-    <p class="event-detail-text">
-      ${isPaid
-        ? `Este taller requiere inscripción y tiene un costo de <strong>S/ ${WORKSHOP_PRICE}</strong>. Al guardar tus datos se abrirá WhatsApp para coordinar el pago.`
-        : `Este evento requiere ticket gratuito. Completa tus datos y descarga tu ticket antes de asistir.`}
-    </p>
+          <h3 class="event-detail-title">${event.title}</h3>
 
-    <div class="event-detail-grid">
-      <div class="event-detail-mini">
-        <strong>Ubicación</strong>
-        <span>${event.place}</span>
-      </div>
+          <p class="event-detail-text">
+            ${isPaid
+              ? `Este taller requiere inscripción y tiene un costo de <strong>S/ ${WORKSHOP_PRICE}</strong>. Al guardar tus datos se abrirá WhatsApp para coordinar el pago.`
+              : `Este evento requiere ticket gratuito. Completa tus datos y descarga tu ticket antes de asistir.`}
+          </p>
 
-      <div class="event-detail-mini">
-        <strong>Referencia</strong>
-        <span>${event.reference || 'Revisa la ubicación en Google Maps antes de salir.'}</span>
-      </div>
-
-    
-
-    <div class="event-detail-actions">
-      <a class="event-button btn-map" href="${mapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">
-        Ver en Google Maps ↗
-      </a>
-
-      <a class="event-button btn-walk" href="${walkingMapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">
-        🚶 Cómo llegar caminando
-      </a>
-    </div>
-  </div>
-</div>
-          <form class="registration-form" data-event-id="${event.id}">
-            <div class="form-grid">
-              <div class="field full">
-                <label>Nombres y apellidos *</label>
-                <input name="fullName" type="text" placeholder="Ej.: María González" required>
-              </div>
-              <div class="field">
-                <label>Celular *</label>
-                <input name="phone" type="tel" placeholder="Ej.: 987654321" required>
-              </div>
-              <div class="field">
-                <label>Edad</label>
-                <input name="age" type="number" min="0" placeholder="Ej.: 22">
-              </div>
-              <div class="field full">
-                <label>Correo *</label>
-                <input name="email" type="email" placeholder="Ej.: nombre@correo.com" required>
-              </div>
-              <div class="field">
-                <label>¿De dónde es?</label>
-                <input name="cityFrom" type="text" placeholder="Ej.: Huaraz">
-              </div>
-              <div class="field">
-                <label>Instagram</label>
-                <input name="instagram" type="text" placeholder="Ej.: @usuario">
-              </div>
+          <div class="event-detail-grid">
+            <div class="event-detail-mini">
+              <strong>Ubicación</strong>
+              <span>${event.place}</span>
             </div>
-            <div class="form-actions">
-              <button class="event-button ${isPaid ? 'btn-paid' : 'btn-primary'}" type="submit">${isPaid ? 'Guardar y abrir WhatsApp' : 'Generar ticket'}</button>
-              <button class="event-button btn-secondary" type="button" data-action="close-form">Cerrar</button>
+
+            <div class="event-detail-mini">
+              <strong>Referencia</strong>
+              <span>${event.reference || 'Revisa la ubicación en Google Maps antes de salir.'}</span>
             </div>
-            <div class="result-box error"></div>
-            <div class="result-box ok"></div>
-          </form>
+          </div>
+
+          <div class="event-detail-actions">
+            <a class="event-button btn-map" href="${mapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">
+              Ver en Google Maps ↗
+            </a>
+
+            <a class="event-button btn-walk" href="${walkingMapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">
+              🚶 Cómo llegar caminando
+            </a>
+          </div>
         </div>
-      `;
-    }
+      </div>
+
+      <form class="registration-form" data-event-id="${event.id}">
+        <div class="form-grid">
+          <div class="field full">
+            <label>Nombres y apellidos *</label>
+            <input name="fullName" type="text" placeholder="Ej.: María González" required>
+          </div>
+
+          <div class="field">
+            <label>Celular *</label>
+            <input name="phone" type="tel" placeholder="Ej.: 987654321" required>
+          </div>
+
+          <div class="field">
+            <label>Edad</label>
+            <input name="age" type="number" min="0" placeholder="Ej.: 22">
+          </div>
+
+          <div class="field full">
+            <label>Correo *</label>
+            <input name="email" type="email" placeholder="Ej.: nombre@correo.com" required>
+          </div>
+
+          <div class="field">
+            <label>¿De dónde es?</label>
+            <input name="cityFrom" type="text" placeholder="Ej.: Huaraz">
+          </div>
+
+          <div class="field">
+            <label>Instagram</label>
+            <input name="instagram" type="text" placeholder="Ej.: @usuario">
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button class="event-button ${isPaid ? 'btn-paid' : 'btn-primary'}" type="submit">
+            ${isPaid ? 'Guardar y abrir WhatsApp' : 'Generar ticket'}
+          </button>
+
+          <button class="event-button btn-secondary" type="button" data-action="close-form">
+            Cerrar
+          </button>
+        </div>
+
+        <div class="result-box error"></div>
+        <div class="result-box ok"></div>
+      </form>
+    </div>
+  `;
+}
 
     function getPayload(form,event){
       const fullName = form.querySelector('input[name="fullName"]').value.trim();
@@ -4233,72 +4246,95 @@ function initEventCarousels(){
     if(!track || slides.length <= 1) return;
 
     const realCount = dots.length;
+    const autoTime = 2500;       // tiempo visible de cada imagen
+    const transitionTime = 1150; // duración del desplazamiento lateral
 
     let visualIndex = 0;
     let interval = null;
-    let userStopped = false;
+    let restartTimer = null;
 
     let isDragging = false;
     let startX = 0;
     let currentX = 0;
 
     function slideWidth(){
-      return carousel.clientWidth;
+      return carousel.clientWidth || 1;
     }
 
     function realIndex(){
-      return visualIndex >= realCount ? 0 : visualIndex;
+      if(visualIndex >= realCount) return 0;
+      if(visualIndex < 0) return realCount - 1;
+      return visualIndex;
+    }
+
+    function updateArtistInfo(activeIndex){
+      const eventId = carousel.dataset.eventId;
+      const event = findEventById(eventId);
+
+      if(!event || !Array.isArray(event.artists)) return;
+
+      const panel = document.querySelector(`[data-artist-panel="${eventId}"]`);
+      if(!panel) return;
+
+      if(panel.dataset.currentArtist === String(activeIndex)) return;
+      panel.dataset.currentArtist = String(activeIndex);
+
+      const artist = event.artists[activeIndex];
+      if(!artist) return;
+
+      panel.classList.add('changing');
+
+      clearTimeout(panel._artistTimer);
+
+      panel._artistTimer = setTimeout(() => {
+        const nameEl = panel.querySelector('.artist-name');
+        const roleEl = panel.querySelector('.artist-role');
+        const descEl = panel.querySelector('.artist-description');
+
+        if(nameEl) nameEl.textContent = artist.name;
+        if(roleEl) roleEl.textContent = artist.role;
+        if(descEl) descEl.textContent = artist.description;
+
+        panel.classList.remove('changing');
+      }, 220);
     }
 
     function updateDots(){
-  const activeIndex = realIndex();
+      const activeIndex = realIndex();
 
-  dots.forEach((dot, i) => {
-    dot.classList.toggle('active', i === activeIndex);
-  });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === activeIndex);
+      });
 
-  updateArtistInfo(activeIndex);
-}
+      updateArtistInfo(activeIndex);
+    }
 
-function updateArtistInfo(activeIndex){
-  const eventId = carousel.dataset.eventId;
-  const event = findEventById(eventId);
+    function moveTo(offset = 0, smooth = true){
+      const isDesktop = window.innerWidth > 760;
 
-  if(!event || !Array.isArray(event.artists)) return;
+      track.style.transition = smooth
+        ? isDesktop
+          ? `transform ${transitionTime}ms cubic-bezier(.19,1,.22,1)`
+          : 'transform 1.05s cubic-bezier(.25,.8,.25,1)'
+        : 'none';
 
-  const artist = event.artists[activeIndex];
-  const panel = document.querySelector(`[data-artist-panel="${eventId}"]`);
+      const x = -(visualIndex * slideWidth()) + offset;
+      track.style.transform = `translate3d(${x}px,0,0)`;
 
-  if(!artist || !panel) return;
+      updateDots();
+    }
 
-  panel.classList.add('changing');
+    function normalizeIfNeeded(){
+      if(visualIndex >= realCount){
+        visualIndex = 0;
+        moveTo(0, false);
+      }
 
-  setTimeout(() => {
-    const nameEl = panel.querySelector('.artist-name');
-    const roleEl = panel.querySelector('.artist-role');
-    const descEl = panel.querySelector('.artist-description');
-
-    if(nameEl) nameEl.textContent = artist.name;
-    if(roleEl) roleEl.textContent = artist.role;
-    if(descEl) descEl.textContent = artist.description;
-
-    panel.classList.remove('changing');
-  }, 220);
-}
-function moveTo(offset = 0, smooth = true){
-  const isDesktop = window.innerWidth > 760;
-
-  track.style.transition = smooth
-    ? isDesktop
-      ? 'transform 1.15s cubic-bezier(.19,1,.22,1)'
-      : 'transform 1.05s cubic-bezier(.25,.8,.25,1)'
-    : 'none';
-
-  const x = -(visualIndex * slideWidth()) + offset;
-  track.style.transform = `translate3d(${x}px,0,0)`;
-
-  updateDots();
-}
+      if(visualIndex < 0){
+        visualIndex = realCount - 1;
+        moveTo(0, false);
+      }
+    }
 
     function goToVisualSlide(nextIndex, smooth = true){
       visualIndex = nextIndex;
@@ -4310,35 +4346,42 @@ function moveTo(offset = 0, smooth = true){
       moveTo(0, smooth);
     }
 
-    function stopAuto(){
-      userStopped = true;
+    function startAuto(){
+      stopAuto();
 
+      interval = setInterval(() => {
+        normalizeIfNeeded();
+
+        const next = visualIndex + 1;
+        goToVisualSlide(next, true);
+      }, autoTime);
+    }
+
+    function stopAuto(){
       if(interval){
         clearInterval(interval);
         interval = null;
       }
     }
 
-    track.addEventListener('transitionend', () => {
-  if(visualIndex === realCount){
-    track.style.transition = 'none';
-    visualIndex = 0;
-    moveTo(0, false);
+    function pauseAndRestartAuto(){
+      stopAuto();
 
-    /* Fuerza el navegador a estabilizar el frame sin animar el salto invisible */
-    track.offsetHeight;
-  }
-});
+      clearTimeout(restartTimer);
 
-    interval = setInterval(() => {
-      if(userStopped) return;
+      restartTimer = setTimeout(() => {
+        normalizeIfNeeded();
+        startAuto();
+      }, 3500);
+    }
 
-      const next = visualIndex + 1;
-      goToVisualSlide(next, true);
-    }, 2500);
+    track.addEventListener('transitionend', (e) => {
+      if(e.propertyName !== 'transform') return;
+      normalizeIfNeeded();
+    });
 
     carousel.addEventListener('pointerdown', (e) => {
-      stopAuto();
+      pauseAndRestartAuto();
 
       isDragging = true;
       startX = e.clientX;
@@ -4383,6 +4426,7 @@ function moveTo(offset = 0, smooth = true){
       }
 
       moveTo(0, true);
+      pauseAndRestartAuto();
 
       try{
         carousel.releasePointerCapture(e.pointerId);
@@ -4393,21 +4437,25 @@ function moveTo(offset = 0, smooth = true){
       isDragging = false;
       carousel.classList.remove('dragging');
       moveTo(0, true);
+      pauseAndRestartAuto();
     });
 
     dots.forEach(dot => {
       dot.addEventListener('click', (e) => {
         e.stopPropagation();
-        stopAuto();
+
+        pauseAndRestartAuto();
         goToRealSlide(Number(dot.dataset.slide), true);
       });
     });
 
     window.addEventListener('resize', () => {
+      normalizeIfNeeded();
       moveTo(0, false);
     });
 
     moveTo(0, false);
+    startAuto();
   });
 }
 function initMobileAutoCollapseDetails(){

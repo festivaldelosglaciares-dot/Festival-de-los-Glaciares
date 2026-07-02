@@ -3742,8 +3742,89 @@ gender:'female',
       
         theme:'Saberes y diálogo',
         events:[
-          { id:'fri-cleaning', time:'7:00 a.m. - 12:00 p.m.', kind:'register', title:'Jornada de limpieza en Rataquenua', description:'Actividad comunitaria coorganizada por Merrell UTCB. Punto de encuentro: Plazuela de la Soledad, Huaraz.', place:'Plazuela de la Soledad, Huaraz', maps:'Plazuela de la Soledad Huaraz' },
-          { id:'fri-art-show', time:'9:00 a.m.', kind:'free', title:'Muestra artística “Voces del Deshielo”', description:'Exhibición artística del festival.', place:'Hall de la DDC Áncash, frente de la Plaza de Armas', maps:'Dirección Desconcentrada de Cultura Áncash Huaraz Plaza de Armas' },
+          {
+  id:'fri-cleaning',
+  time:'7:00 a.m. - 12:00 p.m.',
+  kind:'register',
+  title:'Jornada de limpieza en Rataquenua',
+  description:'Actividad comunitaria coorganizada por Merrell UTCB. Punto de encuentro: Plazuela de la Soledad, Huaraz.',
+  place:'Plazuela de la Soledad, Huaraz',
+  maps:'Plazuela de la Soledad Huaraz',
+
+  images:[
+    'limpieza-rataquenua-1.jpg',
+    'limpieza-rataquenua-2.jpg',
+    'limpieza-rataquenua-3.jpg'
+  ],
+
+  reference:'Punto de encuentro: Plazuela de la Soledad, Huaraz.',
+  detail:'Jornada comunitaria de limpieza en Rataquenua, coorganizada por Merrell UTCB. La actividad requiere inscripción o coordinación previa. El punto de encuentro será la Plazuela de la Soledad, en Huaraz.'
+},
+          {
+  id:'fri-art-show',
+  time:'9:00 a.m.',
+  kind:'free',
+  title:'Muestra artística “Voces del Deshielo”',
+  description:'Exhibición artística del festival durante todo el día.',
+  place:'Hall de la DDC Áncash, frente de la Plaza de Armas',
+  maps:'Dirección Desconcentrada de Cultura Áncash Huaraz Plaza de Armas',
+
+  images:[
+    'artista-elizabeth-sanchez.jpg',
+    'artista-claudia-rosas.jpg',
+    'artista-katya-castillo.jpg',
+    'artista-brayan-oncoy.jpg',
+    'artista-liz-matencio.jpg',
+    'artista-maisha-rondon.jpg',
+    'artista-aurelien-buiron.jpg',
+    'artista-miguel-micha-valverde.jpg'
+  ],
+
+  artists:[
+    {
+      name:'Elizabeth Sánchez',
+      role:'Educadora artística y tallerista de tejido',
+      description:'La montaña es mi guía; en ella cultivo el arte, la contemplación y el aprendizaje interior. Su silencio me enseña a caminar en armonía con la tierra, fortaleciendo mi compromiso con la comunidad y el servicio.'
+    },
+    {
+      name:'Claudia Rosas',
+      role:'Arquitecta',
+      description:'Llegué a Huaraz para ejercer la docencia, pero también con el deseo de comprender este territorio a través de sus memorias, su identidad y las personas que lo habitan. En el Festival de los Glaciares encontré un espacio para hacerlo desde la colaboración y la creación colectiva. Como arquitecta, me interesa cómo los espacios pueden contar historias y convertirse en experiencias que inviten al diálogo.'
+    },
+    {
+      name:'Katya Castillo',
+      role:'Arquitecta',
+      description:'Mi vínculo con los glaciares nace de mi relación con Huaraz, el territorio que siento como propio. Aquí vivieron mis abuelos, viven mis padres, mis amigos y mi comunidad; por eso, hablar de glaciares es también hablar del agua, de los ríos y de la vida que sostiene este lugar.'
+    },
+    {
+      name:'Brayan Oncoy',
+      role:'Artista plástico y docente de arte',
+      description:'Mi conexión con las montañas es desde que nací. Poder apreciar a los hirkas desde la cuna ha inspirado diferentes obras de arte y diversos emprendimientos que hoy dan frutos. Actualmente desarrollo clases de arte en la ciudad de Caraz y gestión cultural con Tinkuy.'
+    },
+    {
+      name:'Liz Matencio',
+      role:'Artista multidisciplinaria',
+      description:'Originaria de Huaraz, en el Callejón de Huaylas. Mi vínculo con las montañas es de pertenencia, de íntimo afecto, y atraviesa mis expresiones textiles, visuales y poéticas como un lenguaje que a veces va hacia fuera y a veces hacia dentro.'
+    },
+    {
+      name:'Maisha Rondón',
+      role:'Artista',
+      description:'Nací en Huaraz y crecí mirando montañas. Con el tiempo entendí que no solo forman parte del paisaje, sino también de mi identidad. Cuando pinto un nevado, pinto la calma, la fuerza y la belleza que me acompañan desde siempre.'
+    },
+    {
+      name:'Aurélien Buiron (Ghost In The Loop)',
+      role:'Artista, compositor y productor',
+      description:'A través del registro de sonidos de glaciares y la sonificación de datos científicos, crea experiencias inmersivas que revelan procesos naturales invisibles. Desde 2023 documenta sonidos de glaciares para construir un archivo de memoria acústica.'
+    },
+    {
+      name:'Miguel “Micha” Valverde Robles',
+      role:'Gestor cultural, museógrafo y curador',
+      description:'Cuenta con experiencia en proyectos culturales, diseño de museos y exposiciones, así como en la gestión de iniciativas independientes para la promoción del arte y el patrimonio cultural. Su vínculo con el territorio se basa en el aprendizaje constante y la admiración por su diversidad y potencial.'
+    }
+  ],
+
+  reference:'Ubicación referencial del evento. Revisa Google Maps antes de salir.'
+},
           { id:'fri-fair', time:'10:00 a.m.', kind:'free', title:'Feria por nuestros glaciares', description:'Feria abierta al público con propuestas vinculadas a los glaciares.', place:'Afuera de la Cámara de Comercio de Áncash', maps:'Cámara de Comercio de Áncash Huaraz' },
           { id:'fri-wood', time:'3:00 p.m. - 5:00 p.m.', kind:'paid', whatsappKey:'fridayWood', title:'Taller artístico: El encanto de la madera recuperada', description:'Crea tu propia obra con materiales reciclados. Tallerista: Enrico Grillo.', place:'Sala Alpamayo de la Cámara de Comercio de Áncash', maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz' },
           { id:'fri-cinema', time:'6:00 p.m. - 8:00 p.m.', kind:'free', title:'Noche del cine', description:'Proyección del documental “Canary” y el cortometraje “Tejiendo Esperanzas”.', place:'Sala Alpamayo de la Cámara de Comercio de Áncash', maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz' },

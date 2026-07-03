@@ -3444,6 +3444,23 @@ img{
     display:none !important;
   }
 }
+/* =========================================================
+   FERIA SOSTENIBLE: EMPRENDIMIENTOS
+   ========================================================= */
+
+.artist-card-link{
+  background:linear-gradient(180deg,#ffffff 0%,#fbf8ff 100%);
+}
+
+.entrepreneur-link{
+  color:var(--purple);
+  text-decoration:none;
+  font-weight:780;
+}
+
+.entrepreneur-link:hover{
+  text-decoration:underline;
+}
   </style>
 </head>
 <body>
@@ -3585,6 +3602,109 @@ img{
     const YAPE_NUMBER = 'COLOCAR_NUMERO_YAPE';
     const YAPE_HOLDER = 'COLOCAR_NOMBRE_YAPE';
     const WORKSHOP_PRICE = 15;
+const fairImages = [
+  'feria-refugios-andinos.jpg',
+  'feria-cerveza-emperador.jpg',
+  'feria-maridaje.jpg',
+  'feria-aunar.jpg',
+  'feria-runaq.jpg',
+  'feria-kapuli.jpg',
+  'feria-kinti.jpg',
+  'feria-cianotipia.jpg',
+  'feria-waraqu.jpg',
+  'feria-ande-avela.jpg',
+  'feria-chasing-glaciers.jpg',
+  'feria-tejiendo-esperanza.jpg',
+  'feria-maargarita-arte-textil.jpg',
+  'feria-mestizo.jpg'
+];
+
+const fairEntrepreneurs = [
+  {
+    name:'Refugios Andinos',
+    description:'Un equipo comprometido con la montaña, las comunidades locales y la hospitalidad. Cuidan los refugios y promueven un turismo responsable que apoya proyectos sociales y educativos.',
+    link:'https://www.refugiosandinos.com',
+    linkText:'www.refugiosandinos.com ↗'
+  },
+  {
+    name:'Cerveza Artesanal El Emperador',
+    description:'Inspirada en la sabiduría de los antiguos incas, quienes reconocían a la tierra —la Pachamama— como la gran proveedora de vida y energía, Cervecería Emperador comenzó a crear recetas únicas elaboradas con insumos sagrados y superalimentos peruanos.',
+    link:'https://www.instagram.com/cerveceria.emperador.huaraz',
+    linkText:'Instagram · cerveceria.emperador.huaraz ↗'
+  },
+  {
+    name:'Maridaje',
+    description:'Ofrecen quesos de Chiquián, jamón huaracino y tablas de charcutería con ambos insumos. Trabajan con empresas familiares de la zona y procesos artesanales.',
+    link:'https://www.instagram.com/elmaridaje.pe?igsh=MTVkc2oyaHQ2Mmdzag==',
+    linkText:'Instagram · elmaridaje.pe ↗'
+  },
+  {
+    name:'Aunar',
+    description:'Producción consciente de textiles y tinturas naturales.',
+    link:'https://www.instagram.com/aunar.elhacer?igsh=NnB6bzF1bTBhb21x&utm_source=qr',
+    linkText:'Instagram · aunar.elhacer ↗'
+  },
+  {
+    name:'Runaq',
+    description:'Primer té orgánico del Perú.',
+    link:'https://www.instagram.com/runaq.pe',
+    linkText:'Instagram · runaq.pe ↗'
+  },
+  {
+    name:'Kapulí',
+    description:'Cafetería de especialidad.',
+    link:'https://www.instagram.com/kapulicafe',
+    linkText:'Instagram · kapulicafe ↗'
+  },
+  {
+    name:'Kinti',
+    description:'Emprendimiento de artesanías y obras de arte inspiradas en la flora, fauna y cordilleras de la región. Se enfocan en bisutería y pinturas.',
+    link:'https://www.instagram.com/kinti.26?igsh=MWZtdTIzOXYzaG9maQ==',
+    linkText:'Instagram · kinti.26 ↗'
+  },
+  {
+    name:'Cianotipia',
+    description:'Técnica fotográfica artesanal que permite crear imágenes sin cámara usando elementos naturales, luz solar y tonos azules únicos. Cada impresión refleja la unión entre naturaleza, luz y arte.',
+    link:'https://www.instagram.com/yplancash.pe?igsh=amFteW92YjFnZ3E3',
+    linkText:'Instagram · yplancash.pe ↗'
+  },
+  {
+    name:'Waraqu',
+    description:'Variedad de suculentas, cactus y sábilas para interior y exterior, con acabados personalizados pintados a mano o maceteros de alta calidad.',
+    link:'https://www.instagram.com/waraqu_gf?igsh=MWgyM2Z4cWl1b3d5ZQ==',
+    linkText:'Instagram · waraqu_gf ↗'
+  },
+  {
+    name:'Ande Avela',
+    description:'Emprendimiento dedicado a productos naturales con identidad andina. Ofrece miel de abeja natural y granola artesanal para una alimentación más consciente y saludable.',
+    link:'https://www.instagram.com/andeavela.pe?igsh=MWlpMTVuaXh6MzFudQ==',
+    linkText:'Instagram · andeavela.pe ↗'
+  },
+  {
+    name:'Chasing Glaciers',
+    description:'Proyecto dedicado a acercar la ciencia, la cultura y la comunidad a la protección de los glaciares.',
+    link:'https://www.instagram.com/chasingglaciers.peru',
+    linkText:'Instagram · chasingglaciers.peru ↗'
+  },
+  {
+    name:'Tejiendo Esperanza',
+    description:'Taller textil de Áncash que reúne a más de 100 mujeres artesanas de comunidades rurales. Genera trabajo digno, fortalece la economía de las tejedoras y preserva saberes textiles andinos.',
+    link:'https://www.instagram.com/tejiendoesperanza__?igsh=bW1hcGV5YnZydmJi',
+    linkText:'Instagram · tejiendoesperanza__ ↗'
+  },
+  {
+    name:'Maargarita Arte Textil',
+    description:'Colección de prendas únicas intervenidas a mano por artistas locales, inspiradas en la majestuosidad de las cordilleras Blanca y Huayhuash. Cada pieza es irrepetible: una obra de arte que lleva consigo el paisaje, la identidad y la historia de nuestras montañas.',
+    link:'https://www.instagram.com/maargarita.artetextil?igsh=MXUydnp1dXcxN3ZlNg==',
+    linkText:'Instagram · maargarita.artetextil ↗'
+  },
+    {
+    name:'Mestizo',
+    description:'Nacimos para celebrar nuestras raíces. Inspirados en los saberes andinos y la riqueza de los ingredientes locales, creamos licores artesanales de hierbas andinas que transforman cada encuentro en una celebración del territorio, la cultura y las personas que lo habitan.',
+    link:'https://www.instagram.com/mestizo.huaraz?igsh=dnV5MWpvbmt1aW1n',
+    linkText:'Instagram · mestizo.huaraz ↗'
+  }
+];
 
     const daysData = [
       {
@@ -3630,7 +3750,7 @@ img{
   detail:'Presentaciones institucionales:<br><br>• Chasing Glaciers: Adopta un Glaciar<br>• Cumbres Blancas: presentación de proyectos del año<br>• Firma de acuerdo entre Cumbres Blancas y el Parque Nacional de Huascarán.',
   institutions:'Chasing Glaciers, Cumbres Blancas y Parque Nacional de Huascarán.'
 },
-          {
+         {
   id:'thu-fair-walk',
   time:'10:30 a.m. - 11:00 a.m.',
   kind:'free',
@@ -3638,13 +3758,10 @@ img{
   description:'Recorrido por los stands y propuestas de la feria.',
   place:'Afuera de la Cámara de Comercio de Áncash',
   maps:'Cámara de Comercio de Áncash Huaraz',
-
-  images:[
-    'feria-sostenible-1.jpg',
-    'feria-sostenible-2.jpg',
-    'feria-sostenible-3.jpg'
-  ]
+  images: fairImages,
+  entrepreneurs: fairEntrepreneurs
 },
+
           {
   id:'thu-art-walk',
   time:'11:30 a.m. - 12:30 p.m.',
@@ -3901,7 +4018,17 @@ gender:'female',
 
   reference:'Ubicación referencial del evento. Revisa Google Maps antes de salir.'
 },
-          { id:'fri-fair', time:'10:00 a.m.', kind:'free', title:'Feria por nuestros glaciares', description:'Feria abierta al público con propuestas vinculadas a los glaciares.', place:'Afuera de la Cámara de Comercio de Áncash', maps:'Cámara de Comercio de Áncash Huaraz' },
+          {
+  id:'fri-fair',
+  time:'10:00 a.m.',
+  kind:'free',
+  title:'Feria sostenible del Festival de los Glaciares',
+  description:'Recorrido por los stands y propuestas de la feria.',
+  place:'Afuera de la Cámara de Comercio de Áncash',
+  maps:'Cámara de Comercio de Áncash Huaraz',
+  images: fairImages,
+  entrepreneurs: fairEntrepreneurs
+},
           { id:'fri-wood', time:'3:00 p.m. - 5:00 p.m.', kind:'paid', whatsappKey:'fridayWood', title:'Taller artístico: El encanto de la madera recuperada', description:'Crea tu propia obra con materiales reciclados. Tallerista: Enrico Grillo.', place:'Sala Alpamayo de la Cámara de Comercio de Áncash', maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz' },
           { id:'fri-cinema', time:'6:00 p.m. - 8:00 p.m.', kind:'free', title:'Noche del cine', description:'Proyección del documental “Canary” y el cortometraje “Tejiendo Esperanzas”.', place:'Sala Alpamayo de la Cámara de Comercio de Áncash', maps:'Sala Alpamayo Cámara de Comercio de Áncash Huaraz' },
           { id:'fri-after', time:'8:30 p.m. - 12:00 a.m.', kind:'free', title:'After Office', description:'Actividad de cierre de jornada.', place:'Cima Taproom, Parque Ginebra', maps:'Cima Taproom Parque Ginebra Huaraz' }
@@ -3914,7 +4041,17 @@ gender:'female',
         events:[
           { id:'sat-biorremediation', time:'7:30 a.m. - 1:00 p.m.', kind:'register', title:'Visita a los campos de biorremediación DAR - Canray Chico', description:'Tour guiado por investigadores a los campos de biorremediación, con explicación sobre drenaje ácido de roca, organismos y sistemas de remediación del agua contaminada. Con apoyo de Merrell UTCB & UNASAM. Cupos limitados.', place:'DAR - Canray Chico', maps:'Canray Chico Huaraz' },
           { id:'sat-art-show', time:'9:00 a.m.', kind:'free', title:'Muestra artística “Voces del Deshielo”', description:'Exhibición artística del festival.', place:'Hall de la DDC Áncash, frente de la Plaza de Armas', maps:'Dirección Desconcentrada de Cultura Áncash Huaraz Plaza de Armas' },
-          { id:'sat-fair', time:'10:00 a.m.', kind:'free', title:'Feria por nuestros glaciares', description:'Feria abierta al público con propuestas vinculadas a los glaciares.', place:'Afuera de la Cámara de Comercio de Áncash', maps:'Cámara de Comercio de Áncash Huaraz' },
+          {
+  id:'sat-fair',
+  time:'10:00 a.m.',
+  kind:'free',
+  title:'Feria sostenible del Festival de los Glaciares',
+  description:'Recorrido por los stands y propuestas de la feria.',
+  place:'Afuera de la Cámara de Comercio de Áncash',
+  maps:'Cámara de Comercio de Áncash Huaraz',
+  images: fairImages,
+  entrepreneurs: fairEntrepreneurs
+},
           { id:'sat-maisha', time:'10:00 a.m. - 1:00 p.m.', kind:'paid', whatsappKey:'saturdayMaisha', title:'Florecer entre glaciares, acuarelas y conexión', description:'Taller artístico. Tallerista: Maisha.', place:'DDC - Doña Nati', maps:'DDC Doña Nati Huaraz' },
           { id:'sat-ana', time:'10:00 a.m. - 1:00 p.m.', kind:'paid', whatsappKey:'saturdayAnaMorcelli', title:'Arteterapia: La voz de la montaña', description:'Taller artístico. Tallerista: Ana Morcelli.', place:'DDC - Auditorio', maps:'DDC Auditorio Huaraz' },
           { id:'sat-yarparishun', time:'10:00 a.m. - 1:00 p.m.', kind:'paid', whatsappKey:'saturdayYarparishun', title:'Máscaras de animales de la reserva de biosfera', description:'Taller artístico. Tallerista: Yarparishun.', place:'DDC - Parque Lítico', maps:'DDC Parque Lítico Huaraz' },
@@ -4212,6 +4349,43 @@ function eventExtendedInfo(event){
 
   return parts.join('<br><br>') || 'Información orientativa de la actividad.';
 }
+function renderEntrepreneurInfo(event){
+  const entrepreneurs = Array.isArray(event.entrepreneurs) ? event.entrepreneurs : [];
+  const profile = entrepreneurs[0];
+
+  if(!profile) return '';
+
+  return `
+    <div class="artist-info" data-artist-panel="${event.id}">
+      <div class="artist-card artist-card-main">
+        <strong class="profile-main-label">Emprendimiento</strong>
+        <span class="artist-name">${profile.name}</span>
+      </div>
+
+      <div class="artist-card artist-card-description">
+        <strong>Descripción</strong>
+        <span class="artist-description">${profile.description}</span>
+      </div>
+
+      <div class="artist-card artist-card-link">
+        <strong>Conoce más</strong>
+        <a class="artist-description entrepreneur-link" href="${profile.link}" target="_blank" rel="noopener noreferrer">
+          ${profile.linkText || 'Visitar enlace ↗'}
+        </a>
+      </div>
+
+      <div class="event-detail-actions">
+        <a class="event-button btn-map" href="${mapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">
+          Ver en Google Maps ↗
+        </a>
+
+        <a class="event-button btn-walk" href="${walkingMapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">
+          🚶 Cómo llegar caminando
+        </a>
+      </div>
+    </div>
+  `;
+}
 function renderProfileInfo(event){
   const profiles =
     Array.isArray(event.artists) ? event.artists :
@@ -4271,7 +4445,7 @@ function renderInfo(event){
 
       <div class="event-detail-content">
 
-        ${event.artists || event.panelists || event.movies ? renderProfileInfo(event) : `
+        ${event.entrepreneurs ? renderEntrepreneurInfo(event) : event.artists || event.panelists || event.movies ? renderProfileInfo(event) : `
           <div class="event-detail-about">
             <strong>Sobre la actividad</strong>
             <span>${eventExtendedInfo(event)}</span>
@@ -4668,11 +4842,12 @@ function updateArtistInfo(activeIndex){
 
   if(!event) return;
 
-  const profiles =
-    Array.isArray(event.artists) ? event.artists :
-    Array.isArray(event.panelists) ? event.panelists :
-    Array.isArray(event.movies) ? event.movies :
-    [];
+ const profiles =
+  Array.isArray(event.artists) ? event.artists :
+  Array.isArray(event.panelists) ? event.panelists :
+  Array.isArray(event.movies) ? event.movies :
+  Array.isArray(event.entrepreneurs) ? event.entrepreneurs :
+  [];
 
   if(!Array.isArray(profiles)) return;
 
@@ -4681,10 +4856,13 @@ function updateArtistInfo(activeIndex){
 
   if(!profile || !panel) return;
 
-  const isPanel = Array.isArray(event.panelists);
-  const isMovie = Array.isArray(event.movies);
+const isPanel = Array.isArray(event.panelists);
+const isMovie = Array.isArray(event.movies);
+const isEntrepreneur = Array.isArray(event.entrepreneurs);
 
-  const mainLabel = isMovie
+  const mainLabel = isEntrepreneur
+  ? 'Emprendimiento'
+  : isMovie
     ? (profile.label || 'Película')
     : isPanel
       ? (profile.gender === 'female' ? 'Investigadora' : 'Investigador')
@@ -4697,6 +4875,7 @@ function updateArtistInfo(activeIndex){
     const nameEl = panel.querySelector('.artist-name');
     const roleEl = panel.querySelector('.artist-role');
     const descEl = panel.querySelector('.artist-card-description .artist-description');
+const linkEl = panel.querySelector('.entrepreneur-link');
 
     const talkCard = panel.querySelector('.artist-card-talk');
     const talkEl = panel.querySelector('.artist-talk');
@@ -4705,6 +4884,10 @@ function updateArtistInfo(activeIndex){
     if(nameEl) nameEl.textContent = profile.name;
     if(roleEl) roleEl.textContent = profile.role;
     if(descEl) descEl.textContent = profile.description;
+if(linkEl){
+  linkEl.href = profile.link || '#';
+  linkEl.textContent = profile.linkText || 'Visitar enlace ↗';
+}
 
     if(talkCard && talkEl){
       if(profile.talk){

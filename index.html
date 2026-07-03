@@ -3528,6 +3528,67 @@ img{
     min-height:260px !important;
   }
 }
+/* =========================================================
+   TARJETA ESPECIAL: APOYA AL FESTIVAL
+   ========================================================= */
+
+.day-support-text{
+  margin-top:12px;
+  color:#ffffff;
+  font-size:clamp(1.15rem,2.2vw,1.75rem);
+  line-height:1.05;
+  font-weight:760;
+  letter-spacing:-.045em;
+}
+
+.support-raffle-card{
+  padding:28px;
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(202,211,63,.16), transparent 34%),
+    linear-gradient(180deg,#ffffff 0%,#fbf8ff 100%);
+  border:1px solid rgba(226,214,255,.9);
+  box-shadow:0 14px 30px rgba(58,30,118,.055);
+}
+
+.support-raffle-card strong{
+  display:block;
+  margin-bottom:12px;
+  color:var(--purple);
+  font-size:.78rem;
+  font-weight:900;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.support-raffle-card p{
+  margin:0 0 20px;
+  color:#565c81;
+  font-size:1.05rem;
+  line-height:1.45;
+  font-weight:620;
+}
+
+.support-raffle-card .event-button{
+  min-height:52px;
+  padding:0 24px;
+  border-radius:16px;
+}
+
+@media (max-width:760px){
+  .day-support-text{
+    font-size:1.1rem;
+  }
+
+  .support-raffle-card{
+    padding:20px;
+    border-radius:22px;
+  }
+
+  .support-raffle-card .event-button{
+    width:100%;
+  }
+}
   </style>
 </head>
 <body>
@@ -4282,8 +4343,27 @@ gender:'female',
           { id:'sat-ana', time:'10:00 a.m. - 1:00 p.m.', kind:'paid', whatsappKey:'saturdayAnaMorcelli', title:'Arteterapia: La voz de la montaña', description:'Taller artístico. Tallerista: Ana Morcelli.', place:'DDC - Auditorio', maps:'DDC Auditorio Huaraz' },
           { id:'sat-yarparishun', time:'10:00 a.m. - 1:00 p.m.', kind:'paid', whatsappKey:'saturdayYarparishun', title:'Máscaras de animales de la reserva de biosfera', description:'Taller artístico. Tallerista: Yarparishun.', place:'DDC - Parque Lítico', maps:'DDC Parque Lítico Huaraz' },
           { id:'sat-origin', time:'2:00 p.m. - 5:00 p.m.', kind:'ticket', title:'El origen de la Cordillera Blanca y la Cordillera Negra', description:'Presentación especial con programación escénica y musical: apertura, ritual de danza, conferencia central, El origen del Río Santa, La memoria del Huascarán, drenaje ácido de roca, Pintaykuna y cierre musical.', place:'Auditorio de Telemática de la UNASAM', maps:'Auditorio de Telemática UNASAM Huaraz' }
-        ]
-      }
+                ]
+      },
+      {
+  id:'day-5',
+  date:'Domingo 5 de julio',
+  theme:'Apoya al Festival',
+  supportText:'Participa de nuestra rifa',
+  events:[
+    {
+      id:'sun-raffle',
+      time:'3:00 p.m.',
+      kind:'free',
+      title:'Rifa del Festival de los Glaciares 2026',
+      description:'Participa de nuestra rifa en vivo y apoya directamente la continuidad del festival.',
+      place:'En vivo',
+      maps:'Huaraz Áncash Perú',
+      raffle:true,
+      buyLink:'https://festivaldelosglaciares-dot.github.io/Festival-de-los-Glaciares-2026/'
+    }
+  ]
+}
     ];
 
     const daysList = document.getElementById('daysList');
@@ -4491,7 +4571,9 @@ function formatEventTime(time){
   `;
 }
 
-    function renderDay(day){
+function renderDay(day){
+  const countText = day.events.length === 1 ? '1 actividad' : `${day.events.length} actividades`;
+
   return `
     <section class="day-card reveal" id="${day.id}">
       <button class="day-btn" type="button" aria-expanded="false">
@@ -4499,8 +4581,9 @@ function formatEventTime(time){
           <div>
             <div class="day-theme">${day.theme}</div>
             <div class="day-title"><span class="date-word">${day.date}</span></div>
+            ${day.supportText ? `<div class="day-support-text">${day.supportText}</div>` : ''}
           </div>
-          <div class="day-count">${day.events.length} actividades <span class="chevron"></span></div>
+          <div class="day-count">${countText} <span class="chevron"></span></div>
         </div>
       </button>
       <div class="day-dropdown">
@@ -4678,6 +4761,26 @@ function renderProfileInfo(event){
 }
 function renderInfo(event){
   const reference = event.reference || 'Ubicación referencial del evento. Revisa Google Maps antes de salir.';
+
+ if(event.raffle){
+  return `
+    <div class="support-raffle-card">
+      <strong>Apoya al Festival</strong>
+
+      <p>
+        Todos los recursos generados se reinvierten totalmente en el mismo festival.
+      </p>
+
+      <a 
+        class="event-button btn-paid" 
+        href="${event.buyLink}" 
+        target="_blank" 
+        rel="noopener noreferrer">
+        Compra tus números
+      </a>
+    </div>
+  `;
+}
 
   return `
     <div class="event-detail-card">

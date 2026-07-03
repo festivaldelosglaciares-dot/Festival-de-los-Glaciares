@@ -4038,7 +4038,7 @@ gender:'female',
 },
 {
   id:'fri-voces-montana',
-  time:'11:00 a.m. - 12:30 p.m.',
+    time:'9:00 a.m. - 12:00 p.m.',
   kind:'free',
   title:'Voces que vienen desde la montaña',
   description:'Encuentro con jóvenes gestores comunitarios, memoria andina y voces que habitan, conocen y cuidan los glaciares.',
@@ -4150,11 +4150,20 @@ function walkingMapUrl(query){
     }
 
     function actionButton(event){
-      if(event.kind === 'paid') return `<button class="event-button btn-paid" type="button" data-action="open-form">Inscribirme al taller</button>`;
-      if(event.kind === 'ticket') return `<button class="event-button btn-primary" type="button" data-action="open-form">Generar ticket gratuito</button>`;
-      if(event.kind === 'register') return `<button class="event-button btn-secondary" type="button" data-action="open-info">Ver indicaciones</button>`;
-      return `<button class="event-button btn-muted" type="button" data-action="open-info">Ver detalle</button>`;
-    }
+  if(event.kind === 'paid') return `
+    <a 
+      class="event-button btn-paid" 
+      href="https://linktr.ee/festivaldelosglaciares?utm_source=ig&utm_medium=social&utm_content=link_in_bio" 
+      target="_blank" 
+      rel="noopener noreferrer">
+      Inscríbete
+    </a>
+  `;
+
+  if(event.kind === 'ticket') return `<button class="event-button btn-primary" type="button" data-action="open-form">Generar ticket gratuito</button>`;
+  if(event.kind === 'register') return `<button class="event-button btn-secondary" type="button" data-action="open-info">Ver indicaciones</button>`;
+  return `<button class="event-button btn-muted" type="button" data-action="open-info">Ver detalle</button>`;
+}
 function formatPlaceName(place){
   const cleanPlace = String(place || '').trim();
 

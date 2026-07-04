@@ -4349,7 +4349,8 @@ gender:'female',
   title:'El origen de la Cordillera Blanca y la Cordillera Negra',
   description:'Presentación especial con programación escénica y musical: apertura, ritual de danza, conferencia central, El origen del Río Santa, La memoria del Huascarán, drenaje ácido de roca, Pintaykuna y cierre musical.',
   place:'Auditorio de Telemática de la UNASAM',
-  maps:'https://maps.app.goo.gl/4xq9bjnpRFbvA8TWA'
+  maps:'https://maps.app.goo.gl/4xq9bjnpRFbvA8TWA',
+  directions:'Auditorio de Telemática UNASAM Huaraz'
 },
 {
   id:'sat-closing',
@@ -4357,8 +4358,9 @@ gender:'female',
   kind:'free',
   title:'Cierre oficial del Festival',
   description:'Actividad de cierre con música, danza, pintura en vivo y encuentro final del festival.',
-  place:'Jardín del Real Hotel Huascarán',
-  maps:'Real Hotel Huascarán Huaraz',
+place:'Jardín del Real Hotel Huascarán',
+maps:'Real Hotel Huascarán Huaraz',
+directions:'Jardín del Real Hotel Huascarán Huaraz',
 
   images:[
     'cierre-festival-1.jpg',
@@ -4378,7 +4380,8 @@ gender:'female',
   title:'After-party',
   description:'After-party de cierre en Cima Restobar.',
   place:'Cima Taproom, Parque Ginebra',
-  maps:'Cima Taproom Parque Ginebra Huaraz',
+maps:'Cima Taproom Parque Ginebra Huaraz',
+directions:'Cima Taproom Parque Ginebra Huaraz',
 
   images:[
     'after-party-cima-1.jpg',
@@ -4423,6 +4426,15 @@ function mapUrl(query){
   }
 
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cleanQuery)}`;
+}
+    function eventMapUrl(event){
+  const routeEvents = ['sat-origin', 'sat-closing', 'sat-after-party'];
+
+  if(routeEvents.includes(event.id)){
+    return walkingMapUrl(event.directions || event.maps || event.place);
+  }
+
+  return mapUrl(event.maps || event.place);
 }
 
 function walkingMapUrl(query){
@@ -4618,7 +4630,7 @@ function formatEventTime(time){
       <div class="event-place">
         <div class="event-place-info">
           <div class="event-place-name">${formatPlaceName(event.place)}</div>
-          <a class="map-link" href="${mapUrl(event.maps || event.place)}" target="_blank" rel="noopener noreferrer">
+<a class="map-link" href="${eventMapUrl(event)}" target="_blank" rel="noopener noreferrer">
             Abrir en Google Maps
           </a>
         </div>

@@ -4482,7 +4482,9 @@ function walkingMapUrl(query){
       return 'Ingreso libre';
     }
 
-    function actionButton(event){
+  function actionButton(event){
+  if(event.id === 'sat-origin') return '';
+
   if(event.kind === 'paid') return `
     <a 
       class="event-button btn-paid" 

@@ -4342,8 +4342,15 @@ gender:'female',
           { id:'sat-maisha', time:'10:00 a.m. - 1:00 p.m.', kind:'paid', whatsappKey:'saturdayMaisha', title:'Florecer entre glaciares, acuarelas y conexión', description:'Taller artístico. Tallerista: Maisha.', place:'DDC - Doña Nati', maps:'DDC Doña Nati Huaraz' },
           { id:'sat-ana', time:'10:00 a.m. - 1:00 p.m.', kind:'paid', whatsappKey:'saturdayAnaMorcelli', title:'Arteterapia: La voz de la montaña', description:'Taller artístico. Tallerista: Ana Morcelli.', place:'DDC - Auditorio', maps:'DDC Auditorio Huaraz' },
           { id:'sat-yarparishun', time:'10:00 a.m. - 1:00 p.m.', kind:'paid', whatsappKey:'saturdayYarparishun', title:'Máscaras de animales de la reserva de biosfera', description:'Taller artístico. Tallerista: Yarparishun.', place:'DDC - Parque Lítico', maps:'DDC Parque Lítico Huaraz' },
-          { id:'sat-origin', time:'2:00 p.m. - 5:00 p.m.', kind:'ticket', title:'El origen de la Cordillera Blanca y la Cordillera Negra', description:'Presentación especial con programación escénica y musical: apertura, ritual de danza, conferencia central, El origen del Río Santa, La memoria del Huascarán, drenaje ácido de roca, Pintaykuna y cierre musical.', place:'Auditorio de Telemática de la UNASAM', maps:'Auditorio de Telemática UNASAM Huaraz' }
-                ]
+          {
+  id:'sat-origin',
+  time:'2:00 p.m. - 5:00 p.m.',
+  kind:'ticket',
+  title:'El origen de la Cordillera Blanca y la Cordillera Negra',
+  description:'Presentación especial con programación escénica y musical: apertura, ritual de danza, conferencia central, El origen del Río Santa, La memoria del Huascarán, drenaje ácido de roca, Pintaykuna y cierre musical.',
+  place:'Auditorio de Telemática de la UNASAM',
+  maps:'https://maps.app.goo.gl/4xq9bjnpRFbvA8TWA'
+}
       },
       {
   id:'day-5',
@@ -4369,11 +4376,23 @@ gender:'female',
     const daysList = document.getElementById('daysList');
 
 function mapUrl(query){
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+  const cleanQuery = String(query || '').trim();
+
+  if(cleanQuery.startsWith('http')){
+    return cleanQuery;
+  }
+
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cleanQuery)}`;
 }
 
 function walkingMapUrl(query){
-  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(query)}&travelmode=walking`;
+  const cleanQuery = String(query || '').trim();
+
+  if(cleanQuery.startsWith('http')){
+    return cleanQuery;
+  }
+
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(cleanQuery)}&travelmode=walking`;
 }
 
     function slugify(text){
